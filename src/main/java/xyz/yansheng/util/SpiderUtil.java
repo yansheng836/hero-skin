@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -84,7 +83,6 @@ public class SpiderUtil {
                 hero.setEname(Integer.parseInt(ename));
 
                 // 英雄cname
-                Element imgElement = aElement.selectFirst("img");
                 String cname = aElement.text();
                 hero.setCname(cname);
             }
@@ -116,35 +114,16 @@ public class SpiderUtil {
         }
 
         // 皮肤列表
-        // ul pic-pf-list pic-pf-list3
-        Element liElements = doc.selectFirst("ul.pic-pf-list");
-        // System.out.println(liElements);
+        // <ul class="pic-pf-list pic-pf-list3" data-imgname="幻纱之灵|归虚梦演">
+        Elements liElements = doc.select("ul.pic-pf-list");
+
+        // 英雄skinName,skins
         String skinName = liElements.attr("data-imgname");
-
-        // 皮肤列表，逆序
-        hero.setSkinName(skinName);
-        // System.out.println(skinName);
-
         String[] skinsArray = skinName.split("\\|");
         skins = Arrays.asList(skinsArray);
-
-        // 遍历
-        // System.out.println(skins.size());
-        // System.out.println("skins:" + skins);
-
-        // skins.forEach((String skin) -> {
-        // System.out.println(skin);
-        // });
-
-        // 因为后面的才是默认皮肤，最新皮肤在前面，这里进行逆序
-        Collections.reverse(skins);
-        // System.out.println("\n逆序后");
-        // skins.forEach((String skin) -> {
-        // System.out.println(skin);
-        // });
-
+        
+        hero.setSkinName(skinName);
         hero.setSkins(skins);
-        // System.out.println(hero.toString());
 
         return hero;
     }

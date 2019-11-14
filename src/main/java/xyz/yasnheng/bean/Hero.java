@@ -38,17 +38,17 @@ public class Hero {
      * 英雄id，用于统计英雄数量
      */
     private Integer id;
-    
+
     /**
      * 类似英雄id
      */
     private Integer ename;
-    
+
     /**
      * 英雄名
      */
     private String cname;
-    
+
     /**
      * 英雄介绍页
      */

@@ -16,9 +16,10 @@ import xyz.yansheng.util.FileUtil;
 import xyz.yansheng.util.SpiderUtil;
 import xyz.yasnheng.bean.Hero;
 
+
 /**
- * Hello world!
- *
+ * @author yansheng
+ * @date 2019/11/13
  */
 public class App {
     public static void main(String[] args) {
@@ -33,9 +34,6 @@ public class App {
         System.out.println("英雄数量：" + size);
         // for (Hero hero : heros) {
         // System.out.println(hero.toString());
-        // }
-        // for (int i = 0; i < size; i++) {
-        //
         // }
 
         // 2.从每个英雄主页heroUrl中获取英雄的皮肤信息（title，skinName，skins）
@@ -62,7 +60,7 @@ public class App {
         map.put("phone-bigskin-images", "大屏手机图片1200*530");
         map.put("wallpaper-mobileskin-images", "手机壁纸727*1071");
         map.put("wallpaper-bigskin-images", "电脑壁纸1920*882");
-        map.put("hero-list", heros.toString());
+        map.put("hero-list", heros);
 
         String jsonString = JSON.toJSONString(map, SerializerFeature.WriteMapNullValue,
             SerializerFeature.WriteNullListAsEmpty);
@@ -77,11 +75,9 @@ public class App {
             e.printStackTrace();
         }
 
-        // 4.下载图片
+        // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
         int sign = 0;
-        // for (Hero hero : heros) {
-        // FileUtil.downloadImages(hero, sign);
-        // }
+        
         List<String> dirs = FileUtil.mkdir(sign);
         for (String dir : dirs) {
             FileUtil.downloadImages(heros,dir);

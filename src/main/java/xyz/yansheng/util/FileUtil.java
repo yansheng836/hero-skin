@@ -20,105 +20,60 @@ import xyz.yasnheng.bean.Hero;
  * @date 2019/11/14
  */
 public class FileUtil {
-    
-    static final String path1 = "1phone-smallskin-images";
-    static final String path2 = "2phone-mobileskin-images";
-    static final String path3 = "3phone-bigskin-images";
-    static final String path4 = "4wallpaper-mobileskin-images";
-    static final String path5 = "5wallpaper-bigskin-images";
+
+    static final String PHONE_SAMLLSKIN_IMAGES = "1phone-smallskin-images";
+    static final String PHONE_MOBILESKIN_IMAGES = "2phone-mobileskin-images";
+    static final String PHONE_BIGSKIN_IMAGES = "3phone-bigskin-images";
+    static final String WALLPAPER_MOBILESKIN_IMAGES = "4wallpaper-mobileskin-images";
+    static final String WALLPAPER_BIGSKIN_IMAGES = "5wallpaper-bigskin-images";
 
     /**
-     * 下载图片（先判断下载哪种尺寸的图片，然后调用实际函数downloadImage(String, String)去下载）
+     * 新建文件夹（不存在才创建）
      * 
-     * @param hero
+     * @param pathname
+     *            文件夹名
+     */
+    public static void mkdir(String pathname) {
+        File file = new File(pathname);
+        if (!file.exists()) {
+            file.mkdirs();
+            System.out.println("\n创建文件夹' " + pathname + "' 成功");
+        } else {
+            System.out.println("\n文件夹' " + pathname + "' 已存在");
+        }
+    }
+
+    /**
+     * 根据标志新建目录
+     * 
      * @param sign
      *            sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
      */
-    public static void downloadImages(Hero hero, int sign) {
-
-        // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
-        String id = hero.getId().toString();
-        String cname = hero.getCname();
-        List<String> skins = hero.getSkins();
-        List<String> urls = null;
-
-        String dir = null;
-
-        switch (sign) {
-            case 0:
-                downloadImages(hero, 1);
-                downloadImages(hero, 2);
-                downloadImages(hero, 3);
-                downloadImages(hero, 4);
-                downloadImages(hero, 5);
-                return;
-            case 1:
-                urls = hero.getPhoneSmallskinUrl();
-                dir = "1phone-smallskin-images";
-                break;
-            case 2:
-                urls = hero.getPhoneMobileskinUrl();
-                dir = "2phone-mobileskin-images";
-                break;
-            case 3:
-                urls = hero.getPhoneBigskinUrl();
-                dir = "3phone-bigskin-images";
-                break;
-            case 4:
-                urls = hero.getWallpaperMobileskinUrl();
-                dir = "4wallpaper-mobileskin-images";
-                break;
-            case 5:
-                urls = hero.getWallpaperBigskinUrl();
-                dir = "5wallpaper-bigskin-images";
-                break;
-            default:
-                System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
-                break;
-        }
-        // 创建目录
-        mkdir(dir);
-
-        // 下载图片
-        int size = urls.size();
-        for (int i = 0; i < size; i++) {
-            String skin = skins.get(i);
-            String imgUrl = urls.get(i);
-
-            // phone-smallskin-images/96西施-0-归虚梦演.jpg
-            String pathname = dir + "/" + id + cname + "-" + i + "-" + skin + ".jpg";
-            // System.out.println("pathname:" + pathname);
-
-            downloadImage(imgUrl, pathname);
-        }
-
-    }
-
     public static List<String> mkdir(int sign) {
         List<String> dirs = new ArrayList<String>(5);
-        
+
         switch (sign) {
             case 0:
-                dirs.add(path1);
-                dirs.add(path2);
-                dirs.add(path3);
-                dirs.add(path4);
-                dirs.add(path5);
+                dirs.add(PHONE_SAMLLSKIN_IMAGES);
+                dirs.add(PHONE_MOBILESKIN_IMAGES);
+                dirs.add(PHONE_BIGSKIN_IMAGES);
+                dirs.add(WALLPAPER_MOBILESKIN_IMAGES);
+                dirs.add(WALLPAPER_BIGSKIN_IMAGES);
                 break;
             case 1:
-                dirs.add(path1);
+                dirs.add(PHONE_SAMLLSKIN_IMAGES);
                 break;
             case 2:
-                dirs.add(path2);
+                dirs.add(PHONE_MOBILESKIN_IMAGES);
                 break;
             case 3:
-                dirs.add(path3);
+                dirs.add(PHONE_BIGSKIN_IMAGES);
                 break;
             case 4:
-                dirs.add(path4);
+                dirs.add(WALLPAPER_MOBILESKIN_IMAGES);
                 break;
             case 5:
-                dirs.add(path5);
+                dirs.add(WALLPAPER_BIGSKIN_IMAGES);
                 break;
             default:
                 System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
@@ -132,7 +87,15 @@ public class FileUtil {
         return dirs;
     }
 
-    public static void downloadImages(ArrayList<Hero> heros,String dir) {
+    /**
+     * 下载图片（先判断下载哪种尺寸的图片，然后调用实际函数downloadImage(String, String)去下载）
+     * 
+     * @param heros
+     *            英雄列表
+     * @param dir
+     *            目录
+     */
+    public static void downloadImages(ArrayList<Hero> heros, String dir) {
 
         for (Hero hero : heros) {
             // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
@@ -140,22 +103,24 @@ public class FileUtil {
             String cname = hero.getCname();
             List<String> skins = hero.getSkins();
             List<String> urls = null;
-            
+
             switch (dir) {
-                case path1:
+                case PHONE_SAMLLSKIN_IMAGES:
                     urls = hero.getPhoneSmallskinUrl();
                     break;
-                case path2:
+                case PHONE_MOBILESKIN_IMAGES:
                     urls = hero.getPhoneMobileskinUrl();
                     break;
-                case path3:
+                case PHONE_BIGSKIN_IMAGES:
                     urls = hero.getPhoneBigskinUrl();
                     break;
-                case path4:
+                case WALLPAPER_MOBILESKIN_IMAGES:
                     urls = hero.getWallpaperMobileskinUrl();
                     break;
-                case path5:
+                case WALLPAPER_BIGSKIN_IMAGES:
                     urls = hero.getWallpaperBigskinUrl();
+                    break;
+                default:
                     break;
             }
 
@@ -166,7 +131,7 @@ public class FileUtil {
                 String imgUrl = urls.get(i);
 
                 // phone-smallskin-images/96西施-0-归虚梦演.jpg
-                String pathname = dir + "/" + id + cname + "-" + i + "-" + skin + ".jpg";
+                String pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
                 // System.out.println("pathname:" + pathname);
 
                 downloadImage(imgUrl, pathname);
@@ -231,22 +196,6 @@ public class FileUtil {
             System.out.println(" --下载图片:" + imgUrl + " 成功！保存位置为：" + pathname);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * 新建文件夹（不存在才创建）
-     * 
-     * @param pathname
-     *            文件夹名
-     */
-    public static void mkdir(String pathname) {
-        File file = new File(pathname);
-        if (!file.exists()) {
-            file.mkdirs();
-            System.out.println("\n创建文件夹' " + pathname + "' 成功");
-        } else {
-            System.out.println("\n文件夹' " + pathname + "' 已存在");
         }
     }
 
