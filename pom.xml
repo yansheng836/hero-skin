@@ -27,7 +27,6 @@
 			<version>3.141.59</version>
 		</dependency>
 
-
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -120,4 +119,3 @@
 	</build>
 
 </project>
-
