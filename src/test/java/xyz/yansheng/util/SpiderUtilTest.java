@@ -20,7 +20,8 @@ public class SpiderUtilTest {
      */
     @Test
     public void testGetHeros() {
-        ArrayList<Hero> heros = SpiderUtil.getHeros("");
+        String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏.html";
+        ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
         for (Hero hero : heros) {
             System.out.println(hero.toString());
         }

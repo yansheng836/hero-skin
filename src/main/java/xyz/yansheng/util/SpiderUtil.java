@@ -57,7 +57,6 @@ public class SpiderUtil {
                 e.printStackTrace();
             }
         }
-
         // System.out.println(doc);
 
         // div herolist-content ul.herolist.clearfix li
@@ -124,7 +123,7 @@ public class SpiderUtil {
 
         // 皮肤列表，逆序
         hero.setSkinName(skinName);
-//        System.out.println(skinName);
+        // System.out.println(skinName);
 
         String[] skinsArray = skinName.split("\\|");
         skins = Arrays.asList(skinsArray);
@@ -150,5 +149,4 @@ public class SpiderUtil {
         return hero;
     }
 
-    
 }

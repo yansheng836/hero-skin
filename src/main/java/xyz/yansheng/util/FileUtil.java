@@ -1,203 +1,253 @@
 package xyz.yansheng.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
-
-import org.apache.commons.io.FileUtils;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import java.util.List;
 
 import xyz.yasnheng.bean.Hero;
 
 /**
- * 文件工具类，作用：将爬取分类专栏的博客的数据以特定的格式写到文件中。
+ * 文件工具类，作用：创建文件夹、下载图片。
  * 
  * @author yansheng
- * @date 2019/10/12
+ * @date 2019/11/14
  */
 public class FileUtil {
+    
+    static final String path1 = "1phone-smallskin-images";
+    static final String path2 = "2phone-mobileskin-images";
+    static final String path3 = "3phone-bigskin-images";
+    static final String path4 = "4wallpaper-mobileskin-images";
+    static final String path5 = "5wallpaper-bigskin-images";
 
     /**
-     * 生成博客目录的列表文件（markdown格式）。遍历分类专栏，将每个分类专栏下的博客进行格式化输出，用StringBuffer进行拼接，最后转为String，写到文件中。
+     * 下载图片（先判断下载哪种尺寸的图片，然后调用实际函数downloadImage(String, String)去下载）
      * 
-     * @param pathname
-     *            文件名
-     * @param categoryList
-     *            分类专栏列表
-     * @return 成功返回true,失败返回false
+     * @param hero
+     * @param sign
+     *            sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
      */
-    public static boolean generateCsdnList(String pathname, ArrayList<Hero> heros) {
+    public static void downloadImages(Hero hero, int sign) {
 
-        // JSONArray也可以
-        // String jsonString = JSON.toJSONString(heros);
-        // 保留空值
-        String jsonString = JSON.toJSONString(heros, SerializerFeature.WriteMapNullValue,
-            SerializerFeature.WriteNullListAsEmpty);
-        System.out.println(jsonString);
+        // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
+        String id = hero.getId().toString();
+        String cname = hero.getCname();
+        List<String> skins = hero.getSkins();
+        List<String> urls = null;
 
-        // String pathname = "./heros.json";
-        File file = new File(pathname);
-        try {
-            FileUtils.writeStringToFile(file, jsonString, "utf-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
+        String dir = null;
 
-    // 网址，文件名
-    public static void downloadImage(String url,String pathname) {
-        
-
-    }
-    // sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
-    public static void downloadImages(Hero hero,int sign) {
-        
-     // 1.按照分析，创建对应文件夹
-        // 1.1.https://game.gtimg.cn/images/yxzj/img201606/heroimg/518/518-smallskin-1.jpg
-        // phone-smallskin-images 头像
-        // phone-mobileskin-images 小屏手机图片
-        // phone-bigskin-images 大屏手机图片
-        // 1.2.https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/518/518-mobileskin-1.jpg
-        // wallpaper-mobileskin-images 手机壁纸
-        // wallpaper-bigskin-images 电脑壁纸
         switch (sign) {
             case 0:
-                mkdir("phone-smallskin-images");
-                mkdir("phone-smallskin-images");
-                mkdir("phone-smallskin-images");
-                mkdir("phone-smallskin-images");
-                mkdir("phone-smallskin-images");
+                downloadImages(hero, 1);
+                downloadImages(hero, 2);
+                downloadImages(hero, 3);
+                downloadImages(hero, 4);
+                downloadImages(hero, 5);
+                return;
+            case 1:
+                urls = hero.getPhoneSmallskinUrl();
+                dir = "1phone-smallskin-images";
                 break;
-
+            case 2:
+                urls = hero.getPhoneMobileskinUrl();
+                dir = "2phone-mobileskin-images";
+                break;
+            case 3:
+                urls = hero.getPhoneBigskinUrl();
+                dir = "3phone-bigskin-images";
+                break;
+            case 4:
+                urls = hero.getWallpaperMobileskinUrl();
+                dir = "4wallpaper-mobileskin-images";
+                break;
+            case 5:
+                urls = hero.getWallpaperBigskinUrl();
+                dir = "5wallpaper-bigskin-images";
+                break;
             default:
+                System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
                 break;
         }
-        
-        int id = hero.getEname();
-        int count = hero.getSkins().size();
-        
-        String phonePrefix = "https://game.gtimg.cn/images/yxzj/img201606/heroimg/";
-        String wallpaperPrefix = "https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/";
+        // 创建目录
+        mkdir(dir);
 
-        for (int i = 0; i < count; i++) {
-            // https://game.gtimg.cn/images/yxzj/img201606/heroimg/518/518-smallskin-1.jpg
+        // 下载图片
+        int size = urls.size();
+        for (int i = 0; i < size; i++) {
+            String skin = skins.get(i);
+            String imgUrl = urls.get(i);
 
-            for (int j = 0; j < count; j++) {
-                psi[j] = phonePrefix + id + "/" + id + "-smallskin-" + j + ".jpg";
-            }
-            for (int j = 0; j < count; j++) {
-                psi[j] = phonePrefix + id + "/" + id + "-mobileskin-" + j + ".jpg";
-            }
-            for (int j = 0; j < count; j++) {
-                psi[j] = phonePrefix + id + "/" + id + "-bigskin-" + j + ".jpg";
-            }
+            // phone-smallskin-images/96西施-0-归虚梦演.jpg
+            String pathname = dir + "/" + id + cname + "-" + i + "-" + skin + ".jpg";
+            // System.out.println("pathname:" + pathname);
 
-            // https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/518/518-mobileskin-1.jpg
-            for (int j = 0; j < count; j++) {
-                psi[j] = wallpaperPrefix + id + "/" + id + "-mobileskin-" + j + ".jpg";
-            }
-            for (int j = 0; j < count; j++) {
-                psi[j] = wallpaperPrefix + id + "/" + id + "-bigskin-" + j + ".jpg";
-            }
-
+            downloadImage(imgUrl, pathname);
         }
 
     }
-    
+
+    public static List<String> mkdir(int sign) {
+        List<String> dirs = new ArrayList<String>(5);
+        
+        switch (sign) {
+            case 0:
+                dirs.add(path1);
+                dirs.add(path2);
+                dirs.add(path3);
+                dirs.add(path4);
+                dirs.add(path5);
+                break;
+            case 1:
+                dirs.add(path1);
+                break;
+            case 2:
+                dirs.add(path2);
+                break;
+            case 3:
+                dirs.add(path3);
+                break;
+            case 4:
+                dirs.add(path4);
+                break;
+            case 5:
+                dirs.add(path5);
+                break;
+            default:
+                System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
+                break;
+        }
+        // 创建目录
+        for (String dir : dirs) {
+            mkdir(dir);
+        }
+
+        return dirs;
+    }
+
+    public static void downloadImages(ArrayList<Hero> heros,String dir) {
+
+        for (Hero hero : heros) {
+            // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
+            String id = hero.getId().toString();
+            String cname = hero.getCname();
+            List<String> skins = hero.getSkins();
+            List<String> urls = null;
+            
+            switch (dir) {
+                case path1:
+                    urls = hero.getPhoneSmallskinUrl();
+                    break;
+                case path2:
+                    urls = hero.getPhoneMobileskinUrl();
+                    break;
+                case path3:
+                    urls = hero.getPhoneBigskinUrl();
+                    break;
+                case path4:
+                    urls = hero.getWallpaperMobileskinUrl();
+                    break;
+                case path5:
+                    urls = hero.getWallpaperBigskinUrl();
+                    break;
+            }
+
+            // 下载图片
+            int size = urls.size();
+            for (int i = 0; i < size; i++) {
+                String skin = skins.get(i);
+                String imgUrl = urls.get(i);
+
+                // phone-smallskin-images/96西施-0-归虚梦演.jpg
+                String pathname = dir + "/" + id + cname + "-" + i + "-" + skin + ".jpg";
+                // System.out.println("pathname:" + pathname);
+
+                downloadImage(imgUrl, pathname);
+            }
+        }
+    }
+
+    /**
+     * 下载图片（如果图片存在就不重复下载）
+     * 
+     * @param imgUrl
+     *            网址
+     * @param pathname
+     *            文件名
+     */
+    public static void downloadImage(String imgUrl, String pathname) {
+        // 取得图片文件名
+        File outFile = new File(pathname);
+        // 如果图片已存在，则直接跳过下载该图片，因为没有必要再下载一次
+        if (outFile.exists()) {
+            System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+            return;
+        }
+
+        // 创建URL对象，将字符串解析为URL
+        URL url = null;
+        // 建立一个网络链接对象
+        HttpURLConnection con = null;
+        try {
+            url = new URL(imgUrl);
+            con = (HttpURLConnection)url.openConnection();
+            // 设置请求方式
+            con.setRequestMethod("GET");
+            // 连接
+            con.connect();
+            // 得到响应码
+            int responseCode = con.getResponseCode();
+            // 这里假设只要不是4xx（请求错误）,5xx（服务器错误）都表示可以下载图片
+            if (responseCode < 400) {
+                // 响应成功，可以建立连接
+            } else {
+                System.err.println("图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode);
+                return;
+            }
+        } catch (MalformedURLException e2) {
+            System.err.println("图片链接(" + imgUrl + ")中不含有合法的网络协议或者无法解析该字符串！");
+            e2.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        // 利用jdk1.7的新特性 ：try(resource){……} catch{……}，自动释放资源
+        // 1.创建输入输出流 2.建立一个网络链接
+        try (InputStream inputStream = con.getInputStream();
+            OutputStream outputStream = new FileOutputStream(outFile);) {
+            int n = -1;
+            byte b[] = new byte[1024];
+            while ((n = inputStream.read(b)) != -1) {
+                outputStream.write(b, 0, n);
+            }
+            outputStream.flush();
+            System.out.println(" --下载图片:" + imgUrl + " 成功！保存位置为：" + pathname);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 新建文件夹（不存在才创建）
+     * 
+     * @param pathname
+     *            文件夹名
+     */
     public static void mkdir(String pathname) {
         File file = new File(pathname);
         if (!file.exists()) {
-            file.mkdir();
-        }
-    }
-
-    /**
-     * 生成当时的格式化的时间，用于拼接生成文件的文件名。
-     * 
-     * @return 格式化的时间字符串
-     */
-    public static String getDateString() {
-
-        Date date = new Date();
-        // 设置时间的显示格式
-        String pattern = "yyyy-MM-dd.HH-mm-ss";
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        String dateString = sdf.format(date);
-
-        return dateString;
-    }
-
-    /**
-     * 将毫秒转为'需要的时间'，取决于毫秒转化后比较接近哪个单位（秒、分钟）。
-     * 
-     * @param time
-     *            毫秒数
-     * @return 转换的秒的字符串
-     */
-    public static String getSecondString(long time) {
-
-        // 判断时间是否超过1分钟，如果没有超过显示为秒钟，如2000ms转为：02.000s；如果超过显示分钟60000ms转为：01.00m
-        Long oneMinute = 60000L;
-        // 设置时间的显示格式
-        String pattern = null;
-        boolean isMoreThenOneMinute = false;
-        if (time < oneMinute) {
-            pattern = "s.SSS";
+            file.mkdirs();
+            System.out.println("\n创建文件夹' " + pathname + "' 成功");
         } else {
-            pattern = "m.ss";
-            isMoreThenOneMinute = true;
+            System.out.println("\n文件夹' " + pathname + "' 已存在");
         }
-
-        Date date = new Date(time);
-
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        String dateString = sdf.format(date);
-
-        // return dateString;
-        return !isMoreThenOneMinute ? (dateString + "秒") : (dateString + "分钟");
-    }
-
-    /**
-     * 打印ASCII的Goodbye，用于程序结尾。（来源：http://www.network-science.de/ascii/ ：Font: big Reflection: no
-     * Adjustment: left Stretch: no Width: 80 Text: Goodbye!）
-     * 
-     * @return
-     */
-    public static String sayGoodbye() {
-
-        String goodbye = "  _____                 _ _                _ \n"
-            + " / ____|               | | |              | |\n"
-            + "| |  __  ___   ___   __| | |__  _   _  ___| |\n"
-            + "| | |_ |/ _ \\ / _ \\ / _` | '_ \\| | | |/ _ \\ |\n"
-            + "| |__| | (_) | (_) | (_| | |_) | |_| |  __/_|\n"
-            + " \\_____|\\___/ \\___/ \\__,_|_.__/ \\__, |\\___(_)\n"
-            + "                                 __/ |       \n"
-            + "                                |___/        ";
-
-        return goodbye;
-    }
-
-    /**
-     * 打印ASCII的Welcome，用于程序开头。
-     * 
-     * @return
-     */
-    public static String sayWelcome() {
-
-        String welcome = "__          __  _                          _ \n"
-            + "\\ \\        / / | |                        | |\n"
-            + " \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___| |\n"
-            + "  \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ |\n"
-            + "   \\  /\\  /  __/ | (_| (_) | | | | | |  __/_|\n"
-            + "    \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___(_)\n"
-            + "                                             ";
-
-        return welcome;
     }
 
 }

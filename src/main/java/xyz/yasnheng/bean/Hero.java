@@ -18,14 +18,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Hero {
     // {
-    // "ename": 105,
-    // "cname": "廉颇",
-    // "title": "正义爆轰",
-    // "new_type": 0,
-    // "hero_type": 3,
-    // "skin_name": "正义爆轰|地狱岩魂"
-    // },
-    // {
     // "ename": 522,
     // "cname": "曜",
     // "title": "星辰之子",
@@ -46,31 +38,34 @@ public class Hero {
      * 英雄id，用于统计英雄数量
      */
     private Integer id;
+    
     /**
      * 类似英雄id
      */
     private Integer ename;
+    
     /**
      * 英雄名
      */
     private String cname;
+    
     /**
      * 英雄介绍页
      */
     private String heroUrl;
 
     /**
-     * 即默认皮肤名称，title = skin[0]
+     * 即默认皮肤名称，title = skin.get(0)
      */
     private String title;
     private Integer newType;
     private Integer heroType;
     /**
-     * 皮肤名字符串
+     * 皮肤名字符串，如：幻纱之灵|归虚梦演
      */
     private String skinName;
     /**
-     * 皮肤名列表
+     * 皮肤名列表，如：[归虚梦演, 幻纱之灵]，按照推出顺序，先出的在前面
      */
     private List<String> skins;
 
@@ -93,12 +88,12 @@ public class Hero {
      * 利用现有字段生成其他字段
      */
     public void generateField() {
-        
-        if (skins!=null && !skins.isEmpty()) {
+        // 设置默认皮肤
+        if (skins != null && !skins.isEmpty()) {
             title = skins.get(0);
         }
-        
-        // 
+
+        // 根据英雄的ename和皮肤列表，生成各种类型皮肤图片网址
         if (ename != null && skins != null) {
             int size = skins.size();
             phoneSmallskinUrl = new ArrayList<String>(size);
@@ -121,13 +116,12 @@ public class Hero {
                 String pbu = phonePrefix + ename + "/" + ename + bigskin + i + suffix;
                 String wmu = wallpaperPrefix + ename + "/" + ename + mobileskin + i + suffix;
                 String wbu = wallpaperPrefix + ename + "/" + ename + bigskin + i + suffix;
-                phoneBigskinUrl.add(psu);
+                phoneSmallskinUrl.add(psu);
                 phoneMobileskinUrl.add(pmu);
                 phoneBigskinUrl.add(pbu);
                 wallpaperMobileskinUrl.add(wmu);
                 wallpaperBigskinUrl.add(wbu);
             }
-
         }
 
     }
