@@ -1,4 +1,4 @@
-package xyz.yasnheng.bean;
+package xyz.yansheng.bean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +124,11 @@ public class Hero {
             }
         }
 
+    }
+
+    public String toStringSimple() {
+        return "Hero [id=" + id + ", ename=" + ename + ", cname=" + cname + ", title=" + title
+            + ", skinName=" + skinName + "]";
     }
 
 }

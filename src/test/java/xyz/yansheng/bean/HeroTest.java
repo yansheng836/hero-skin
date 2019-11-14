@@ -1,7 +1,8 @@
- package xyz.yasnheng.bean;
+ package xyz.yansheng.bean;
 
 import org.junit.Test;
 
+import xyz.yansheng.bean.Hero;
 import xyz.yansheng.util.SpiderUtil;
 
 /**
@@ -11,7 +12,7 @@ import xyz.yansheng.util.SpiderUtil;
 public class HeroTest {
 
     /**
-     * Test method for {@link xyz.yasnheng.bean.Hero#toString()}.
+     * Test method for {@link xyz.yansheng.bean.Hero#toString()}.
      */
     @Test
     public void testToString() {

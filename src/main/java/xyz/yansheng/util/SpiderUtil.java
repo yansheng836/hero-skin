@@ -14,7 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import xyz.yasnheng.bean.Hero;
+import xyz.yansheng.bean.Hero;
 
 /**
  * 工具类

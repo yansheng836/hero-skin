@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.yasnheng.bean.Hero;
+import xyz.yansheng.bean.Hero;
 
 /**
  * 文件工具类，作用：创建文件夹、下载图片。
@@ -152,7 +152,7 @@ public class FileUtil {
         File outFile = new File(pathname);
         // 如果图片已存在，则直接跳过下载该图片，因为没有必要再下载一次
         if (outFile.exists()) {
-            System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+//            System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
             return;
         }
 

@@ -1,4 +1,4 @@
-package xyz.yasnheng.main;
+package xyz.yansheng.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +12,9 @@ import org.apache.commons.io.FileUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import xyz.yansheng.bean.Hero;
 import xyz.yansheng.util.FileUtil;
 import xyz.yansheng.util.SpiderUtil;
-import xyz.yasnheng.bean.Hero;
-
 
 /**
  * @author yansheng
@@ -31,7 +30,6 @@ public class App {
 
         ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
-        System.out.println("英雄数量：" + size);
         // for (Hero hero : heros) {
         // System.out.println(hero.toString());
         // }
@@ -41,12 +39,18 @@ public class App {
         for (Hero hero : heros) {
             SpiderUtil.getHeroSkins(hero);
             hero.generateField();
-            System.out.println(hero.toString());
+            // System.out.println(hero.toString());
+            System.out.println(hero.toStringSimple());
             count++;
             if (count == 2) {
-//                break;
+                // break;
             }
         }
+        int sum = 0;
+        for (Hero hero : heros) {
+            sum = sum + hero.getSkins().size();
+        }
+        System.out.println("到目前为止，王者荣耀一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。");
 
         // 3.将数据写到json中
         // JSON,JSONArray也可以
@@ -64,7 +68,7 @@ public class App {
 
         String jsonString = JSON.toJSONString(map, SerializerFeature.WriteMapNullValue,
             SerializerFeature.WriteNullListAsEmpty);
-        System.out.println(jsonString);
+        // System.out.println(jsonString);
 
         String pathname = "./heros1.json";
         File file = new File(pathname);
@@ -77,10 +81,10 @@ public class App {
 
         // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
         int sign = 0;
-        
+
         List<String> dirs = FileUtil.mkdir(sign);
         for (String dir : dirs) {
-            FileUtil.downloadImages(heros,dir);
+            FileUtil.downloadImages(heros, dir);
         }
 
     }

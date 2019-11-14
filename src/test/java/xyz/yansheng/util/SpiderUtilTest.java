@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import xyz.yasnheng.bean.Hero;
+import xyz.yansheng.bean.Hero;
 
 /**
  * @author yansheng
