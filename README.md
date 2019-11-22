@@ -21,3 +21,12 @@
 ```
 
 直接访问也是404。
+
+## 辅助功能
+
+统计英雄皮肤图片数量，拼接成json数据，为hexo博客提供每日切换背景图片的效果（现在有367张图片）。
+
+主要程序：
+
+- `DownloadBigskinWallpaper.java`：电脑壁纸，对应json：`wzry_mobile_367.json`
+- `DownloadMobileskinWallpaper.java`：手机壁纸，对应json：`wzry_wallpaper367.json`
