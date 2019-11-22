@@ -102,7 +102,7 @@ public class SpiderUtil {
 
         String url = hero.getHeroUrl();
 
-        List<String> skins = new ArrayList<String>(5);
+        List<String> skins1 = new ArrayList<String>(5);
 
         Document doc = null;
         try {
@@ -115,15 +115,19 @@ public class SpiderUtil {
 
         // 皮肤列表
         // <ul class="pic-pf-list pic-pf-list3" data-imgname="幻纱之灵|归虚梦演">
+        // (2019年11月22日)发现有变化了：幻纱之灵&0|归虚梦演&0，需要去除多余的字符串
         Elements liElements = doc.select("ul.pic-pf-list");
 
         // 英雄skinName,skins
         String skinName = liElements.attr("data-imgname");
+        // System.out.println(skinName);
+        // 去除皮肤名中多余的字符串
+        skinName = skinName.replaceAll("&\\d+", "");
         String[] skinsArray = skinName.split("\\|");
-        skins = Arrays.asList(skinsArray);
-        
+        skins1 = Arrays.asList(skinsArray);
+
         hero.setSkinName(skinName);
-        hero.setSkins(skins);
+        hero.setSkins(skins1);
 
         return hero;
     }
