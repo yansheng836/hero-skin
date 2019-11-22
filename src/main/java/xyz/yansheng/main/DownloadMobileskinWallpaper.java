@@ -16,18 +16,17 @@ import xyz.yansheng.bean.Hero;
 import xyz.yansheng.util.FileUtil;
 
 /**
- * 下载最大的桌面壁纸或者获取需要的json文件，用于hexo博客切换背景图片。
+ * 下载最大的手机壁纸或者获取需要的json文件，用于hexo博客切换背景图片。
  * 
  * @author yansheng
  * @date 2019/11/22
  */
-public class DownloadBigskinWallpaper {
+public class DownloadMobileskinWallpaper {
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-
         String seriPath = "seri_hero.txt";
         ArrayList<Hero> heros = SeriHero.deSeriHero(seriPath);
         int sum = 0;
@@ -40,15 +39,15 @@ public class DownloadBigskinWallpaper {
         int sign = 5;
 
         // 方式1：下载图片
-        String dir = "./wzry";
+        String dir = "./wzry-mobile";
         FileUtil.mkdir(dir);
         int count1 = 0;
         for (Hero hero : heros) {
-            List<String> urls = hero.getWallpaperBigskinUrl();
+            List<String> urls = hero.getWallpaperMobileskinUrl();
             for (String imgUrl : urls) {
                 count1++;
                 String pathname = dir + "/" + count1 + ".jpg";
-                // FileUtil.downloadImage(imgUrl, pathname);
+                 FileUtil.downloadImage(imgUrl, pathname);
             }
             if (count1 >= 10) {
                 break;
@@ -59,7 +58,7 @@ public class DownloadBigskinWallpaper {
         count1 = 0;
         Map<String, String> imgMap = new LinkedHashMap<String, String>(365);
         for (Hero hero : heros) {
-            List<String> urls = hero.getWallpaperBigskinUrl();
+            List<String> urls = hero.getWallpaperMobileskinUrl();
             for (String imgUrl : urls) {
                 count1++;
                 imgMap.put(Integer.toString(count1), imgUrl);
@@ -79,7 +78,7 @@ public class DownloadBigskinWallpaper {
         String jsonString = JSON.toJSONString(imgMap);
         System.out.println(jsonString);
 
-        String pathname = "./wzry_wallpaper.json";
+        String pathname = "./wzry_mobile367.json";
         try {
             FileUtils.writeStringToFile(new File(pathname), jsonString, "utf-8");
         } catch (IOException e) {

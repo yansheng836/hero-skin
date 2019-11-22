@@ -1,5 +1,6 @@
 package xyz.yansheng.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Hero {
+public class Hero implements Serializable{
     // {
     // "ename": 522,
     // "cname": "曜",
@@ -33,6 +34,8 @@ public class Hero {
     // "hero_type": 1,
     // "hero_type2": 4
     // }
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 英雄id，用于统计英雄数量
