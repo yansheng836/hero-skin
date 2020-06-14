@@ -1,0 +1,750 @@
+<!doctype html>
+<html>
+ <head> 
+  <meta charset="utf-8"> 
+  <meta name="robots" content="all"> 
+  <meta name="Copyright" content="TENCNET"> 
+  <meta name="author" content="Tencent-TGideas"> 
+  <meta name="keywords" content="英雄联盟,lol,league of legends,lol攻略,lol视频,lol视频攻略,lol英雄资料,lol战争学院,小仓解说视频,101战争学院,英雄"> 
+  <meta name="description" content="英雄联盟101战争学院，推荐攻略，视频攻略，小仓解说视频"> 
+  <title>游戏资料-英雄联盟官方网站-腾讯游戏</title> 
+  <!-- 设计：帅呆 | 重构：小倪 | 创建：20131028 | 团队博客：//tgideas.qq.com --> 
+  <link rel="stylesheet" href="//lol.qq.com/v3/css/topfoot.css"> 
+  <link rel="stylesheet" href="//lol.qq.com/v3/css/comm.css"> 
+  <link rel="stylesheet" href="//lol.qq.com/v3/css/v2public.css"> 
+  <style>
+    /*pop*/
+    .popupbox{ position: fixed; left: 0; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 99999; background-color: #000;}
+    .popupbox div{ width: 100%; height: 100%}
+    /*.pop-close{position: absolute;top: 0;right: -70px;display: block;width: 60px; height: 60px; font:bold 70px/60px simsun; color: #fff;}*/
+    /*.pop-close:hover{text-decoration: none}*/
+
+</style> 
+ </head> 
+ <body> 
+  <!--[if lt IE 9]>
+<style>.comm-head{top:40px}</style>
+<p class="chromeframe">
+  <span>您使用的IE浏览器版本过低，本站不再支持，</span>
+  <a href="//windows.microsoft.com/">升级您的IE浏览器</a>
+  <span>，或使用</span>
+  <a href="//www.google.cn/chrome/">Google Chrome</a><a>、</a><a href="//www.firefox.com.cn/download/">Firefox</a>
+  <span>等高级浏览器，将会得到更好的体验！</span>
+</p>
+<![endif]--> 
+  <!--官网通用页头 start--> 
+  <div class="comm-head" exposure-tag="topnav,头部导航"> 
+   <div class="head-normal"> 
+    <!--logo--> 
+    <a class="logo" href="/" title="英雄联盟官网"> <img src="//game.gtimg.cn/images/lol/v3/logo-public.png" width="167" height="60" alt="英雄联盟"> </a> 
+    <!--官网导航--> 
+    <ul class="head-nav" id="J_headNav"> 
+    </ul> 
+    <script type="text/html" id="J_headNavTemplate">
+      {{each list}}
+      <li>
+        <a {{if $value.url.length > 0}}href="{{$value.url}}" target="_blank" onclick="PTTSendClick('topnav','topnav-{{$index}}','{{$value.name}}');" title="{{$value.name}}"{{/if}}>
+          <span class="head-nav-title">{{$value.name}}</span>
+          <span class="head-nav-subtitle">{{$value.enname}}</span>
+        </a>
+      </li>
+      {{/each}}
+    </script> 
+    <!--玩家信息--> 
+    <div class="head-userinfo-normal"> 
+     <div class="head-userinfo-avatar"> 
+      <img src="//game.gtimg.cn/images/lol/v2/personal/avatar/default.png" width="36" height="auto" alt="玩家头像"> 
+      <span></span> 
+      <a href="//lol.qq.com/space/index.shtml" target="_blank" class="herf-mask" title="个人中心"></a> 
+     </div> 
+     <div class="head-userinfo-brief"> 
+      <p class="unlogin">亲爱的召唤师，欢迎<a href="javascript:T_Login.login()">登录</a></p> 
+      <p class="login-unbindarea" style="display: none">请<a href="javascript:T_Login.changeArea()">绑定大区</a>或<a href="javascript:T_Login.logout()">注销</a></p> 
+      <p class="logined" style="display: none"><a class="logined-name"></a><a class="logined-logout" href="javascript:T_Login.logout()">[注销]</a></p> 
+     </div> 
+    </div> 
+    <!--掌盟图标--> 
+    <span class="head-app-normal"> <a target="_blank" href="//lol.qq.com/app/index.html" onclick="pgvSendClick({hottag:'v3.top.top.zmpc'})" class="comm-icon-phone"></a> </span> 
+    <!--搜索按钮--> 
+    <a class="head-search-btn" id="J_headSearchBtn" href="javascript:" title="搜索"> <i class="comm-icon-search"></i> </a> 
+    <!--hover:掌盟二维码--> 
+    <div class="head-app-hover"> 
+     <i class="head-zm-qrcode"> <img src="//game.gtimg.cn/images/lol/v3/zm-qrcode.jpg" width="119" height="119" alt="掌盟App二维码"> </i> 
+     <p class="p1">扫码下载掌上英雄联盟</p> 
+     <img class="polo" src="//game.gtimg.cn/images/lol/v3/polo.gif" alt="魄罗" width="50" height="50"> 
+    </div> 
+    <!--登录hover--> 
+    <div class="head-login-hover"> 
+     <div class="unlogin"> 
+      <p class="p1"> 登录并且绑定大区后才可以查看您的具体信息哦<br> (包括战绩、资产、声望） </p> 
+      <p class="p2"> 官网个人信息显示略有延迟，请以游戏数据为准 </p> 
+     </div> 
+     <div class="logined" style="display: none;"> 
+      <div class="logined-top"> 
+       <a class="select-area" href="javascript:T_Login.changeArea()"></a> 
+       <a class="user-name"></a> 
+      </div> 
+      <ul class="logined-ul"> 
+       <li class="user-rank"> 
+        <div class="img-wrap"> 
+         <img src="//game.gtimg.cn/images/lol/space/rank/2019pre/default.png" alt="段位" id="commHeadTierImg"> 
+        </div> <a class="a1" id="commHeadTier">暂无段位</a><br> <a class="a2" id="commHeadQueue"></a> </li> 
+       <li class="user-datalist"> <a class="a1" id="commHeadWinRate">--</a><br><a class="a2">胜率</a> </li> 
+       <li class="user-datalist"> <a class="a1" id="commHeadMatchCount">--</a><br><a class="a2">总场次</a> </li> 
+       <li class="user-datalist"> <a class="a1" id="commHeadJingCui">--</a><br><a class="a2">蓝色精粹</a> </li> 
+       <li class="user-datalist"> <a class="a1" id="commHeadDianQuan">--</a><br><a class="a2">点券</a> </li> 
+      </ul> 
+      <p class="p2"> 官网个人信息显示略有延迟，请以游戏数据为准 </p> 
+     </div> 
+     <a href="//lol.qq.com/space/index.shtml" class="href-gouserhome">进入个人中心<i class="more-arrow"></i></a> 
+    </div> 
+   </div> 
+   <!--hover:官网导航子菜单--> 
+   <div class="head-nav-sub"> 
+    <div class="head-nav-sub-inner"> 
+     <ul id="J_headNavSub"> 
+     </ul> 
+     <script type="text/html" id="J_headNavSubTemplate">
+        {{each list as topItem topIndex}}
+        <li>
+          {{each topItem.urls as subItem subIndex}}
+          <a class="head-nav-sub-a" onclick="PTTSendClick('topnav','topnav-{{topIndex+1}}-{{subIndex}}','{{subItem.name}}');" href="{{subItem.url}}" target="_blank">
+            {{if subItem.icon.length > 0}}<i class="icon-{{subItem.icon}}"></i>{{/if}}
+            {{subItem.name}}
+          </a>
+          {{/each}}
+        </li>
+        {{/each}}
+      </script> 
+    </div> 
+   </div> 
+   <!--hover:搜索--> 
+   <div class="search-hover-wrap"> 
+    <div class="search-hover-inner"> 
+     <a href="javascript:" class="btn-search" id="J_hoverSearchBtn" title="点击搜索"> <i class="comm-icon-search"></i> </a> 
+     <input type="text" id="J_hoverSearchInput" class="input-search" placeholder="搜索 lol.qq.com" autocomplete="off"> 
+     <a class="btn-close-search" id="J_btnCloseSearch" href="javascript:" title="关闭搜索"> <i class="icon-xx-1"></i> </a> 
+     <div class="search-hover-bottom"> 
+      <span class="hover-bottom-s1">搜索记录</span> 
+      <ul class="search-direct-href"></ul> 
+      <a class="hover-bottom-s2" href="javascript:" id="J_hoverClearRecord">清除记录</a> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <!--官网通用页头 end--> 
+  <!--头部广告 start--> 
+  <div class="comm-topact big" exposure-tag="topact,头部广告"> 
+   <img class="topact-big-img"> 
+   <img class="topact-small-img"> 
+   <div class="act-fullscreen-mask"></div> 
+   <div class="dark-mask"></div> 
+   <div class="comm-topact-inner"> 
+    <a class="top-act-link" href="javascript:" onclick="PTTSendClick('topact','topact-detail','查看详情')" target="_blank">查看详情</a> 
+    <div id="J_topActVersion" class="top-version">
+     当前游戏版本：
+     <em>Ver ***</em> 
+     <a class="top-version-link" href="javascript:" onclick="pgvSendClick({hottag:'v3.topact.version.link'})" target="_blank">版本详情</a>
+    </div> 
+   </div> 
+  </div> 
+  <!--头部广告 end--> 
+  <div class="wraper"> 
+   <div class="layout mainer"> 
+    <!--路径导航--> 
+    <div class="website-path"> 
+     <i class="icon-home"></i> 
+     <a href="/main.shtml">英雄联盟首页</a> 
+     <i class="icon-arrow-2"></i> 
+     <a href="info-heros.shtml#Navi">游戏资料</a> 
+     <i class="icon-arrow-2"></i> 
+     <a href="info-heros.shtml#Navi">全部英雄</a> 
+     <i class="icon-arrow-2"></i> 
+     <a class="here" id="DATAnametitle"></a> 
+    </div> 
+    <div class="infodefail"> 
+     <div id="defailDATA" class="defail-data"> 
+      <h1 id="DATAname"></h1> 
+      <h2 id="DATAtitle"></h2> 
+      <div id="DATAtags" class="defail-tags"></div> 
+      <div id="defailVideo" class="defail-vod" title="点击观看视频">
+       <i class="commspr commico-vod"></i>
+      </div> 
+      <dl id="DATAinfo" class="defail-stat"> 
+       <dt>
+        物理攻击
+       </dt> 
+       <dd>
+        <i class="up up1" style="width:50%"></i>
+       </dd> 
+       <dt>
+        魔法攻击
+       </dt> 
+       <dd>
+        <i class="up up2" style="width:60%"></i>
+       </dd> 
+       <dt>
+        防御能力
+       </dt> 
+       <dd>
+        <i class="up up3" style="width:20%"></i>
+       </dd> 
+       <dt>
+        上手难度
+       </dt> 
+       <dd>
+        <i class="up up4" style="width:90%"></i>
+       </dd> 
+      </dl> 
+      <div class="defail-buy">
+       <a id="defailBuy" href="#" target="_blank" class="commspr commbtn-buy">购买英雄</a>
+      </div> 
+     </div> 
+     <span class="sbg"></span> 
+     <div class="defail-skin" delayload="showSkin()"> 
+      <ul id="skinBG" class="defail-skin-bg">
+       皮肤加载中...
+      </ul> 
+      <div class="defail-skin-nav"> 
+       <div class="defail-skin-name">
+        <span id="skinName">皮肤名称加载中...</span>
+       </div> 
+       <ul id="skinNAV">
+        皮肤缩略图加载中...
+       </ul> 
+      </div> 
+     </div> 
+     <div id="defailVodPlayer" class="defail-vod-player" style="display:none;"> 
+      <div id="VideoContent">
+       <p class="loading">视频加载中...</p>
+      </div> 
+      <a href="javascript:hidVod()" class="popclose">×</a> 
+     </div> 
+    </div> 
+    <div class="clearfix"> 
+     <div class="infoleftcont"> 
+      <h4 class="infotitle">背景故事</h4> 
+      <div class="colbox bgstroy" delayload="showInfo.BG(heroid)"> 
+       <div id="DATAlore"></div> 
+       <a id="Gmore" href="javascript:;" class="cgray">查看更多...</a> 
+       <a id="Hmore" href="javascript:;" class="cgray">收起...</a> 
+      </div> 
+      <h4 class="infotitle" delayload="showInfo.Spell(heroid)">技能介绍</h4> 
+      <ul id="DATAspellsNAV" class="infotab"></ul> 
+      <div id="DATAspells" class="colbox infoskillbox"> 
+       <!-- <div class="skilltitle">
+              <h5>一箭双雕</h5>
+              <em>快捷键：Q</em>
+            </div>
+            <p class="skilltip">朝目标地点发射一团光球，束缚并伤害最多2个敌方单位。第一个目标将受到60/110/160/210/260(+0.7)魔法伤害，并被束缚2秒。第二个目标会受到50%的效果。</p>
+            <ul class="skillstat">
+              <li>法力消耗：50/60/70/80/90 法力值</li>
+              <li>冷却时间：15/14/13/12/11 秒</li>
+            </ul> --> 
+      </div> 
+      <h4 class="infotitle" id="title_equipment">推荐装备</h4> 
+      <div id="jSearchItemDiv" class="colbox infospells" delayload="showInfo.Item(alias)"> 
+       <div class="pagetab"> 
+        <ul id="infospellsTAB" class="pagetab-list pagetablist-sec"> 
+         <li class="current" rel="classBlocks"><a class="pagetab-list-lnk">召唤师峡谷</a></li> 
+         <li rel="aramBlocks"><a class="pagetab-list-lnk">极地大乱斗</a></li> 
+        </ul> 
+       </div> 
+       <dl id="infospellsTABclassBlocks" style="display:block"> 
+        <!-- <dt>出门装</dt>
+              <dd class="borlineX">
+                <img src="//game.gtimg.cn/images/lol/web201310/101/tmp/tmp-user.jpg" alt="">
+                <img src="//game.gtimg.cn/images/lol/web201310/101/tmp/tmp-user.jpg" alt="">
+              </dd> --> 
+       </dl> 
+       <dl id="infospellsTABaramBlocks" style="display:none"> 
+        <!-- <dt>出门装</dt>
+              <dd class="borlineX">
+                <img src="//game.gtimg.cn/images/lol/web201310/101/tmp/tmp-user.jpg" alt="">
+                <img src="//game.gtimg.cn/images/lol/web201310/101/tmp/tmp-user.jpg" alt="">
+              </dd> --> 
+       </dl> 
+      </div> 
+      <h4 class="infotitle">使用技巧</h4> 
+      <div class="colbox arttips" delayload="showInfo.Skill(heroid)"> 
+       <dl id="DATAallytips" class="borlineX"> 
+        <!-- <dt>当你使用厄运女郎</dt>
+              <dd><p></p></dd> --> 
+       </dl> 
+       <dl id="DATAenemytips"></dl> 
+      </div> 
+     </div> 
+     <div class="inforightcont"> 
+      <div id="jUserRecInfo" class="clearfix infotitle"> 
+       <h4 class="fl">我的记录</h4> 
+       <p id="jUserHeroArea" class="fr more"></p> 
+      </div> 
+      <div id="jUserRecList" class="colbox"> 
+       <div id="jUserHeroinfo" class="clearfix pageuserline-shout">
+        您无法查看使用该英雄的记录，请
+        <a class="cgreen" href="javascript:LW201310_Userinfo.userLogin();">[登陆]</a>，并绑定所在大区。
+       </div> 
+       <div id="jUserRecH5" class="hisbox-title" style="display:none;"> 
+        <h5 class="fl">近期使用记录</h5> 
+        <p class="fr more"><a id="jUserPersonalPage" class="cgray publicspr ico-more2" href="//lol.qq.com/personal/index.shtml">查看更多</a></p> 
+       </div> 
+       <ul id="jUserHeroBattle" class="hisbox-list clearfix"></ul> 
+      </div> 
+      <div class="clearfix infotitle" style="display: none"> 
+       <h4 class="fl">推荐攻略</h4> 
+       <div class="fr more">
+        <a class="cgray publicspr ico-more2" href="javascript:window.open('//lol.qq.com/guide/list.shtml?key=' + encodeURIComponent(LW201310_ChampionInfo.dHeroName), '_blank');">查看更多</a>
+       </div> 
+      </div> 
+      <div class="colbox info-medialist" exposure-tag="Strategy,攻略" style="display: none"> 
+       <ol id="jMediaList" class="ghot-list">
+        <li>没有找到该英雄相关攻略。</li>
+       </ol> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <!--官网通用底部,仅供官网使用,其他站请用pureFoot start--> 
+  <div class="foot-wrap" id="footWrap"> 
+   <div class="foot_inner" id="gfooter" ams="152/35206/m131" age="18" dark="1" ieg-logo="1"> 
+    <!-- <div class="foot_top"> any HTML code </div> --> 
+    <a onclick="pgvSendClick({hottag:'v3.foot.ieg.link'})" target="_blank" href="//ieg.tencent.com/" title="腾讯互动娱乐" class="foot_ieg_logo">腾讯互动娱乐</a> 
+    <span onclick="pgvSendClick({hottag:'v3.foot.riot.link'})" title="RIOT" class="foot_left logo-riot">riot</span> 
+    <p class="copyright_txt">COPYRIGHT &copy; 2012 Riot Games,Inc. ALL RIGHTS RESERVED.</p> 
+    <p>全国文化市场统一举报电话：12318</p> 
+    <!-- <p class="copyright_txt">COPYRIGHT &?Smilegate Entertainment. All rights reserved.</p>--> 
+    <!-- <div  class="foot_bottom"> any HTML code </div> --> 
+   </div> 
+  </div> 
+  <!--底部版权js--> 
+  <script src="//game.gtimg.cn/images/js/2018foot/foot.js"></script> 
+  <!--官网通用js start--> 
+  <script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.9.1.min.js"></script> 
+  <script src="//ossweb-img.qq.com/images/js/eas/eas.js"></script> 
+  <script src="/v3/js/lib.js?v=927"></script> 
+  <script src="//js.aq.qq.com/js/aq_common.js"></script> 
+  <!--官网通用js end--> 
+  <!--登录部分js start--> 
+  <script src="//ossweb-img.qq.com/images/js/milo_bundle/milo.js"></script> 
+  <script src="//lol.qq.com/comm-htdocs/js/game_area/lol_server_select.js"></script> 
+  <script src="/v3/js/LOL_Login.js"></script> 
+  <script src="/v3/js/v3comm.js"></script> 
+  <!--登录部分js end--> 
+  <!--顶部模块js start--> 
+  <script src="//lol.qq.com/act/AutoCMS/publish/LOLWeb/HeadCfg/headcfg.js"></script> 
+  <script src="/v3/js/TopModule.js"></script> 
+  <script src="//ossweb-img.qq.com/images/js/ArtTemplate.js" charset="utf-8"></script> 
+  <!--顶部模块js end--> 
+  <!--官网通用底部 end--> 
+  <script src="/v2/js/index.js"></script> 
+  <div id="popPupItem" class="poppup-item" style="display:none"> 
+   <div id="itemFromTop">
+    拼命加载中...
+   </div> 
+   <div id="itemFromTree" class="item-from">
+    拼命加载中...
+   </div> 
+  </div> 
+  <!-- 视频弹窗--> 
+  <div id="EggVideo" class="popupbox" style="display:none"> 
+   <div id="EggVideoContent">
+    加载中...
+   </div> 
+   <!--<a href="javascript:hidEgg()" class="pop-close">&times;</a>--> 
+  </div> 
+  <script src="//lol.qq.com/biz/hero/champion.js"></script> 
+  <!--<script src="//game.gtimg.cn/images/js/milo/milo-min.js"></script>--> 
+  <!--<script src="//imgcache.qq.com/tencentvideo_v1/tvp/js/tvp.player_v2.js" charset="utf-8"></script>--> 
+  <!--<script src='//vm.gtimg.cn/tencentvideo/txp/js/txplayer.js'></script>--> 
+  <script src="/web201310/js/common.js"></script> 
+  <script src="//lol.qq.com/web201310/js/info.js?d=20151120"></script> 
+  <!--<script src="//apps.game.qq.com/CommArticle/app/reg/gdate.php"></script>--> 
+  <script>
+    var heroInfo = null;
+
+    showVideosDialogs = function (key) {
+      // var selfdata = LOLherojs.otherthings.data[key];
+      var selfdata = heroInfo.hero;
+      /*if (selfdata.buylink != "") {
+        var lnk = selfdata.buylink.split("/")[5].split(".shtml")[0];
+        // g("defailBuy").href = selfdata.buylink + "?ADTAG=cop.innercop.lol_guanwang.hero_" + lnk;
+        g("defailBuy").href = 'https://daoju.qq.com/lol/list/16-0-0-0-0-0-0-0-0-0-0-00-0-0-1-1.shtml?ADTAG=innercop.lol.SY.shoppinglist_new_16';
+        g("defailBuy").onclick = function () {
+          pgvSendClick({hottag: 'infodefail.link.buy.' + key})
+        };
+      } else {
+        g("defailBuy").href = "javascript:alert('暂未开启，敬请期待哦！');";
+        g("defailBuy").target = "_self";
+      }*/
+      // 购买按钮
+      g("defailBuy").href = 'https://daoju.qq.com/lol/list/16-0-0-0-0-0-0-0-0-0-0-00-0-0-1-1.shtml?ADTAG=innercop.lol.SY.shoppinglist_new_16';
+      g("defailBuy").onclick = function () {
+        PTTSendClick('btn','buy'+key,'购买英雄');
+      };
+
+      // 播放视频
+      if(selfdata.heroVideoPath != ""){
+        g("defailVideo").style.display="block";
+        g("defailVideo").onclick = function(){
+          PTTSendClick('btn','playVideo','视频播放');
+          window.open(selfdata.defailVideo);
+        }
+      }else{
+        g("defailVideo").style.display="none";
+      }
+    },
+    showSkin = function () {
+      // var skin = LOLherojs.champion[heroid].data.skins,
+      var skin = heroInfo.skins,
+              ids = null,
+              names = null,
+              nav = [],
+              bg = [],
+              title = [],
+              url = '//game.gtimg.cn/images/lol/web201310/skin/';
+      for (var i = 0, len = skin.length; i < len; i++) {
+        if(skin[i].chromas == 1) continue;//炫彩皮肤不显示
+        ids = skin[i].id;
+        names = skin[i].name;
+        if (names.indexOf('default') != -1) {
+          names = "默认皮肤"
+        };
+        // loadScript(url+'small'+ids+'.jpg',function(){console.log(0);});
+        nav.push('<li rel="_' + i + '"><a title="' + names + '"><img width="60" height="60" src="' + skin[i].iconImg + '" alt="' + names + '"><span class="sbor"></span></a></li>');
+        bg.push('<li title="' + names + '"><img src="' + skin[i].mainImg + '" alt="' + names + '"></li>');
+        title.push(names);
+      }
+      g('skinNAV').innerHTML = nav.join('');
+      g('skinBG').innerHTML = bg[0];
+      g('skinName').innerHTML = title[0];
+      var sw = gets.tag('skinNAV', "li"), ord = 0;
+      sw[0].className = "current";
+      for (var j = sw.length; j--;) {
+        sw[j].count = j;
+        sw[j].onclick = function () {
+          var simg = gets.tag('skinBG', "li");
+          if (!simg[this.count]) {
+            g('skinBG').innerHTML = bg.join('');
+          }
+          move("skinBG", this.count, 1240, "left");
+          sw[ord].className = "";
+          this.className = "current";
+          g('skinName').innerHTML = title[this.count];
+          ord = this.count;
+        }
+      }
+    },
+//end
+//页面内容
+    showInfo = {
+      "Top": function (heroid) {
+        //topinfo
+        // var data = LOLherojs.champion[heroid].data,
+        var data = heroInfo.hero,
+                tg = [],
+                tmp,
+                inf = [];
+        g("DATAnametitle").innerHTML = data.name + ' ' + data.title;
+        g("DATAname").innerHTML = data.name;
+        g("DATAtitle").innerHTML = data.title;
+        for (var i in data.roles) {
+          tmp = data.roles[i];
+          tg.push('<span>' + getTag2(tmp) + '</span>');
+        };
+        g("DATAtags").innerHTML = tg.join('');
+        inf.push('<dt>物理攻击</dt><dd><i class="up up1" title="' + data.attack + '" style="width:' + data.attack + '0%"></i></dd>');
+        inf.push('<dt>魔法攻击</dt><dd><i class="up up2" title="' + data.magic + '" style="width:' + data.magic + '0%"></i></dd>');
+        inf.push('<dt>防御能力</dt><dd><i class="up up3" title="' + data.defense + '" style="width:' + data.defense + '0%"></i></dd>');
+        inf.push('<dt>上手难度</dt><dd><i class="up up4" title="' + data.difficulty + '" style="width:' + data.difficulty + '0%"></i></dd>');
+        g("DATAinfo").innerHTML = inf.join('');
+        loadScript("/web201310/js/herovideo.js", function () {
+          showVideosDialogs(heroid);
+        });
+      },
+      "BG": function (heroid) {
+        //背景故事
+        // var data = LOLherojs.champion[heroid].data;
+        var data = heroInfo.hero,
+            shortBio = data.shortBio.length > 200 ? data.shortBio.substring(0,200) +'……' : data.shortBio;
+        g("DATAlore").innerHTML = shortBio;
+        g("Hmore").style.display = "none";
+        g("Gmore").onclick = function () {
+          g("DATAlore").innerHTML = data.shortBio;
+          g("Gmore").style.display = "none";
+          g("Hmore").style.display = "inline";
+        };
+        g("Hmore").onclick = function () {
+          g("DATAlore").innerHTML = shortBio;
+          g("Gmore").style.display = "inline";
+          g("Hmore").style.display = "none";
+        };
+      },
+      "Spell": function (heroid) {
+        //技能介绍
+        // var data =LOLherojs.champion[heroid].data,
+        var data = heroInfo,
+                stab = [],
+                scont = [],
+                spe = data.spells,
+                len = spe.length,
+                lv = [],
+                url,
+                skey = ["Q", "W", "E", "R"];
+                // url2 = gets.u + data.passive.image.group + "/" + data.passive.image.full;
+
+
+        // 被动技能
+        var passive = [];
+
+        //主动技能
+        var spellsTmp = [],
+            spells = [];
+        for(var j in data.spells){
+          if(data.spells[j].spellKey == 'passive'){
+            passive.push(data.spells[j])
+          }else{
+            spellsTmp.push(data.spells[j])
+          }
+        }
+
+        for(var k in passive){
+          stab.push('<li class="current"><img src="' + passive[k].abilityIconPath + '" alt=""></li>');
+          scont.push('<div class="skilltitle"><h5>' + passive[k].name + '</h5><em>被动技能</em></div><p class="skilltip">' + passive[k].description + '</p>');
+        }
+
+
+        //处理顺序 QWER
+        for(var k1 in skey){
+          for(var k2 in spellsTmp){
+            if(skey[k1] == spellsTmp[k2].spellKey.toUpperCase()){
+              spells.push(spellsTmp[k2]);
+              continue;
+            }
+          }
+        }
+
+        for (var i = 0, sp; i < spells.length; i++) {
+          sp = spells[i];
+          url = sp.abilityIconPath;
+          stab.push('<li><img src="' + url + '" alt=""></li>');
+          if (!!sp.leveltip) {
+            // 等接口调整
+            for (var k = 0, lvlen = sp.leveltip.label.length; k < lvlen; k++) {
+              lv.push('<li>' + sp.leveltip.label[k] + '：' + sp.leveltip.effect[k] + '</li>');
+            }
+
+            if (sp.leveltip.label.length == 1 && sp.leveltip.label[0] == '') {
+              scont.push('<div class="skilltitle"><h5>' + sp.name + '</h5><em>快捷键：' + sp.spellKey.toUpperCase() + '</em></div><p class="skilltip">' + sp.description + '</p>')
+            } else {
+              scont.push('<div class="skilltitle"><h5>' + sp.name + '</h5><em>快捷键：' + sp.spellKey.toUpperCase() + '</em></div><p class="skilltip">' + sp.description + '</p><ul class="skillstat">' + lv.join('') + '</ul>')
+            }
+          } else {
+            scont.push('<div class="skilltitle"><h5>' + sp.name + '</h5><em>快捷键：' + sp.spellKey.toUpperCase() + '</em></div><p class="skilltip">' + sp.description + '</p>')
+          }
+          lv = [];
+        }
+        g("DATAspellsNAV").innerHTML = stab.join('');
+        g("DATAspells").innerHTML = scont[0];
+        var sw = gets.tag("DATAspellsNAV", "li"), ord = 0;
+        for (i = 0; i < sw.length + 1; i++) {
+          // sw[i].count = i;
+          // sw[i].onclick = function () {
+          //   var count = $(this).attr('count');
+          //   console.log(count)
+          //   sw[ord].className = "";
+          //   this.className = "current";
+          //   g("DATAspells").innerHTML = scont[this.count];
+          //   ord = this.count;
+          // }
+          $(sw[i]).attr('count',i).click(function () {
+            var count = $(this).attr('count');
+            sw[ord].className = "";
+            this.className = "current";
+            g("DATAspells").innerHTML = scont[count];
+            ord = count;
+          })
+        }
+      },
+      "Item": function (alias) {
+        //推荐装备
+        var data = LOLherojs.champion[alias].data,
+        // var data = heroInfo.hero,
+                itemsHtml = [], ddHtml = [],
+                type = {"starting": "起始装备", "essential": "核心物品", "offensive": "进攻型物品", "defensive": "防御型物品"},
+                typeN = [{
+                  "starting": false,
+                  "essential": false,
+                  "offensive": false,
+                  "defensive": false
+                }, {"starting": false, "essential": false, "offensive": false, "defensive": false}],
+                typeNum = 0,
+                blocks = data.blocks;
+
+        console.log('推荐装备', data);
+        if (blocks) {
+          for (var i = 0, lent = blocks.length; i < lent; i++) {
+            if ((blocks[i].map == "1" && blocks[i].mode == "CLASSIC") || (blocks[i].map == "12" && blocks[i].mode == "ARAM")) {
+              if (blocks[i].map == "1" && blocks[i].mode == "CLASSIC") {
+                typeNum = 0;
+              }
+              if (blocks[i].map == "12" && blocks[i].mode == "ARAM") {
+                typeNum = 1;
+              }
+              var classbk = blocks[i].recommended,
+                      itemURL = gets.u + "item/",
+                      items,
+                      itemID;
+              for (var j = 0, ln = classbk.length - 1; j < ln; j++) {
+                items = classbk[j].items;
+                if (classbk[j].type == 'starting' || classbk[j].type == 'essential' || classbk[j].type == 'offensive' || classbk[j].type == 'defensive') {
+                  if (!typeN[typeNum][classbk[j].type]) {
+                    for (var t = 0, l = items.length; t < l; t++) {
+                      itemID = items[t].id;
+                      itemsHtml.push('<img data-title="' + itemID + '" src="' + itemURL + itemID + '.png" alt="">');
+                    }
+                    ddHtml.push('<dt>' + type[classbk[j].type] + '</dt><dd class="borlineX">' + itemsHtml.join('') + '</dd>');
+                    itemsHtml = [];
+                  }
+                  typeN[typeNum][classbk[j].type] = true;
+                }
+              }
+
+              if (blocks[i].map == "1") {
+                g("infospellsTABclassBlocks").innerHTML = ddHtml.join('');
+              } else {
+                g("infospellsTABaramBlocks").innerHTML = ddHtml.join('');
+              }
+              ddHtml = [];
+            }
+          }
+        }else{
+          $("#title_equipment").hide();
+          $("#jSearchItemDiv").hide();
+        }
+        // var nobor = gets.tag("jSearchItemDiv","dd");
+        // nobor[nobor.length-1].className="";
+        // nobor[3].className="";
+        // $('#jSearchItemDiv dl dd:last')
+        JSwrap("infospellsTAB", "li", false, false, "click");
+        loadScript("//lol.qq.com/biz/hero/item.js", function () {
+          showPopup("jSearchItemDiv", "img");
+        });
+      },
+      "Skill": function (heroid) {
+        //使用技巧
+        // var data =LOLherojs.champion[heroid].data,
+        var data = heroInfo.hero,
+                atips = data.allytips,
+                etips = data.enemytips,
+                aTmp = [];
+        for (var i = 0, l = atips.length; i < l; i++) {
+          aTmp.push('<p>' + atips[i] + '</p>')
+        }
+        g("DATAallytips").innerHTML = '<dt>当你使用' + data.name + '</dt><dd>' + aTmp.join('') + '</dd>';
+        aTmp = [];
+        for (var i = 0, l = etips.length; i < l; i++) {
+          aTmp.push('<p>' + etips[i] + '</p>')
+        }
+        g("DATAenemytips").innerHTML = '<dt>敌人使用' + data.name + '</dt><dd>' + aTmp.join('') + '</dd>';
+      }
+    },
+
+    //头部区域模块 nav
+    getTag2 = function(t){
+      switch(t){
+        case "fighter": return "战士";
+        case "mage": return "法师";
+        case "assassin": return "刺客";
+        case "tank": return "坦克";
+        case "marksman": return "射手";
+        case "support": return "辅助";
+        default: return
+      }
+    };
+    //运行
+    var heroid = encodeReg(GetUrlParamByName("id"));
+    var alias = null;
+
+    var JisNum = function (str) {
+      if ("" == str) {
+        return false;
+      }
+      for (var i = 0; i < str.length; i++) {
+        var c = str.charAt(i);
+        if ((c < "0" || c > "9")) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    if (!JisNum(heroid)) {
+      // location.href="/data/info-heros.shtml";
+    } else {
+      g("DATAname").innerHTML = GetUrlParamByName("id");
+      $(function () {
+        $.getJSON('//game.gtimg.cn/images/lol/act/img/js/hero/' + heroid + '.js', function (res) {
+          console.log('新接口:',res)
+          heroInfo = res;
+          alias = encodeReg(res.hero['alias']);
+          getHeroInfo(alias); //旧版本接口（这里只拿推荐装备）
+          showInfo.Top(heroid);
+          LW201310_ChampionInfo.init();
+        })
+      })
+    }
+
+    //旧版本接口（这里只拿推荐装备）
+    function getHeroInfo(alias) {
+      loadScript("//lol.qq.com/biz/hero/"+alias+".js", function () {
+        console.log("原始数据：", LOLherojs);
+      });
+    }
+
+    /*g("DATAname").innerHTML = GetUrlParamByName("id");
+    $(function () {
+      $.getJSON('//game.gtimg.cn/images/lol/act/img/js/hero/1.js', function (res) {
+        console.log('新接口:', res)
+        heroInfo = res
+        showInfo.Top(heroid);
+      })
+    })*/
+
+   /* g("DATAname").innerHTML = GetUrlParamByName("id");
+    loadScript("//lol.qq.com/biz/hero/Akali.js", function () {
+      console.log("原始数据：", LOLherojs);
+      /!*if(LOLherojs.champion[heroid]!=null){
+        showInfo.Top(heroid);
+      }*!/
+    });*/
+    need(["biz.delayLoad"]);
+
+
+    /*if (!JisLetter(heroid)) {
+      location.href="/data/info-heros.shtml";
+    } else {
+      g("DATAname").innerHTML = GetUrlParamByName("id");
+      loadScript("//lol.qq.com/biz/hero/Akali.js", function () {
+        console.log("原始数据：", LOLherojs);
+        if (LOLherojs.champion[heroid] != null) {
+          showInfo.Top(heroid);
+        }
+      });
+      need(["biz.delayLoad"]);
+
+    }*/
+</script> 
+  <script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script> 
+  <script>
+var setSite = {
+        siteType: "data",
+        pageType: "defail",
+        pageName: "英雄详情页",
+        project: "base",
+    };
+    if (typeof (pgvMain) == 'function') pgvMain();
+</script>  
+  <!--[if !IE]>|xGv00|2d97607e604c0c87cce9d76b5e00b52b<![endif]-->
+ </body>
+</html>
