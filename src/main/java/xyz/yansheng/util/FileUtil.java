@@ -132,7 +132,7 @@ public class FileUtil {
 
                 // phone-smallskin-images/96西施-0-归虚梦演.jpg
                 String pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
-                // System.out.println("pathname:" + pathname);
+                //System.out.println("pathname:" + pathname);
 
                 downloadImage(imgUrl, pathname);
             }
@@ -152,7 +152,7 @@ public class FileUtil {
         File outFile = new File(pathname);
         // 如果图片已存在，则直接跳过下载该图片，因为没有必要再下载一次
         if (outFile.exists()) {
-//            System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+            //System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
             return;
         }
 
