@@ -198,9 +198,9 @@ public class FileUtil {
 
                     pathname = pathname.replace(".jpg", ".png");
                     // 因为这个透明的图片只有一种格式，为了防止重复，统一放在 2phone-mobileskin-images 这个目录下。
-                    pathname = pathname.replace("1phone-smallskin-images", "2phone-mobileskin-images");
-                    pathname = pathname.replace("3phone-bigskin-images", "2phone-mobileskin-images");
-                    pathname = pathname.replace("5wallpaper-bigskin-images", "2phone-mobileskin-images");
+                    pathname = pathname.replace("1phone-smallskin", "2phone-mobileskin");
+                    pathname = pathname.replace("3phone-bigskin", "2phone-mobileskin");
+                    pathname = pathname.replace("5wallpaper-bigskin", "2phone-mobileskin");
                     System.out.println("imgUrl:" + imgUrl + ", pathname:" + pathname);
 
                     downloadImage(imgUrl, pathname);
