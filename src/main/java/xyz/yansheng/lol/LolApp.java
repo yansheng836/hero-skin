@@ -1,4 +1,4 @@
-package xyz.yansheng.main;
+package xyz.yansheng.lol;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,19 +17,22 @@ import xyz.yansheng.util.FileUtil;
 import xyz.yansheng.util.SpiderUtil;
 
 /**
+ * 爬取LOL皮肤壁纸（按照王者的规则，先爬取主页英雄列表的信息，然后根据id，爬取对应英雄json数据 （本来应该要爬某个英雄主页皮肤信息的，但是因为数据是js加载的，行不通）。）
+ * 
  * @author yansheng
  * @date 2019/11/13
  */
-public class App {
+public class LolApp {
     public static void main(String[] args) {
 
         // 1.从英雄列表页爬取英雄基本数据（id,ename,cname,heroUrl）
         // 在线数据不实时，好像加了js，暂时不会爬取；先使用爬取下载的本地网页
-        String url = "https://pvp.qq.com/web201605/herolist.shtml";
-        String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏.html";
+        // String url = "https://pvp.qq.com/web201605/herolist.shtml";
+        String localUrl = "./游戏资料-英雄联盟官方网站-腾讯游戏.html";
 
-        ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
+        ArrayList<Hero> heros = SpiderUtil.getLolHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
+        System.out.println(heros.get(0).toString());
         // for (Hero hero : heros) {
         // System.out.println(hero.toString());
         // }
@@ -37,22 +40,18 @@ public class App {
         // 2.从每个英雄主页heroUrl中获取英雄的皮肤信息（title，skinName，skins）
         int count = 0;
         for (Hero hero : heros) {
-            SpiderUtil.getHeroSkins(hero);
-            hero.generateField();
-             System.out.println(hero.toString());
-            System.out.println(hero.toStringSimple());
+            SpiderUtil.getLolHeroSkins2(hero);
+            // 生成皮肤相关信息
+            hero.generateLolField();
             count++;
-            if (count == 2) {
-                 break;
-
-            }
         }
-        System.exit(1);
         int sum = 0;
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
         }
-        System.out.println("到目前为止，王者荣耀一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。");
+        System.out.println("到目前为止，英雄联盟一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。");
+
+        // System.exit(1);
 
         // 3.将数据写到json中
         // JSON,JSONArray也可以
@@ -68,8 +67,8 @@ public class App {
         map.put("wallpaper-bigskin-images", "电脑壁纸1920*882");
         map.put("hero-list", heros);
 
-        String jsonString = JSON.toJSONString(map, SerializerFeature.WriteMapNullValue,
-            SerializerFeature.WriteNullListAsEmpty);
+        String jsonString =
+            JSON.toJSONString(map, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
         // System.out.println(jsonString);
 
         String pathname = "./heros1.json";
@@ -82,7 +81,7 @@ public class App {
         }
 
         // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
-        int sign = 0;
+        int sign = 1;
 
         List<String> dirs = FileUtil.mkdir(sign);
         for (String dir : dirs) {

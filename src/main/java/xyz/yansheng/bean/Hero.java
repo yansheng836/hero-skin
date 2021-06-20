@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Hero implements Serializable{
+public class Hero implements Serializable {
     // {
     // "ename": 522,
     // "cname": "曜",
@@ -129,9 +129,49 @@ public class Hero implements Serializable{
 
     }
 
+    /**
+     * 利用现有字段生成其他字段
+     */
+    public void generateLolField() {
+
+        // 根据英雄的ename和皮肤列表，生成各种类型皮肤图片网址
+        if (ename != null && skins != null) {
+            int size = skins.size() * 2;
+            phoneSmallskinUrl = new ArrayList<>(size);
+            phoneMobileskinUrl = new ArrayList<>(size);
+            phoneBigskinUrl = new ArrayList<>(size);
+            wallpaperMobileskinUrl = new ArrayList<>(size);
+            wallpaperBigskinUrl = new ArrayList<>(size);
+
+            // https://game.gtimg.cn/images/lol/act/img/skin/big1000.jpg
+            // "iconImg": "https://game.gtimg.cn/images/lol/act/img/skin/small1000.jpg",
+            // https://game.gtimg.cn/images/lol/act/img/skinloading/1000.jpg
+            String phonePrefix = "https://game.gtimg.cn/images/lol/act/img/skinloading/";
+            String wallpaperPrefix = "https://game.gtimg.cn/images/lol/act/img/skin/";
+            String smallskin = "small";
+            String mobileskin = "-mobileskin-";
+            String bigskin = "big";
+            String suffix = ".jpg";
+            String[] skinsArray = title.split("\\|");
+            for (int i = 0; i < skinsArray.length; i++) {
+                String psu = wallpaperPrefix + smallskin +  skinsArray[i].toString() + suffix;
+//                String pmu = phonePrefix + ename + "/" + ename + mobileskin + i + suffix;
+                String pbu = phonePrefix + skinsArray[i].toString() + suffix;
+//                String wmu = wallpaperPrefix + ename + "/" + ename + mobileskin + i + suffix;
+                String wbu = wallpaperPrefix + bigskin + skinsArray[i].toString() + suffix;
+                 phoneSmallskinUrl.add(psu);
+                // phoneMobileskinUrl.add(pmu);
+                 phoneBigskinUrl.add(pbu);
+                // wallpaperMobileskinUrl.add(wmu);
+                wallpaperBigskinUrl.add(wbu);
+            }
+        }
+
+    }
+
     public String toStringSimple() {
-        return "Hero [id=" + id + ", ename=" + ename + ", cname=" + cname + ", title=" + title
-            + ", skinName=" + skinName + "]";
+        return "Hero [id=" + id + ", ename=" + ename + ", cname=" + cname + ", title=" + title + ", skinName="
+            + skinName + "]";
     }
 
 }

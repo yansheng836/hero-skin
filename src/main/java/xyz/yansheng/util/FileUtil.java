@@ -1,15 +1,13 @@
 package xyz.yansheng.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import xyz.yansheng.bean.Hero;
 
@@ -132,7 +130,7 @@ public class FileUtil {
 
                 // phone-smallskin-images/96西施-0-归虚梦演.jpg
                 String pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
-                //System.out.println("pathname:" + pathname);
+                // System.out.println("pathname:" + pathname);
 
                 downloadImage(imgUrl, pathname);
             }
@@ -152,7 +150,7 @@ public class FileUtil {
         File outFile = new File(pathname);
         // 如果图片已存在，则直接跳过下载该图片，因为没有必要再下载一次
         if (outFile.exists()) {
-            //System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+            // System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
             return;
         }
 
@@ -174,6 +172,35 @@ public class FileUtil {
                 // 响应成功，可以建立连接
             } else {
                 System.err.println("图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode);
+
+                if (imgUrl.indexOf("https://game.gtimg.cn/images/lol/act/img") != -1) {
+                    // https://game.gtimg.cn/images/lol/act/img/chromas/1/1014.png
+                    // lol 的特殊情况，重新下载一次
+                    String skinId = imgUrl.substring(imgUrl.lastIndexOf('/') + 1, imgUrl.lastIndexOf('.'));
+                    skinId = skinId.replace("small", "").replace("big", "");
+
+                    String id = pathname.substring(pathname.lastIndexOf('/') + 1, pathname.length());
+                    System.out.println("skinId:" + skinId + ", id:" + id);
+
+                    String pattern = "\\d+";
+                    // 创建 Pattern 对象
+                    Pattern r = Pattern.compile(pattern);
+                    // 现在创建 matcher 对象
+                    Matcher m = r.matcher(id);
+                    if (m.find()) {
+                        id = m.group(0);
+                    } else {
+                        System.out.println("NO MATCH");
+                    }
+
+                    imgUrl = "https://game.gtimg.cn/images/lol/act/img/chromas/" + (Integer.parseInt(id)+1) + "/" + skinId + ".png";
+
+
+                    pathname = pathname.replace(".jpg", ".png");
+                    System.out.println("imgUrl:" + imgUrl + ", pathname:" + pathname);
+
+                    downloadImage(imgUrl, pathname);
+                }
                 return;
             }
         } catch (MalformedURLException e2) {
