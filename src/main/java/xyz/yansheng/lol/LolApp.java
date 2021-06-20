@@ -32,7 +32,7 @@ public class LolApp {
 
         ArrayList<Hero> heros = SpiderUtil.getLolHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
-        System.out.println(heros.get(0).toString());
+        // System.out.println(heros.get(0).toString());
         // for (Hero hero : heros) {
         // System.out.println(hero.toString());
         // }
@@ -71,7 +71,7 @@ public class LolApp {
             JSON.toJSONString(map, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
         // System.out.println(jsonString);
 
-        String pathname = "./heros1.json";
+        String pathname = "./lol-heros.json";
         File file = new File(pathname);
         try {
             FileUtils.writeStringToFile(file, jsonString, SpiderUtil.UTF8);
@@ -81,7 +81,7 @@ public class LolApp {
         }
 
         // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
-        int sign = 1;
+        int sign = 0;
 
         List<String> dirs = FileUtil.mkdir(sign);
         for (String dir : dirs) {

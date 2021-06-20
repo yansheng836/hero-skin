@@ -47,5 +47,6 @@ release
 游戏资料-英雄联盟官方网站-腾讯游戏_files/
 *.jpg
 *.png
+*-images/
 .idea/
 *.iml

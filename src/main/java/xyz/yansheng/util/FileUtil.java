@@ -19,11 +19,12 @@ import xyz.yansheng.bean.Hero;
  */
 public class FileUtil {
 
-    static final String PHONE_SAMLLSKIN_IMAGES = "1phone-smallskin-images";
-    static final String PHONE_MOBILESKIN_IMAGES = "2phone-mobileskin-images";
-    static final String PHONE_BIGSKIN_IMAGES = "3phone-bigskin-images";
-    static final String WALLPAPER_MOBILESKIN_IMAGES = "4wallpaper-mobileskin-images";
-    static final String WALLPAPER_BIGSKIN_IMAGES = "5wallpaper-bigskin-images";
+    // lol 自带前缀 ./lol-skin-images/ 或者 images 换成 lol ,如果是王者需要去掉
+    static final String PHONE_SAMLLSKIN_IMAGES = "./1phone-smallskin-lol";
+    static final String PHONE_MOBILESKIN_IMAGES = "./2phone-mobileskin-lol";
+    static final String PHONE_BIGSKIN_IMAGES = "./3phone-bigskin-lol";
+    static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-lol";
+    static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-lol";
 
     /**
      * 新建文件夹（不存在才创建）
@@ -173,7 +174,7 @@ public class FileUtil {
             } else {
                 System.err.println("图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode);
 
-                if (imgUrl.indexOf("https://game.gtimg.cn/images/lol/act/img") != -1) {
+                if (imgUrl.contains("https://game.gtimg.cn/images/lol/act/img")) {
                     // https://game.gtimg.cn/images/lol/act/img/chromas/1/1014.png
                     // lol 的特殊情况，重新下载一次
                     String skinId = imgUrl.substring(imgUrl.lastIndexOf('/') + 1, imgUrl.lastIndexOf('.'));
@@ -195,13 +196,15 @@ public class FileUtil {
 
                     imgUrl = "https://game.gtimg.cn/images/lol/act/img/chromas/" + (Integer.parseInt(id)+1) + "/" + skinId + ".png";
 
-
                     pathname = pathname.replace(".jpg", ".png");
+                    // 因为这个透明的图片只有一种格式，为了防止重复，统一放在 2phone-mobileskin-images 这个目录下。
+                    pathname = pathname.replace("1phone-smallskin-images", "2phone-mobileskin-images");
+                    pathname = pathname.replace("3phone-bigskin-images", "2phone-mobileskin-images");
+                    pathname = pathname.replace("5wallpaper-bigskin-images", "2phone-mobileskin-images");
                     System.out.println("imgUrl:" + imgUrl + ", pathname:" + pathname);
 
                     downloadImage(imgUrl, pathname);
                 }
-                return;
             }
         } catch (MalformedURLException e2) {
             System.err.println("图片链接(" + imgUrl + ")中不含有合法的网络协议或者无法解析该字符串！");
