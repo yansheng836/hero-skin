@@ -4,9 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Connection;
@@ -30,6 +34,7 @@ public class SpiderUtil {
 
     public static final String UTF8 = "UTF-8";
     public static final String GBK = "GBK";
+    public static final String CLASS_NAME = "xyz.yansheng.util.SpiderUtil";
 
     /**
      * 获取英雄列表
@@ -274,6 +279,9 @@ public class SpiderUtil {
         // String url = "http://game.gtimg.cn/images/lol/act/img/js/hero/1.js";
         String url = "http://game.gtimg.cn/images/lol/act/img/js/hero/" + hero.getEname() + ".js";
 
+        String logFileName = "./log/lol-per-hero-js-" + LocalDate.now() + ".log";
+        LogUtil.writeLog(CLASS_NAME, logFileName, LogUtil.INFO, url);
+
         Document document = null;
         JSONObject object = null;
         try {
@@ -317,6 +325,10 @@ public class SpiderUtil {
         skinName = skinName.substring(0, skinName.lastIndexOf('|'));
         title = title.substring(0, title.lastIndexOf('|'));
 
+        // 去除特殊字符，比如 “K/DA ALL OUT 伊芙琳”
+        skinName = skinName.replaceAll("/","-");
+        title = title.replaceAll("/","-");
+
         // Hero [id=105, ename=155, cname=艾琳, title=精灵之舞, skinName=精灵之舞|女武神]
         // Hero [id=104, ename=537, cname=司空震, title=雷霆之王, skinName=雷霆之王|启蛰]
         String[] skinsArray = skinName.split("\\|");
@@ -327,5 +339,4 @@ public class SpiderUtil {
         hero.setTitle(title);
         return hero;
     }
-
 }

@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,6 +26,8 @@ public class FileUtil {
     static final String PHONE_BIGSKIN_IMAGES = "./3phone-bigskin-lol";
     static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-lol";
     static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-lol";
+
+    public static final String CLASS_NAME = "xyz.yansheng.util.FileUtil";
 
     /**
      * 新建文件夹（不存在才创建）
@@ -151,7 +154,7 @@ public class FileUtil {
         File outFile = new File(pathname);
         // 如果图片已存在，则直接跳过下载该图片，因为没有必要再下载一次
         if (outFile.exists()) {
-            // System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+            System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
             return;
         }
 
@@ -172,9 +175,13 @@ public class FileUtil {
             if (responseCode < 400) {
                 // 响应成功，可以建立连接
             } else {
-                System.err.println("图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode);
+                String errorString = "图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode;
+                System.err.println(errorString);
 
-                if (imgUrl.contains("https://game.gtimg.cn/images/lol/act/img")) {
+                String logFileName = "./log/downloadImage-error-" + LocalDate.now() + ".log";
+                LogUtil.writeLog(CLASS_NAME, logFileName, LogUtil.SEVERE, errorString);
+
+                if (imgUrl.contains(".jpg") && imgUrl.contains("https://game.gtimg.cn/images/lol/act/img")) {
                     // https://game.gtimg.cn/images/lol/act/img/chromas/1/1014.png
                     // lol 的特殊情况，重新下载一次
                     String skinId = imgUrl.substring(imgUrl.lastIndexOf('/') + 1, imgUrl.lastIndexOf('.'));
@@ -194,7 +201,8 @@ public class FileUtil {
                         System.out.println("NO MATCH");
                     }
 
-                    imgUrl = "https://game.gtimg.cn/images/lol/act/img/chromas/" + (Integer.parseInt(id)+1) + "/" + skinId + ".png";
+                    imgUrl = "https://game.gtimg.cn/images/lol/act/img/chromas/" + (Integer.parseInt(id) + 1) + "/"
+                        + skinId + ".png";
 
                     pathname = pathname.replace(".jpg", ".png");
                     // 因为这个透明的图片只有一种格式，为了防止重复，统一放在 2phone-mobileskin-images 这个目录下。
@@ -204,6 +212,7 @@ public class FileUtil {
                     System.out.println("imgUrl:" + imgUrl + ", pathname:" + pathname);
 
                     downloadImage(imgUrl, pathname);
+
                 }
             }
         } catch (MalformedURLException e2) {

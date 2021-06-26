@@ -27,6 +27,8 @@ public class TestString {
         Collections.reverse(list);
         System.out.println(list.get(0));
 
+        System.out.println("K/DA ALL OUT 伊芙琳".replaceAll("/","-"));
+
     }
 
 }
