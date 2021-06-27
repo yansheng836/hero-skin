@@ -50,3 +50,10 @@ release
 *-images/
 .idea/
 *.iml
+
+# 不忽略文档截图
+#assets
+#assets/
+!assets
+!assets/
+!assets/*.png
