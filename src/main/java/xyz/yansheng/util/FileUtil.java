@@ -36,15 +36,15 @@ public class FileUtil {
      *            文件夹名
      */
     public static void mkdir(String pathname) {
-        String infoString = "";
+        String infoString;
         File file = new File(pathname);
         if (!file.exists()) {
             file.mkdirs();
-            infoString = "\n创建文件夹' " + pathname + "' 成功";
+            infoString = "创建文件夹' " + pathname + "' 成功";
             System.out.println(infoString);
             LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
         } else {
-            infoString = "\n文件夹' " + pathname + "' 已存在";
+            infoString = "文件夹' " + pathname + "' 已存在";
             System.out.println(infoString);
             LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
         }

@@ -6,7 +6,8 @@
     <groupId>xyz.yansheng</groupId>
     <artifactId>hero-skin</artifactId>
     <!-- 2021年6月26日 约定：王者荣耀打包后缀为 -wzry ，英雄联盟为 -lol -->
-    <version>1.0.0-lol</version>
+    <version>1.0.1-lol</version>
+    <!--<version>1.0.0-wzry</version>-->
     <packaging>jar</packaging>
 
     <description>爬取王者荣耀的皮肤图片。</description>
@@ -16,8 +17,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 防止测试时中文乱码 -->
         <argLine>-Dfile.encoding=UTF-8</argLine>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -113,6 +116,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 

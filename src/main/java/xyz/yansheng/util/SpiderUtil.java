@@ -279,6 +279,7 @@ public class SpiderUtil {
         // String url = "http://game.gtimg.cn/images/lol/act/img/js/hero/1.js";
         String url = "http://game.gtimg.cn/images/lol/act/img/js/hero/" + hero.getEname() + ".js";
 
+        new File("./log").mkdirs();
         String logFileName = "./log/lol-per-hero-js-" + LocalDate.now() + ".log";
         LogUtil.writeLog(CLASS_NAME, logFileName, LogUtil.INFO, url);
 

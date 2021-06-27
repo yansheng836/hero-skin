@@ -15,16 +15,17 @@ import xyz.yansheng.bean.Hero;
 public class SpiderUtilTest {
 
     /**
-     * Test method for {@link xyz.yansheng.util.SpiderUtil#getHeros(java.lang.String)}.
+     * Test method for {@link xyz.yansheng.util.SpiderUtil#getHeros(java.lang.String,java.lang.String)}.
      */
     @Test
     public void testGetHeros() {
         String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏.html";
         ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
         assertNotNull(heros);
-        for (Hero hero : heros) {
-            System.out.println(hero.toString());
-        }
+        System.out.println(heros.size());
+//        for (Hero hero : heros) {
+//            System.out.println(hero.toString());
+//        }
 
     }
 
@@ -33,6 +34,7 @@ public class SpiderUtilTest {
         Hero hero = new Hero();
         hero.setHeroUrl("https://pvp.qq.com/web201605/herodetail/523.shtml");
         hero = SpiderUtil.getHeroSkins(hero);
+        assertNotNull(hero.getSkins());
         System.out.println(hero.toString());
     }
 
