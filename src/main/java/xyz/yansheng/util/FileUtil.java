@@ -36,12 +36,17 @@ public class FileUtil {
      *            文件夹名
      */
     public static void mkdir(String pathname) {
+        String infoString = "";
         File file = new File(pathname);
         if (!file.exists()) {
             file.mkdirs();
-            System.out.println("\n创建文件夹' " + pathname + "' 成功");
+            infoString = "\n创建文件夹' " + pathname + "' 成功";
+            System.out.println(infoString);
+            LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
         } else {
-            System.out.println("\n文件夹' " + pathname + "' 已存在");
+            infoString = "\n文件夹' " + pathname + "' 已存在";
+            System.out.println(infoString);
+            LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
         }
     }
 
@@ -128,14 +133,20 @@ public class FileUtil {
 
             // 下载图片
             int size = urls.size();
+            String skin;
+            String imgUrl;
+            String pathname;
             for (int i = 0; i < size; i++) {
-                String skin = skins.get(i);
-                String imgUrl = urls.get(i);
-
+                skin = skins.get(i);
+                imgUrl = urls.get(i);
                 // phone-smallskin-images/96西施-0-归虚梦演.jpg
-                String pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+                // 对lol的图片重新处理命名规则（从1开始，不是王者的0开始） ：1黑暗之女-1-哥特萝莉 安妮.jpg
+                if (imgUrl.contains("lol")) {
+                    pathname = dir + "/" + (Integer.parseInt(id) + 1) + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+                } else {
+                    pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+                }
                 // System.out.println("pathname:" + pathname);
-
                 downloadImage(imgUrl, pathname);
             }
         }
@@ -150,11 +161,20 @@ public class FileUtil {
      *            文件名
      */
     public static void downloadImage(String imgUrl, String pathname) {
+
+        String infoString;
+        String errorString;
+
+        String errorLogFileName = "./log/hero-skin-error-" + LocalDate.now() + ".log";
+        String infoLogFileName = "./log/hero-skin-info-" + LocalDate.now() + ".log";
+
         // 取得图片文件名
         File outFile = new File(pathname);
         // 如果图片已存在，则直接跳过下载该图片，因为没有必要再下载一次
         if (outFile.exists()) {
-            System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+            infoString = " -图片：" + pathname + " 已存在，故不再下载。";
+            // System.out.println(" -图片：" + pathname + " 已存在，故不再下载。");
+            LogUtil.writeLog(CLASS_NAME, infoLogFileName, LogUtil.INFO, infoString);
             return;
         }
 
@@ -174,21 +194,41 @@ public class FileUtil {
             // 这里假设只要不是4xx（请求错误）,5xx（服务器错误）都表示可以下载图片
             if (responseCode < 400) {
                 // 响应成功，可以建立连接
+                // 利用jdk1.7的新特性 ：try(resource){……} catch{……}，自动释放资源
+                // 1.创建输入输出流 2.建立一个网络链接
+                try (InputStream inputStream = con.getInputStream();
+                    OutputStream outputStream = new FileOutputStream(outFile);) {
+                    int n = -1;
+                    byte b[] = new byte[1024];
+                    while ((n = inputStream.read(b)) != -1) {
+                        outputStream.write(b, 0, n);
+                    }
+                    outputStream.flush();
+                    // System.out.println(" --下载图片:" + imgUrl + " 成功！保存位置为：" + pathname);
+                    infoString = " --下载图片:" + imgUrl + " 成功！保存位置为：" + pathname;
+                    LogUtil.writeLog(CLASS_NAME, infoLogFileName, LogUtil.INFO, infoString);
+                } catch (Exception e) {
+                    // e.printStackTrace();
+                    errorString = "下载(" + imgUrl + ")图片时发生异常";
+                    LogUtil.writeLog(CLASS_NAME, errorLogFileName, LogUtil.SEVERE, errorString);
+                }
             } else {
-                String errorString = "图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode;
-                System.err.println(errorString);
+                errorString = "图片链接(" + imgUrl + ")无效！响应状态码为：" + responseCode;
+                // System.err.println(errorString);
+                LogUtil.writeLog(CLASS_NAME, errorLogFileName, LogUtil.SEVERE, errorString);
 
-                String logFileName = "./log/downloadImage-error-" + LocalDate.now() + ".log";
-                LogUtil.writeLog(CLASS_NAME, logFileName, LogUtil.SEVERE, errorString);
+                // if (imgUrl.contains(".jpg") && imgUrl.contains("https://game.gtimg.cn/images/lol/act/img")) {
 
-                if (imgUrl.contains(".jpg") && imgUrl.contains("https://game.gtimg.cn/images/lol/act/img")) {
+                if (false) {
                     // https://game.gtimg.cn/images/lol/act/img/chromas/1/1014.png
                     // lol 的特殊情况，重新下载一次
                     String skinId = imgUrl.substring(imgUrl.lastIndexOf('/') + 1, imgUrl.lastIndexOf('.'));
                     skinId = skinId.replace("small", "").replace("big", "");
 
                     String id = pathname.substring(pathname.lastIndexOf('/') + 1, pathname.length());
-                    System.out.println("skinId:" + skinId + ", id:" + id);
+                    // System.out.println("skinId:" + skinId + ", id:" + id);
+                    infoString = "lol 的特殊情况，重新下载一次: skinId:" + skinId + ", id:" + id;
+                    LogUtil.writeLog(CLASS_NAME, infoLogFileName, LogUtil.INFO, infoString);
 
                     String pattern = "\\d+";
                     // 创建 Pattern 对象
@@ -209,33 +249,24 @@ public class FileUtil {
                     pathname = pathname.replace("1phone-smallskin", "2phone-mobileskin");
                     pathname = pathname.replace("3phone-bigskin", "2phone-mobileskin");
                     pathname = pathname.replace("5wallpaper-bigskin", "2phone-mobileskin");
-                    System.out.println("imgUrl:" + imgUrl + ", pathname:" + pathname);
-
+                    // System.out.println("imgUrl:" + imgUrl + ", pathname:" + pathname);
+                    infoString = "处理后图片信息为：imgUrl:" + imgUrl + ", pathname:" + pathname;
+                    LogUtil.writeLog(CLASS_NAME, infoLogFileName, LogUtil.INFO, infoString);
                     downloadImage(imgUrl, pathname);
-
                 }
             }
         } catch (MalformedURLException e2) {
-            System.err.println("图片链接(" + imgUrl + ")中不含有合法的网络协议或者无法解析该字符串！");
-            e2.printStackTrace();
+            // System.err.println("图片链接(" + imgUrl + ")中不含有合法的网络协议或者无法解析该字符串！");
+            errorString = "图片链接(" + imgUrl + ")中不含有合法的网络协议或者无法解析该字符串！";
+            errorString = errorString + e2.getMessage();
+            LogUtil.writeLog(CLASS_NAME, errorLogFileName, LogUtil.SEVERE, errorString);
+            // e2.printStackTrace();
         } catch (IOException e1) {
-            e1.printStackTrace();
+            // e1.printStackTrace();
+            errorString = "请求(" + imgUrl + ")图片时发生异常：" + e1.getMessage();
+            LogUtil.writeLog(CLASS_NAME, errorLogFileName, LogUtil.SEVERE, errorString);
         }
 
-        // 利用jdk1.7的新特性 ：try(resource){……} catch{……}，自动释放资源
-        // 1.创建输入输出流 2.建立一个网络链接
-        try (InputStream inputStream = con.getInputStream();
-            OutputStream outputStream = new FileOutputStream(outFile);) {
-            int n = -1;
-            byte b[] = new byte[1024];
-            while ((n = inputStream.read(b)) != -1) {
-                outputStream.write(b, 0, n);
-            }
-            outputStream.flush();
-            System.out.println(" --下载图片:" + imgUrl + " 成功！保存位置为：" + pathname);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

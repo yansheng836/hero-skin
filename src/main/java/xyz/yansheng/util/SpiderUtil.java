@@ -316,17 +316,24 @@ public class SpiderUtil {
         // System.out.println("skins:" + skins.size());
         String skinName = "";
         title = "";
+        // 判断皮肤是否为基本皮肤 chromasBelongId = 0 只统计基本皮肤
+        String chromasBelongId;
         for (int i = 0; i < skins.size(); i++) {
-            String skin = skins.getJSONObject(i).getString("name");
-            skinName = skinName + skin + "|";
-            String skinId = skins.getJSONObject(i).getString("skinId");
-            title = title + skinId + "|";
+            chromasBelongId = skins.getJSONObject(i).getString("isBase");
+            if ("0".equals(chromasBelongId)) {
+                String skin = skins.getJSONObject(i).getString("name");
+                skinName = skinName + skin + "|";
+                String skinId = skins.getJSONObject(i).getString("skinId");
+                title = title + skinId + "|";
+            }
         }
         skinName = skinName.substring(0, skinName.lastIndexOf('|'));
         title = title.substring(0, title.lastIndexOf('|'));
 
         // 去除特殊字符，比如 “K/DA ALL OUT 伊芙琳”
         skinName = skinName.replaceAll("/","-");
+        skinName = skinName.replaceAll(":"," ");
+        skinName = skinName.replaceAll("\""," ");
         title = title.replaceAll("/","-");
 
         // Hero [id=105, ename=155, cname=艾琳, title=精灵之舞, skinName=精灵之舞|女武神]

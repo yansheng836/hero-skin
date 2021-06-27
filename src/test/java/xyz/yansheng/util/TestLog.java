@@ -46,6 +46,9 @@ public class TestLog {
         log.info("This is test java util log");
         System.out.println(LocalDate.now());
         System.out.println(LocalDateTime.now());
+        String logFileName = "";
+        // string.isEmpty() 只能用于判断空字符串，不能用于判断null
+        System.out.println(logFileName.isEmpty());
     }
 
 }
