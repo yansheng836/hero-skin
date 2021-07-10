@@ -1,5 +1,6 @@
 package xyz.yansheng.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.logging.FileHandler;
@@ -66,6 +67,10 @@ public class LogUtil {
         if (logFileName == null || "".equals(logFileName)) {
             logFileName = DEFALE_LOG_FILE_NAME;
             System.out.println("使用默认日志文件名:" + logFileName);
+            File file = new File("./log");
+            if (!file.exists()) {
+                file.mkdirs();
+            }
         }
         log.setLevel(Level.ALL);
         // 不向 控制台 输出日志，默认为true

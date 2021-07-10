@@ -14,6 +14,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import xyz.yansheng.bean.Hero;
 import xyz.yansheng.util.FileUtil;
+import xyz.yansheng.util.LogUtil;
 import xyz.yansheng.util.SpiderUtil;
 
 /**
@@ -21,6 +22,9 @@ import xyz.yansheng.util.SpiderUtil;
  * @date 2019/11/13
  */
 public class App {
+
+    public static final String CLASS_NAME = "xyz.yansheng.main.App";
+
     public static void main(String[] args) {
 
         // 1.从英雄列表页爬取英雄基本数据（id,ename,cname,heroUrl）
@@ -51,7 +55,10 @@ public class App {
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
         }
-        System.out.println("到目前为止，王者荣耀一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。");
+        String infoString;
+        infoString = "到目前为止，王者荣耀一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。";
+        System.out.println(infoString);
+        LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
 
         // 3.将数据写到json中
         // JSON,JSONArray也可以
