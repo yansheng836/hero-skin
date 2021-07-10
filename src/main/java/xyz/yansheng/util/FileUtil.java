@@ -21,11 +21,11 @@ import xyz.yansheng.bean.Hero;
 public class FileUtil {
 
     // lol 自带前缀 ./lol-skin-images/ 或者 images 换成 lol ,如果是王者需要去掉
-    static final String PHONE_SAMLLSKIN_IMAGES = "./1phone-smallskin-lol";
-    static final String PHONE_MOBILESKIN_IMAGES = "./2phone-mobileskin-lol";
-    static final String PHONE_BIGSKIN_IMAGES = "./3phone-bigskin-lol";
-    static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-lol";
-    static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-lol";
+    static final String PHONE_SAMLLSKIN_IMAGES = "./1phone-smallskin-images";
+    static final String PHONE_MOBILESKIN_IMAGES = "./2phone-mobileskin-images";
+    static final String PHONE_BIGSKIN_IMAGES = "./3phone-bigskin-images";
+    static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-images";
+    static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-images";
 
     public static final String CLASS_NAME = "xyz.yansheng.util.FileUtil";
 

@@ -6,8 +6,8 @@
     <groupId>xyz.yansheng</groupId>
     <artifactId>hero-skin</artifactId>
     <!-- 2021年6月26日 约定：王者荣耀打包后缀为 -wzry ，英雄联盟为 -lol -->
-    <version>1.0.2-lol</version>
-    <!--<version>1.0.0-wzry</version>-->
+    <!--    <version>1.0.2-lol</version>-->
+    <version>1.0.0-wzry</version>
     <packaging>jar</packaging>
 
     <description>爬取王者荣耀的皮肤图片。</description>
@@ -79,7 +79,8 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>xyz.yansheng.lol.LolApp</mainClass>
+                            <!-- <mainClass>xyz.yansheng.lol.LolApp</mainClass>-->
+                            <mainClass>xyz.yansheng.main.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

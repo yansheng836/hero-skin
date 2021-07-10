@@ -39,15 +39,14 @@ public class App {
         for (Hero hero : heros) {
             SpiderUtil.getHeroSkins(hero);
             hero.generateField();
-             System.out.println(hero.toString());
-            System.out.println(hero.toStringSimple());
+            // System.out.println(hero.toString());
+            // System.out.println(hero.toStringSimple());
             count++;
             if (count == 2) {
-                 break;
-
+                // break;
             }
         }
-        System.exit(1);
+        // System.exit(1);
         int sum = 0;
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
@@ -68,14 +67,14 @@ public class App {
         map.put("wallpaper-bigskin-images", "电脑壁纸1920*882");
         map.put("hero-list", heros);
 
-        String jsonString = JSON.toJSONString(map, SerializerFeature.WriteMapNullValue,
-            SerializerFeature.WriteNullListAsEmpty);
-        // System.out.println(jsonString);
+        // 输出格式化后的字符串 https://blog.csdn.net/bestxianfeng163/article/details/100073318
+        String pretty = JSON.toJSONString(map, SerializerFeature.PrettyFormat, SerializerFeature.WriteDateUseDateFormat,
+            SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
 
-        String pathname = "./heros1.json";
+        String pathname = "./wzry-heros.json";
         File file = new File(pathname);
         try {
-            FileUtils.writeStringToFile(file, jsonString, SpiderUtil.UTF8);
+            FileUtils.writeStringToFile(file, pretty, SpiderUtil.UTF8);
             System.out.println("写数据到json成功");
         } catch (IOException e) {
             e.printStackTrace();
