@@ -1,9 +1,7 @@
  package xyz.yansheng.bean;
 
-import org.junit.Test;
-
-import xyz.yansheng.bean.Hero;
-import xyz.yansheng.util.SpiderUtil;
+ import org.junit.Test;
+ import xyz.yansheng.util.SpiderUtil;
 
 /**
  * @author yansheng

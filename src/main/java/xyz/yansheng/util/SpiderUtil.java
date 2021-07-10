@@ -280,13 +280,14 @@ public class SpiderUtil {
         JSONObject object = null;
         try {
             Connection con = Jsoup.connect(url).userAgent(
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
-                    .header("Accept", "text/html,application/xhtml+xml")
-                    .header("Content-Type", "application/json;charset=UTF-8").ignoreContentType(true)
-                    // 设置连接超时时间
-                    .timeout(30000);
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
+                .header("Accept", "text/html,application/xhtml+xml")
+                .header("Content-Type", "application/json;charset=UTF-8").ignoreContentType(true)
+                // 设置连接超时时间
+                .timeout(30000);
             Connection.Response response = con.execute();
-            if (response.statusCode() == 200) {
+            int sucessStatus = 200;
+            if (response.statusCode() == sucessStatus) {
                 document = con.get();
             } else {
                 System.err.println(response.statusCode());
@@ -306,23 +307,23 @@ public class SpiderUtil {
         // System.out.println("title:" +title);
 
         JSONArray skins = object.getJSONArray("skins");
-//         System.out.println("skins:" + skins);
+        //         System.out.println("skins:" + skins);
         // System.out.println("skins:" + skins.size());
         String skinName = "";
         title = "";
         // 判断皮肤是否为基本皮肤 chromasBelongId = 0 只统计基本皮肤
         String chromasBelongId;
         for (int i = 0; i < skins.size(); i++) {
-//            System.out.println("skins.getJSONObject(i):" + skins.getJSONObject(i));
+            //            System.out.println("skins.getJSONObject(i):" + skins.getJSONObject(i));
             chromasBelongId = skins.getJSONObject(i).getString("chromasBelongId");
-//            System.out.println("chromasBelongId:" + chromasBelongId);
+            //            System.out.println("chromasBelongId:" + chromasBelongId);
             if ("0".equals(chromasBelongId)) {
 
                 String skin = skins.getJSONObject(i).getString("name");
                 skinName = skinName + skin + "|";
                 String skinId = skins.getJSONObject(i).getString("skinId");
                 title = title + skinId + "|";
-//                System.out.println("skinName:" + skinName + ",chromasBelongId:" + chromasBelongId);
+                //                System.out.println("skinName:" + skinName + ",chromasBelongId:" + chromasBelongId);
             }
         }
         skinName = skinName.substring(0, skinName.lastIndexOf('|'));
@@ -334,8 +335,8 @@ public class SpiderUtil {
         skinName = skinName.replaceAll("\"", " ");
         title = title.replaceAll("/", "-");
 
-//        System.out.println("skinName:" + skinName);
-//        System.out.println("title:" + title);
+        //        System.out.println("skinName:" + skinName);
+        //        System.out.println("title:" + title);
 
         // Hero [id=105, ename=155, cname=艾琳, title=精灵之舞, skinName=精灵之舞|女武神]
         // Hero [id=104, ename=537, cname=司空震, title=雷霆之王, skinName=雷霆之王|启蛰]

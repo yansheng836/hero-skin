@@ -192,14 +192,15 @@ public class FileUtil {
             // 得到响应码
             int responseCode = con.getResponseCode();
             // 这里假设只要不是4xx（请求错误）,5xx（服务器错误）都表示可以下载图片
-            if (responseCode < 400) {
+            int errorStatus = 400;
+            if (responseCode < errorStatus) {
                 // 响应成功，可以建立连接
                 // 利用jdk1.7的新特性 ：try(resource){……} catch{……}，自动释放资源
                 // 1.创建输入输出流 2.建立一个网络链接
                 try (InputStream inputStream = con.getInputStream();
                      OutputStream outputStream = new FileOutputStream(outFile);) {
                     int n = -1;
-                    byte b[] = new byte[1024];
+                    byte[] b = new byte[1024];
                     while ((n = inputStream.read(b)) != -1) {
                         outputStream.write(b, 0, n);
                     }

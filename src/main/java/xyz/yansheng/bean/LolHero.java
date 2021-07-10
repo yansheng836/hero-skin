@@ -72,12 +72,12 @@ public class LolHero {
      */
     private String banAudio;
     /**
-     * 英雄介绍页
+     * 是否 isARAMweekfree
      */
     private String isARAMweekfree;
 
     /**
-     * 是否ispermanentweekfree
+     * 是否 ispermanentweekfree
      */
     private String ispermanentweekfree;
     /**

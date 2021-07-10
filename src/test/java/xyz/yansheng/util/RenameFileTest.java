@@ -16,23 +16,22 @@ import static org.junit.Assert.assertEquals;
  * @date 2021/07/10
  */
 public class RenameFileTest {
-    @Test
-    public void testRenameFile() {
+    @Test public void testRenameFile() {
         String dir = "./1phone-smallskin-lol";
         File file = new File(dir);
         String[] files = file.list();
         System.out.println("files:" + files);
-//        for (String fileName : files) {
-//            System.out.println("fileName:" + fileName);
-//        }
+        //        for (String fileName : files) {
+        //            System.out.println("fileName:" + fileName);
+        //        }
 
         for (int i = 0; i < files.length; i++) {
-//        for (int i = 0; i < 10; i++) {
+            //        for (int i = 0; i < 10; i++) {
             String fileName = files[i];
             System.out.println("fileName:" + files[i]);
 
-//            String pattern = "-[1-100]-";
-//            String pattern = "^[0-9]\\d{0,1}$";
+            //            String pattern = "-[1-100]-";
+            //            String pattern = "^[0-9]\\d{0,1}$";
             String pattern = "-\\d+-";
             // 创建 Pattern 对象
             Pattern r = Pattern.compile(pattern);
@@ -52,7 +51,7 @@ public class RenameFileTest {
                 // 重命名
                 File oldFile = new File(newFileName);
                 File newFile = new File(newFileName.replaceAll(pattern, value));
-//                oldFile.renameTo(newFile);
+                //                oldFile.renameTo(newFile);
             } else {
                 System.out.println("NO MATCH");
             }
@@ -61,24 +60,23 @@ public class RenameFileTest {
 
     }
 
-    @Test
-    public void testRenameFile2() {
+    @Test public void testRenameFile2() {
         String dir = "./5wallpaper-bigskin-lol";
         File file = new File(dir);
         String[] files = file.list();
         System.out.println("files:" + files);
-//        for (String fileName : files) {
-//            System.out.println("fileName:" + fileName);
-//        }
+        //        for (String fileName : files) {
+        //            System.out.println("fileName:" + fileName);
+        //        }
 
         for (int i = 0; i < files.length; i++) {
-//        for (int i = 0; i < 33; i++) {
-//        for (int i = 0; i < 10; i++) {
+            //        for (int i = 0; i < 33; i++) {
+            //        for (int i = 0; i < 10; i++) {
             String fileName = files[i];
             System.out.println("fileName:" + files[i]);
 
-//            String pattern = "-[1-100]-";
-//            String pattern = "^[0-9]\\d{0,1}$";
+            //            String pattern = "-[1-100]-";
+            //            String pattern = "^[0-9]\\d{0,1}$";
             String pattern = "\\d+";
             // 创建 Pattern 对象
             Pattern r = Pattern.compile(pattern);
@@ -99,7 +97,7 @@ public class RenameFileTest {
                 File oldFile = new File(newFileName);
                 File newFile = new File(newFileName.replace(m.group(0), value));
                 System.out.println();
-//                oldFile.renameTo(newFile);
+                //                oldFile.renameTo(newFile);
             } else {
                 System.out.println("NO MATCH");
             }

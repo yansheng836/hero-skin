@@ -35,7 +35,8 @@ public class LolForJson {
                 .timeout(30000);
             Response response = con.execute();
 
-            if (response.statusCode() == 200) {
+            int sucessStatus = 200;
+            if (response.statusCode() == sucessStatus) {
                 document = con.get();
             } else {
                  System.err.println("解析出错，状态码不是200，而是："+response.statusCode());

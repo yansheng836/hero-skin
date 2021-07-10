@@ -19,7 +19,7 @@ import xyz.yansheng.util.SpiderUtil;
 
 /**
  * 爬取LOL皮肤壁纸（按照王者的规则，先爬取主页英雄列表的信息，然后根据id，爬取对应英雄json数据 （本来应该要爬某个英雄主页皮肤信息的，但是因为数据是js加载的，行不通）。）
- * 
+ *
  * @author yansheng
  * @date 2019/11/13
  */
@@ -51,11 +51,11 @@ public class LolApp {
             hero.generateLolField();
             count++;
         }
-//        System.exit(1);
+        //      System.exit(1);
         int sum = 0;
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
-            System.out.println("hero:"+hero);
+            System.out.println("hero:" + hero);
         }
 
         infoString = "到目前为止，英雄联盟一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。";
@@ -63,7 +63,7 @@ public class LolApp {
         // LogUtil.writeLog(CLASS_NAME, "", LogUtil.INFO, infoString);
         LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
 
-//         System.exit(1);
+        // System.exit(1);
 
         // 3.将数据写到json中
         // JSON,JSONArray也可以
@@ -109,7 +109,7 @@ public class LolApp {
         // Hero tempHero = heros.get(16);
         // tempList.add(tempHero);
         // for (String dir : dirs) {
-        // FileUtil.downloadImages(tempList, dir);
+        //     FileUtil.downloadImages(tempList, dir);
         // }
     }
 
