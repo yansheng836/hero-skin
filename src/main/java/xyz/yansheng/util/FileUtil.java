@@ -14,7 +14,7 @@ import xyz.yansheng.bean.Hero;
 
 /**
  * 文件工具类，作用：创建文件夹、下载图片。
- * 
+ *
  * @author yansheng
  * @date 2019/11/14
  */
@@ -31,9 +31,8 @@ public class FileUtil {
 
     /**
      * 新建文件夹（不存在才创建）
-     * 
-     * @param pathname
-     *            文件夹名
+     *
+     * @param pathname 文件夹名
      */
     public static void mkdir(String pathname) {
         String infoString;
@@ -52,9 +51,8 @@ public class FileUtil {
 
     /**
      * 根据标志新建目录
-     * 
-     * @param sign
-     *            sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
+     *
+     * @param sign sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
      */
     public static List<String> mkdir(int sign) {
         List<String> dirs = new ArrayList<String>(5);
@@ -96,11 +94,9 @@ public class FileUtil {
 
     /**
      * 下载图片（先判断下载哪种尺寸的图片，然后调用实际函数downloadImage(String, String)去下载）
-     * 
-     * @param heros
-     *            英雄列表
-     * @param dir
-     *            目录
+     *
+     * @param heros 英雄列表
+     * @param dir   目录
      */
     public static void downloadImages(ArrayList<Hero> heros, String dir) {
 
@@ -108,6 +104,9 @@ public class FileUtil {
             // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
             String id = hero.getId().toString();
             String cname = hero.getCname();
+            String title = hero.getTitle();
+            String[] skinidArray = title.split("\\|");
+
             List<String> skins = hero.getSkins();
             List<String> urls = null;
 
@@ -142,11 +141,14 @@ public class FileUtil {
                 // phone-smallskin-images/96西施-0-归虚梦演.jpg
                 // 对lol的图片重新处理命名规则（从1开始，不是王者的0开始） ：1黑暗之女-1-哥特萝莉 安妮.jpg
                 if (imgUrl.contains("lol")) {
-                    pathname = dir + "/" + (Integer.parseInt(id) + 1) + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+                    String skinidString = skinidArray[i];
+                    Integer skinid = Integer.parseInt(skinidString.substring(skinidString.length() - 2, skinidString.length())) + 1;
+                    pathname = dir + "/" + (Integer.parseInt(id) + 1) + cname + "-" + skinid + "-" + skin + ".jpg";
                 } else {
                     pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
                 }
-                // System.out.println("pathname:" + pathname);
+//                 System.out.println("pathname:" + pathname);
+//                 System.out.println("imgUrl:" + imgUrl);
                 downloadImage(imgUrl, pathname);
             }
         }
@@ -154,11 +156,9 @@ public class FileUtil {
 
     /**
      * 下载图片（如果图片存在就不重复下载）
-     * 
-     * @param imgUrl
-     *            网址
-     * @param pathname
-     *            文件名
+     *
+     * @param imgUrl   网址
+     * @param pathname 文件名
      */
     public static void downloadImage(String imgUrl, String pathname) {
 
@@ -184,7 +184,7 @@ public class FileUtil {
         HttpURLConnection con = null;
         try {
             url = new URL(imgUrl);
-            con = (HttpURLConnection)url.openConnection();
+            con = (HttpURLConnection) url.openConnection();
             // 设置请求方式
             con.setRequestMethod("GET");
             // 连接
@@ -197,7 +197,7 @@ public class FileUtil {
                 // 利用jdk1.7的新特性 ：try(resource){……} catch{……}，自动释放资源
                 // 1.创建输入输出流 2.建立一个网络链接
                 try (InputStream inputStream = con.getInputStream();
-                    OutputStream outputStream = new FileOutputStream(outFile);) {
+                     OutputStream outputStream = new FileOutputStream(outFile);) {
                     int n = -1;
                     byte b[] = new byte[1024];
                     while ((n = inputStream.read(b)) != -1) {
@@ -242,7 +242,7 @@ public class FileUtil {
                     }
 
                     imgUrl = "https://game.gtimg.cn/images/lol/act/img/chromas/" + (Integer.parseInt(id) + 1) + "/"
-                        + skinId + ".png";
+                            + skinId + ".png";
 
                     pathname = pathname.replace(".jpg", ".png");
                     // 因为这个透明的图片只有一种格式，为了防止重复，统一放在 2phone-mobileskin-images 这个目录下。

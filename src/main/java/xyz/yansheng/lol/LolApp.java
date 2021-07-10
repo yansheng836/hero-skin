@@ -51,9 +51,11 @@ public class LolApp {
             hero.generateLolField();
             count++;
         }
+//        System.exit(1);
         int sum = 0;
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
+            System.out.println("hero:"+hero);
         }
 
         infoString = "到目前为止，英雄联盟一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。";
@@ -61,7 +63,7 @@ public class LolApp {
         // LogUtil.writeLog(CLASS_NAME, "", LogUtil.INFO, infoString);
         LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
 
-        // System.exit(1);
+//         System.exit(1);
 
         // 3.将数据写到json中
         // JSON,JSONArray也可以

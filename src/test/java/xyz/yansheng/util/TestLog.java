@@ -51,4 +51,6 @@ public class TestLog {
         System.out.println(logFileName.isEmpty());
     }
 
+
+
 }

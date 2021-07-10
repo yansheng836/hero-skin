@@ -26,7 +26,7 @@ import xyz.yansheng.bean.Hero;
 
 /**
  * 爬虫工具类
- * 
+ *
  * @author yansheng
  * @date 2019/09/30
  */
@@ -38,11 +38,9 @@ public class SpiderUtil {
 
     /**
      * 获取英雄列表
-     * 
-     * @param url
-     *            英雄列表页网址
-     * @param encoding
-     *            编码
+     *
+     * @param url      英雄列表页网址
+     * @param encoding 编码
      * @return 英雄list信息
      */
     public static ArrayList<Hero> getHeros(String url, String encoding) {
@@ -106,10 +104,8 @@ public class SpiderUtil {
     /**
      * 获取英雄列表
      *
-     * @param url
-     *            英雄列表页网址
-     * @param encoding
-     *            编码
+     * @param url      英雄列表页网址
+     * @param encoding 编码
      * @return 英雄list信息
      */
     public static ArrayList<Hero> getLolHeros(String url, String encoding) {
@@ -167,9 +163,8 @@ public class SpiderUtil {
 
     /**
      * 根据英雄的信息（主要是英雄介绍页网址），获得皮肤名称字符串（逆序）和皮肤列表（有序）。
-     * 
-     * @param hero
-     *            含有HeroUrl的英雄。
+     *
+     * @param hero 含有HeroUrl的英雄。
      * @return Hero 在原有基础上，添加了skinName和skins字段的英雄。
      */
     public static Hero getHeroSkins(Hero hero) {
@@ -209,8 +204,7 @@ public class SpiderUtil {
     /**
      * 根据英雄的信息（主要是英雄介绍页网址），获得皮肤名称字符串（逆序）和皮肤列表（有序）。
      *
-     * @param hero
-     *            含有HeroUrl的英雄。
+     * @param hero 含有HeroUrl的英雄。
      * @return Hero 在原有基础上，添加了skinName和skins字段的英雄。
      * @deprecated
      */
@@ -268,8 +262,7 @@ public class SpiderUtil {
      * 根据英雄的信息（主要是英雄介绍页网址），获得皮肤名称字符串（逆序）和皮肤列表（有序）。 因为皮肤列表是通过js加载的，不能直接爬取，只能通过json进行爬取
      * http://game.gtimg.cn/images/lol/act/img/js/hero/1.js
      *
-     * @param hero
-     *            含有HeroUrl的英雄。
+     * @param hero 含有HeroUrl的英雄。
      * @return Hero 在原有基础上，添加了skinName和skins字段的英雄。
      */
     public static Hero getLolHeroSkins2(Hero hero) {
@@ -287,11 +280,11 @@ public class SpiderUtil {
         JSONObject object = null;
         try {
             Connection con = Jsoup.connect(url).userAgent(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
-                .header("Accept", "text/html,application/xhtml+xml")
-                .header("Content-Type", "application/json;charset=UTF-8").ignoreContentType(true)
-                // 设置连接超时时间
-                .timeout(30000);
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
+                    .header("Accept", "text/html,application/xhtml+xml")
+                    .header("Content-Type", "application/json;charset=UTF-8").ignoreContentType(true)
+                    // 设置连接超时时间
+                    .timeout(30000);
             Connection.Response response = con.execute();
             if (response.statusCode() == 200) {
                 document = con.get();
@@ -313,29 +306,36 @@ public class SpiderUtil {
         // System.out.println("title:" +title);
 
         JSONArray skins = object.getJSONArray("skins");
-        // System.out.println("skins:" + skins);
+//         System.out.println("skins:" + skins);
         // System.out.println("skins:" + skins.size());
         String skinName = "";
         title = "";
         // 判断皮肤是否为基本皮肤 chromasBelongId = 0 只统计基本皮肤
         String chromasBelongId;
         for (int i = 0; i < skins.size(); i++) {
-            chromasBelongId = skins.getJSONObject(i).getString("isBase");
+//            System.out.println("skins.getJSONObject(i):" + skins.getJSONObject(i));
+            chromasBelongId = skins.getJSONObject(i).getString("chromasBelongId");
+//            System.out.println("chromasBelongId:" + chromasBelongId);
             if ("0".equals(chromasBelongId)) {
+
                 String skin = skins.getJSONObject(i).getString("name");
                 skinName = skinName + skin + "|";
                 String skinId = skins.getJSONObject(i).getString("skinId");
                 title = title + skinId + "|";
+//                System.out.println("skinName:" + skinName + ",chromasBelongId:" + chromasBelongId);
             }
         }
         skinName = skinName.substring(0, skinName.lastIndexOf('|'));
         title = title.substring(0, title.lastIndexOf('|'));
 
         // 去除特殊字符，比如 “K/DA ALL OUT 伊芙琳”
-        skinName = skinName.replaceAll("/","-");
-        skinName = skinName.replaceAll(":"," ");
-        skinName = skinName.replaceAll("\""," ");
-        title = title.replaceAll("/","-");
+        skinName = skinName.replaceAll("/", "-");
+        skinName = skinName.replaceAll(":", " ");
+        skinName = skinName.replaceAll("\"", " ");
+        title = title.replaceAll("/", "-");
+
+//        System.out.println("skinName:" + skinName);
+//        System.out.println("title:" + title);
 
         // Hero [id=105, ename=155, cname=艾琳, title=精灵之舞, skinName=精灵之舞|女武神]
         // Hero [id=104, ename=537, cname=司空震, title=雷霆之王, skinName=雷霆之王|启蛰]
