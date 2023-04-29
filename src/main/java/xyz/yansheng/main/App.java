@@ -92,7 +92,7 @@ public class App {
 
         List<String> dirs = FileUtil.mkdir(sign);
         for (String dir : dirs) {
-            FileUtil.downloadImages(heros, dir);
+//            FileUtil.downloadImages(heros, dir);
         }
 
     }
