@@ -1,0 +1,540 @@
+@charset "UTF-8";
+/*!移植v2版本页面所需的样式*/
+/*! base */
+.clearfix,.hd,.layout{*zoom:1}
+.clearfix:after,.hd:after,.layout:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none}
+a:hover,a:visited{text-decoration:none}
+.hid{display:none}
+.tnd{overflow:hidden;text-indent:-9999em}
+.ovh{overflow:hidden}
+.fl{float:left;display:inline}
+.fr{float:right;display:inline}
+li{list-style-type:none}
+.pa{position:absolute}
+.pr{position:relative}
+.ht{display:block;overflow:hidden;text-indent:-999em}
+.w100{width:100%}
+.cred{color:#e3583c}
+.cgray{color:#999}
+.cgreen{color:#00a483}
+.lnk-red{color:#e3583c;border-bottom:1px dotted #e3583c}
+.lnk-normal{color:#666;border-bottom:1px dotted #666}
+.lnk-normal:hover,.lnk-red:hover{text-decoration:none;border-bottom-style:solid}
+.checkbox,.radio{margin-right:3px}
+.colbox{border:1px solid #e1e1e1;box-shadow:0 0 2px rgba(0,0,0,.1);background:#fff}
+.borline{border-bottom:1px dotted #bfbfbf;overflow:hidden;zoom:1}
+.borlineX{border-bottom:1px solid #eee}
+/*! layout */
+.layout{width:1240px;margin:0 auto}
+.bd{overflow:hidden;zoom:1}
+body.newbie{background-color:#f7f8f8}
+.wraper{font:normal 12px/1.6em Microsoft YaHei,Tahoma,simsun;color:#666;min-width:1240px;margin:0 auto;background:#f7f8f8;overflow:hidden}
+.wraper .website-path{width:1240px}
+/*! spr */
+.icon-18,.icon-arrow-down,.icon-cdk,.icon-cjf,.icon-free-drag,.icon-guide,.icon-icon,.icon-info,.icon-kefu,.icon-mall,.icon-prestige,.icon-reward,.icon-rgm,.icon-search-inner,.icon-tag-live,.icon-top-play,.icon-tr,.icon-weibo,.logo,.top-search-close,.user-mask{background-repeat:no-repeat;background-image:url(//ossweb-img.qq.com/images/lol/v2/spr-v2.png);background-position:-9999em -9999em}
+.btn-long,.ico-arrowdown,.icon-activity,.icon-hero,.icon-play,.icon-submit,.icon-video,.more{background-repeat:no-repeat;background-image:url(//ossweb-img.qq.com/images/lol/v1/public-spr.png);background-position:-9999em -9999em}
+/*! ==================================================================================================== Public Mod (公共模块) ==================================================================================================== */
+/*!home-mod*/
+.home-mod{margin-bottom:50px}
+/*! inner pages */
+.mainer{position:relative;z-index:1;overflow:hidden;zoom:1;width:1240px;margin:0 auto 50px}
+/*! act center inner page */
+.icons{display:inline-block;vertical-align:middle}
+.ico-more,.ico-more2{padding-left:18px;height:18px;line-height:18px;background-position:-1411px -49px;font-size:12px}
+.ico-more2{background-position:-1411px -66px}
+.ico-arrowdown{width:7px;height:6px;background-position:-1233px -428px}
+.btn-search{width:19px;height:21px;background-position:-1411px -95px}
+/*! other inner pages */
+.navi{padding-top:28px;height:65px;font-size:16px}
+.navi a{color:#333;border-bottom:1px dotted #333}
+.navi a:hover{text-decoration:none;border-bottom-style:solid}
+.banner{height:259px;position:relative;background:url(//game.gtimg.cn/images/lol/web201310/101/banner.jpg) no-repeat}
+.banner .searchbox{position:absolute;top:170px;left:42px}
+.searchbox{padding:0 10px 0 8px;width:24%;height:45px;background:#f1f1f1}
+.input-search{float:left;margin-top:12px;width:87%;height:20px;line-height:20px;border:0;background:0 0;color:#999}
+.btn-search{float:right;margin-top:5%}
+.page-more{margin-top:5px}
+/*!sp*/
+.commspr{background-repeat:no-repeat;display:inline-block;background-image:url(//game.gtimg.cn/images/lol/web201310/page.png?d=20131230)}
+.commico-crumbs{margin-right:5px;width:16px;height:14px;vertical-align:middle;background-position:-831px 0}
+.commico-rrow{margin:0 8px;width:8px;height:9px;vertical-align:middle;background-position:-831px -17px}
+.commico-search{display:block;width:23px;height:26px;background-position:-582px -86px}
+.commico-corner{width:19px;height:12px;background-position:-765px -102px}
+.commico-arrright{width:30px;height:30px;vertical-align:middle;background-position:-431px -86px}
+.commico-err{margin-right:3px;width:20px;height:20px;vertical-align:middle;background-position:-785px -80px}
+.commico-low,.commico-up{width:20px;height:11px;background-position:-786px -101px}
+.commico-low{background-position:-807px -98px}
+.commico-h,.commico-n{vertical-align:top;width:16px;height:16px;background-position:-831px -34px}
+.commico-h{background-position:-831px -51px}
+.commico-vod{display:block;width:42px;height:42px;background-position:-184px -72px}
+.commico-left,.commico-right{display:block;width:38px;height:38px}
+.commico-leftsmall,.commico-rightsmall{display:block;width:27px;height:27px}
+.commico-left{background-position:-682px -41px}
+.commico-right{background-position:-721px -41px}
+.commico-leftsmall{background-position:-347px -43px}
+.commico-rightsmall{background-position:-374px -44px}
+.ico-arrdown,.ico-arrdown2,.ico-arrup{display:inline-block;width:9px;height:7px;background-position:-831px -68px;overflow:hidden;vertical-align:middle}
+.ico-arrup{background-position:-850px -38px}
+.ico-arrdown2{background-position:-850px -38px}
+.without .commico-left{background-position:-760px -41px}
+.without .commico-right{background-position:-792px 0}
+.without .commico-leftsmall{background-position:-401px -43px}
+.without .commico-rightsmall{background-position:-555px -86px}
+.commico-L,.commico-R,.commico-why{width:14px;height:14px;background-position:-831px -102px;vertical-align:middle;margin:0 3px}
+.commico-L{background-position:-848px 0}
+.commico-R{background-position:-848px -17px}
+.commico-arrright2{width:18px;height:18px;background-position:-806px -79px;vertical-align:middle}
+.commbtn-cdk{display:block;width:107px;height:40px;overflow:hidden;text-indent:-999em;background-position:-530px 0}
+.commbtn-buy{display:block;width:153px;height:40px;overflow:hidden;text-indent:-999em;background-position:-638px 0}
+.commbtn-smallred{width:75px;height:23px;line-height:20px;text-align:center;background-position:-605px -86px;color:#fff;margin-left:10px}
+.commbtn-smallred:hover{text-decoration:none}
+.commbtn-biggreen{display:block;width:191px;height:42px;padding-right:10px;line-height:36px;background-position:-227px -72px;font-size:14px;color:#fff;text-align:center}
+.commbtn-green{width:82px;height:32px;line-height:32px;text-align:center;background-position:-682px -80px;color:#fff}
+.commbtn-green2,.commbtn-red{width:170px;padding-right:10px;height:42px;line-height:38px;text-align:center;background-position:-347px 0;color:#fff}
+.commbtn-green3{width:250px;height:42px;line-height:38px;text-align:center;background-position:-431px -43px;color:#fff}
+.commbtn-downs{width:346px;height:71px;background-position:0 0}
+.commbtn-red{background-position:0 -72px}
+.pageleftbox,.pageleftbox2{float:left;width:880px}
+.pageleftbox{background:#fff}
+.pagesubside{float:right;width:270px}
+.subggbox{width:258px;height:275px;border:1px solid #e1e1e1;background:url(//game.gtimg.cn/images/lol/web201310/page-subgg.jpg)}
+.subggbox a{display:block;height:69px;overflow:hidden;text-indent:-999em}
+.loading{padding:20px 0;text-align:center}
+/*!翻页*/
+.pages{padding:10px 0 30px;text-align:center}
+.pages a,.pages input,.pages span{display:inline-block;margin:0 2px;width:36px;height:30px;line-height:30px;text-align:center;border:1px solid #cecece;background-position:-462px -86px;color:#999;font-size:14px;font-weight:700;border-radius:2px;vertical-align:middle;white-space:nowrap}
+.pages a.pagenext:hover,.pages a.pagepre:hover,.pages a.previouspage:hover,.pages span.pagenow{border:1px solid #00a584;background:#00a584;color:#fff;text-decoration:none}
+.pages a.pagenext,.pages a.pagenextnone,.pages a.previouspage,.pages a.previouspageone{width:60px;font-weight:400}
+.pages a.pagenextnone:hover,.pages a.previouspageone:hover{cursor:default;text-decoration:none}
+.pages input{margin:0 4px;height:28px;padding:0 3px;font-weight:400;background:#fff;color:#333}
+.rightbox .pages .pagenow,.rightbox .pages .pagepre{display:none}
+.rightbox .pages .pagenext,.rightbox .pages .pagenextnone,.rightbox .pages .previouspage,.rightbox .pages a.pageprenone{display:inline-block}
+/*!模拟单选框*/
+.ms-radio{margin-right:3px;display:inline-block;width:14px;height:14px;border:1px solid #b1b1b1;border-radius:10px;cursor:pointer;position:relative}
+.ms-radio .i{display:inline-block;position:absolute;top:2px;left:2px;height:10px;width:10px;cursor:pointer;background:#fff}
+.current .ms-radio .i{background:#00a383;border-radius:10px}
+/*!游戏资料*/
+.pagetab{border-top:4px solid #d7d7d7;border-bottom:1px solid #e2e2e2;height:48px;background:#f0f0f0}
+.pagetab-list,.pagetab-list li{float:left}
+.pagetab-list{margin-top:-4px;margin-bottom:-2px;position:relative;height:53px}
+.pagetab-list-lnk{display:block;border-top:4px solid #d7d7d7;height:49px;line-height:48px;width:160px;text-align:center;color:#525252;font-size:16px;cursor:pointer}
+.pagetab-list .current a,.pagetab-list-lnk:hover,.pagetab-list1 .p-list1 a,.pagetab-list2 .p-list2 a,.pagetab-list3 .p-list3 a,.pagetab-list4 .p-list4 a,.pagetab-list5 .p-list5 a,.pagetab-list6 .p-list6 a{text-decoration:none;border-top:4px solid #00a383;color:#00a383;background:#fff}
+.pagetablist-four,.pagetablist-sec,.pagetablist-third{width:100%}
+.pagetablist-four li{width:25%;margin-right:-1px}
+.pagetablist-five .pagetab-list-lnk,.pagetablist-four .pagetab-list-lnk,.pagetablist-sec .pagetab-list-lnk,.pagetablist-third .pagetab-list-lnk{width:100%}
+.pagetablist-four .pagetab-list-lnk{border-top:4px solid #f0f0f0}
+.pagetablist-third li{width:33.33%;margin-right:-1px}
+.pagetablist-sec li{width:50%;margin-right:-1px}
+.pagetablist-five{width:100%}
+.pagetablist-five li{width:20%;margin-right:-1px}
+.pagetab-list li.noresult{width:100%;padding-top:20px;text-align:center}
+.pagetab-list-lnk:hover{background:0 0}
+.selete-seccheck{float:left;width:50%;margin-top:14px;padding:12px 20px;position:relative}
+.selete-seccheck .sbg{position:absolute;top:-10px;left:82px;display:block}
+.selete-seccheck .sbgmove2{left:158px}
+.selete-seccheck .sbgmove3{left:235px}
+.selete-seccheck .sbgmove4{left:313px}
+/*!英雄/物品列表*/
+.selete-item{float:left;min-width:60px;_width:60px;margin-right:17px;position:relative}
+.selete-item .ms-radio,.selete-item label,.selete-item li{float:left;cursor:pointer}
+.info-showbox{padding:30px 37px 30px 30px;margin-top:-1px;position:relative;min-height:500px;_height:500px}
+.selete-checklist{float:left;width:70%;padding-top:5px}
+.selete-seccheck .selete-checklist{width:100%}
+.info-searchbox{float:right;height:40px;background:#fff;border:1px solid #cdcdcd;box-shadow:-1px 0 3px rgba(0,0,0,.1) inset}
+.info-searchbox .input-search{margin-top:10px;border-right:1px solid #e5e5e5}
+.imgtextlist{float:left;padding:30px 0 0;position:relative}
+.imgtextlist li{float:left;width:90px;height:100px;margin-bottom:22px;text-align:center;line-height:15px;cursor:pointer;position:relative;overflow:hidden}
+.imgtextlist img{display:block;margin:0 auto 7px}
+.imgtextlist .sbg,.imgtextlist img{width:66px;height:65px}
+.imgtextlist .sbg{display:none;position:absolute;top:0;left:12px;background:#00a383;opacity:.8;cursor:pointer;*background:0 0}
+.sbg .commico-search{position:absolute;top:50%;left:50%;margin:-12px 0 0 -12px}
+.imgtextlist .current{color:#00a383}
+.imgtextlist .current .sbg{display:block}
+.imgtextlist a{color:#666}
+.imgtextlist a:hover{color:#00a383;text-decoration:none}
+.imgtextlist a:hover .sbg{display:block}
+.imgtextlist li.loading{width:100%;cursor:default;color:#cc3f11;font-size:14px}
+/*!物品弹层*/
+.poppup-item{display:none;position:absolute;top:0;left:0;width:400px;padding:20px;background:#000;background:rgba(0,0,0,.8);border-radius:5px;z-index:100}
+.item-title{height:65px}
+.item-title img{float:left;width:65px;height:65px;margin-right:15px}
+.item-title h4{font-size:16px;font-weight:700;color:#54ff00;line-height:30px}
+.item-title .cons{font-size:14px;color:#ca9033;line-height:30px}
+.item-desc{padding:15px 0;border-bottom:1px solid #222;color:#b0ddff;font-size:14px;line-height:16px}
+.item-from{padding:25px 0}
+.item-from h5{font-size:16px;color:#ff4200;margin-bottom:20px}
+.item-tree{position:relative;margin-top:-40px;width:100%;color:#54ff00}
+.item-tree img{display:block;margin:0 auto}
+.item-depth2 img{width:43px;height:43px}
+.item-depth3 img{width:35px;height:35px}
+.item-depth4 img{width:30px;height:30px}
+.tree-lv{float:left;width:100%;text-align:center}
+.tree-lv .line0,.tree-lv .line1,.tree-lv .line2{display:block;background:#999;overflow:hidden;margin:0 auto}
+.tree-lv .line0{height:1px}
+.tree-lv .line1{width:1px;height:20px}
+.tree-lv .line2{width:1px;height:18px}
+.tree-lv li{float:left}
+.tree-lv3{margin:0}
+.tree-count1{width:100%}
+.tree-count2{width:49.99%}
+.tree-count3{width:33.33%}
+.tree-count4{width:25%}
+/*!召唤师技能*/
+.spell-list{float:left;width:43%;padding-left:16px;margin-right:0;border-right:1px solid #f0f0f0}
+.spell-list .sbg{width:56px;height:56px;border:5px solid #00a383;background:0 0}
+.spell-defail{float:left;width:50%;padding-top:30px;padding-left:40px}
+.spell-title{overflow:hidden;zoom:1}
+.spell-title img{float:left;margin-right:20px}
+.spell-title h4{float:left;width:60%;font-size:16px;color:#00a383;line-height:30px}
+.spell-title .cons{float:left;width:60%;color:#9a9a9a;line-height:30px;font-size:14px}
+.spell-desc{padding:20px 0;line-height:18px;color:#333;font-size:14px}
+/*!英雄详情*/
+.infodefail{height:632px;position:relative}
+.infodefail .sbg{position:absolute;top:0;left:0;width:305px;height:100%;z-index:2;background:#000;opacity:.6}
+.defail-data{position:absolute;top:50px;left:40px;width:290px;color:#fff;z-index:3}
+.defail-data h1{font-size:24px;line-height:25px;padding-bottom:25px;font-weight:400}
+.defail-data h2{font-size:42px;padding-bottom:30px}
+.defail-tags{overflow:hidden;zoom:1}
+.defail-tags span{float:left;width:35px;height:21px;line-height:21px;margin-right:5px;text-align:center;background:#00a483;border-radius:5px}
+.defail-vod{margin-top:20px;width:150px;height:100px;background:#000;border-radius:10px;position:relative;cursor:pointer;border:1px solid #363c3c}
+.defail-vod .commico-vod{position:absolute;top:50%;left:50%;margin:-20px 0 0 -20px}
+.defail-stat{margin-top:25px;height:90px;width:150px}
+.defail-stat dt{float:left;width:40%;margin-bottom:5px;height:16px;line-height:16px}
+.defail-stat dd{float:left;width:60%;margin:2px 0 7px;height:12px;background:#363c3c}
+.defail-stat .up{display:block;height:12px}
+.defail-stat .up1{background:#f2c500}
+.defail-stat .up2{background:#f59d00}
+.defail-stat .up3{background:#2c97de}
+.defail-stat .up4{background:#1eca6b}
+.defail-buy{margin-top:25px}
+#Gmore,#Hmore{line-height:40px}
+.defail-skin{width:100%;height:632px;overflow:hidden;position:relative}
+.defail-skin-bg{width:20000px;position:relative}
+.defail-skin-bg li{float:left;width:1240px}
+.defail-skin-bg li img{width:1240px;height:632px}
+.defail-skin-nav{position:absolute;bottom:10px;right:10px;padding-left:306px}
+.defail-skin-nav li{float:left}
+.defail-skin-nav a{display:block;width:60px;height:60px;overflow:hidden;position:relative;cursor:pointer}
+.defail-skin-nav .sbor{display:none;cursor:pointer}
+.defail-skin-nav img{opacity:.7}
+.defail-skin-nav .current .sbor{position:absolute;top:0;left:0;display:block;width:52px;height:52px;border:4px solid #00a483}
+.defail-skin-nav .current img,.defail-skin-nav a:hover img{opacity:1}
+.defail-skin-name{padding-bottom:10px;text-align:right}
+.defail-skin-name span{padding:0 5px;background-color:#000;font-size:20px;line-height:25px;color:#fff}
+.defail-vod-player{position:absolute;top:53px;left:305px;width:675px;height:376px;overflow:hidden;z-index:1}
+.defail-vod-player .popclose{position:absolute;top:0;right:0;background-color:#000}
+.infoleftcont{float:left;width:63%}
+.inforightcont{float:right;width:35%}
+.infotitle{margin:47px 0 20px;font-size:24px;color:#338c7a;position: relative;}
+.infotitle .more{font-size:12px;color:#666}
+.bgstroy{padding:28px 32px;font-size:14px;line-height:24px;text-indent:2em}
+.infotab{height:90px;position:relative;z-index:2}
+.infoleftcont .infotab{overflow:hidden}
+.infotab li{float:left;width:64px;height:64px;padding:13px 20px;cursor:pointer}
+.infotab li.current{border-top:3px solid #00a383;padding:10px 19px 13px;background:#fff;border-left:1px solid #e1e1e1;border-right:1px solid #e1e1e1}
+.infoskillbox{padding:20px 30px;margin-top:-1px;position:relative;z-index:1}
+.skilltitle{padding-bottom:10px;font-size:14px;color:#999}
+.skilltitle h5{display:inline;padding-right:10px;font-size:16px;color:#333}
+.skilltip{color:#333;padding-bottom:10px}
+.skilltip font{color:#333}
+.skillstat font{color:#707070}
+.arttips,.infospells dl{padding:20px 30px 10px}
+.arttips dt,.infospells dt{font-size:14px;font-weight:700;color:#338c7a;padding-bottom:8px}
+.infospells dd{padding-bottom:15px;margin-bottom:20px}
+.infospells img{margin-right:20px;cursor:pointer}
+.arttips dl{padding-bottom:15px;margin-bottom:20px;font-size:14px;color:#333}
+.arttips p{padding-bottom:10px}
+.hisbox-title{padding:10px 20px;font-size:16px}
+.hisbox-list{padding:0 20px}
+.hisbox-list .myhis-list-item .rline{font-size:12px;width:27px}
+.hisbox-list .myhis-list-item .helps{font-size:12px;width:50px}
+.hisbox-list .myhis-list-item .name{font-weight:700}
+.myhis-list{clear:both;padding:0 10px 50px 16px;min-height:590px}
+.myhis-list-times{margin-bottom:-50px;padding:30px 32px 0 0;text-align:right}
+.myhis-list .myhis-id{font-size:18px;padding:20px 0 10px 0;color:#e3583c;font-weight:700}
+.myhis-list h4{font-size:16px;padding:10px 0}
+.myhis-list h4 i{display:inline-block;margin-right:5px;width:10px;height:10px;border-radius:5px;background:#e94f2b}
+.myhis-list h4 i.cgreen{background:#35b499}
+.myhis-list-item{float:left;width:100%;padding:10px 0;line-height:26px;border-bottom:1px solid #efefef;font-size:14px;color:#888}
+.myhis-list-item img{float:left;width:26px;height:26px;margin-right:5px}
+.myhis-list-item .name{float:left;width:21%}
+.myhis-list-item .name a{color:#888;border-bottom:1px dotted #888}
+.myhis-list-item .name a:hover{color:#555;border-bottom:1px solid #888;text-decoration:none}
+.myhis-list-item .mony{float:left;width:18%}
+.myhis-list-item .rline{float:left;width:32px;height:14px;line-height:14px;margin:6px 0;padding:0 6px;border-right:1px solid #efefef;text-align:center}
+.myhis-list-item .helps{float:left;width:60px;text-align:center}
+.myhis-list-item .myitem{float:left;width:176px}
+.myhis-list-item .myitem img{width:24px;height:24px;cursor:pointer}
+.infotitle .effect{
+    font-size: 14px;
+    color: #7ea1a6;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -4px;
+    font-weight: lighter;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.infotitle .effect i{
+    display:inline-block;
+    vertical-align: middle;
+    color: #676767;
+    width: 14px;
+    height: 14px;
+    background: url(//game.gtimg.cn/images/lol/v3/data/video-icon.png) top center no-repeat;
+    margin-top: -2px;
+}
+.infotitle .effect:hover{
+    filter: contrast(0.8);;
+}
+.seriestab{
+    display: inline-block;
+    width: 610px;
+    height: 30px;
+    border-bottom: 1px solid #e0e2e2;
+    margin-left: 20px;
+    vertical-align: text-top;
+    box-sizing: border-box;
+    padding-top: 3px;
+    
+}
+.seriestab .series{
+    font-size: 16px;
+    color: #676767;
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+.seriestab .series.cur{
+    color: #00a383;
+    border-bottom: 4px solid #00a383;
+    padding-bottom: 1px;
+}
+.starstele{
+    font-size: 0;
+}
+.starstele .item{
+    display: inline-block;
+    width: 244px;
+    height: 256px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #e0e2e2;
+    margin-right: 24px;
+}
+.starstele .item+.item+.item{
+    margin-right: 0;
+}
+.starstele .item .img-box{
+    width: 64px;
+    height: 64px;
+    border: 2px solid #9f7c47;
+    border-radius: 50%;
+    margin: 21px auto 16px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.starstele .item .img-box img{
+    max-width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+.starstele .item .name{
+    font-size: 16px;
+    text-align: center;
+    color: #333333;
+}
+.starstele .item .text{
+    color: #666666;
+    font-size: 14px;
+    line-height: 30px;
+    height: 108px;
+    padding: 0 17px;
+    overflow: hidden;
+}
+#StarsteleOrdinary .item .text{
+    text-align: center;
+}
+.line-dec{
+    width: 198px;
+    height: 16px;
+    background: url(//game.gtimg.cn/images/lol/v3/data/line-dec.png) top center no-repeat;
+    margin: 10px auto 0;
+}
+
+#starsteleVideo{
+    width: 840px;
+    height: 470px;
+}
+#starsteleVideo .dia-close{
+    font-size: 45px;
+    position: absolute;
+    right: -35px;
+    top: -24px;
+    color: #ffffff;
+}
+
+/*!----推荐攻略*/
+.info-medialist{padding:15px;position:relative}
+.ghot-list{position:relative;overflow:hidden}
+.ghot-list .spr{background:url(//ossweb-img.qq.com/images/lol/web201310/101/101-spr.png) no-repeat}
+.ghot-list .ico-arrow{margin-right:2px;display:inline-block;width:17px;height:18px;background-position:-20px -43px;vertical-align:middle}
+.ghot-list .ico-tj{position:absolute;display:inline-block;width:30px;height:18px;line-height:150%;text-align:center;font-style:normal;background:#e04502;color:#fff;border-radius:3px}
+.ghot-list li{display:block;line-height:20px;padding-top:8px;padding-bottom:8px;border-top:1px solid #eaeaea;overflow:hidden;zoom:1;text-decoration:none;margin-top:-1px;position:relative}
+.ghot-list .names{float:left;height:20px;color:#555;width:85%;font-size:12px;overflow:hidden}
+.ghot-list .names:hover .ico-arrow{background-position:-154px -35px}
+.gt1,.gt2,.gt3,.gt4{overflow:hidden;float:left}
+.ghot-list .gt1{width:233px;position:relative}
+.ghot-list .gt2{width:24%;text-align:right}
+.ghot-list .gt3{width:50%;text-align:left;text-indent:2em;color:#9a9898}
+.ghot-list .gt4{width:49%;text-align:right;color:#9a9898}
+.ghot-list .gt4 .sidbar{display:inline-block;width:60%;vertical-align:middle}
+.ghot-list .ico-tj{width:17px}
+.ghot-list .item-hot .ico-arrow,.ghot-list .voditem-hot .ico-arrow{background-position:-136px -35px}
+.ghot-list .item-hot .ico-tj{position:absolute;top:0;right:0;display:block}
+/*!**进度条*/
+.sidbar{display:block;margin-top:2px;height:9px;border:1px solid #e0e0e0;padding:2px;background:#fff;position:relative;overflow:hidden}
+.sidbar .empt,.upbar-green,.upbar-red{display:block;width:100%;height:9px;background:#eee}
+.upbar-green,.upbar-red{margin-top:-9px;position:relative}
+.upbar-green{background:#00a483}
+.upbar-red{background:#e04502}
+/*!个人资料*/
+.infotab-big{height:100px;position:relative;z-index:2}
+.infotab-big .infotab-area{float:left;width:17%;position:relative}
+.pageuserbody{position:relative;z-index:1}
+.infotab-area li{width:80px;height:75px;text-align:center}
+.infotab-area img{display:block;margin:0 auto;width:50px;height:50px;border:4px solid #00a483;border-radius:50px;opacity:.6}
+.infotab-area img:hover{opacity:1}
+.infotab-area .current img{opacity:1}
+.tab-prevnext{float:left;width:50px;padding-top:34px}
+.infotab-big .searchbox{margin-top:30px}
+.infotab-more{position:absolute;top:102px;left:1px;z-index:3;padding-left:20px;width:400px;height:300px;background-color:#fff;border-right:1px solid #e2e2e2;border-bottom:1px solid #e2e2e2;overflow-x:hidden;overflow-y:auto}
+.infotab-more h4{width:85%;margin:0 auto 10px;border-bottom:1px solid #e7e7e7;line-height:60px;color:#a7a7a7;font-size:14px}
+.seletearea{float:right;width:114px;padding-top:30px;position:relative}
+.seletearea-current{display:block;height:40px;line-height:40px;background:#fff;border:1px solid #cdcdcd;border-right:0;box-shadow:-1px 0 3px rgba(0,0,0,.1) inset;text-align:center;margin-right:-2px;position:relative}
+.seletearea-list{position:absolute;top:71px;left:0;width:114px;height:100px;border:1px solid #cdcdcd;background:#fff;overflow-x:hidden;overflow-y:auto}
+.seletearea-list a{display:block;height:20px;line-height:20px;color:#999;text-align:center}
+.seletearea-list a:hover{background:#ededed;text-decoration:none}
+.honor-top{float:right;padding:40px 30px 22px 0;width:170px;text-align:center}
+.honor-top img{width:70px}
+.pageuserline{float:left;width:60%;padding:40px 0 22px 30px}
+.pu-header{float:left;margin-right:15px;width:100px;position:relative;text-align:center}
+.pu-header img{width:100px;height:100px;border-radius:5px}
+.pu-lv{position:absolute;top:78px;left:5px;display:block;width:35px;height:17px;line-height:17px;text-align:center;color:#01372c;background:#0fc09c;border-radius:3px}
+.pu-names{float:left}
+.pu-names h2{float:left;font-size:30px;line-height:40px;color:#333}
+.pu-out{float:left;margin:5px 0 0 10px;overflow:hidden}
+.pu-num{clear:both;padding-top:5px}
+.pageuserline-shout{padding:35px 0 22px 20px;width:311px}
+.pageuserline-shout .pu-num{padding-top:0}
+.pageuserline-shout .pu-names{width:180px;overflow:hidden}
+.pageuserline-shout .pu-names h2{font-size:22px;font-weight:400}
+.perleftcont{float:left;width:68%}
+.perrightcont{float:right;width:29%}
+.personinfo-numbox{position:relative;padding-bottom:30px}
+.personinfo-tab{float:left;width:75%}
+.personinfo-tab li{font-size:16px;color:#999}
+.choonames,.personinfo-tab{height:35px}
+.choonames{float:right;width:136px;position:relative;z-index:2}
+.choonames-curr{display:inline-block;margin-left:5px;padding-left:5px;width:126px;height:32px;line-height:32px;background:#00a483;color:#fff;font-size:14px;cursor:pointer}
+.choonames-curr .n{display:inline-block;width:80%}
+.choonames-list{position:absolute;top:33px;right:0;width:131px;height:100px;background:#00a483}
+.choonames-list a{display:block;padding-left:5px;line-height:20px;color:#fff}
+.choonames-list a:hover{background:#008367;text-decoration:none}
+.per-radarbox{float:left;width:50%;padding-top:30px}
+.per-radarbox .commbtn-biggreen{margin:15px 0 15px 30px}
+.per-databox{float:right;width:44%;padding-top:45px}
+.per-win{float:left;width:50%;height:90px;border-bottom:1px solid #eee;font-weight:700}
+.per-win2{padding-left:15%;width:34%}
+.per-session dt,.per-win dt{font-size:15px;font-weight:700}
+.per-win dd{padding-top:10px}
+.bigfront{font-size:42px;line-height:46px;font-family:Arial}
+.bigfront sup{float:left;font-size:18px}
+.per-session{float:left;width:100%;padding-top:15px}
+.per-session dd{padding-top:5px}
+.per-session-list li{float:left;width:100%;height:16px;line-height:16px;padding-top:8px}
+.per-session-list .lab,.per-session-list .loadbar{float:left;margin-right:8px;color:#575757}
+.loadbar{width:72%;height:16px;background:#e9e9e9}
+.loadbar .up{display:block;height:16px;background:#00a483;border-left:3px solid #087e66}
+.per-session-list .num{float:right;width:32px;color:#bcbcbc}
+.per-tps{margin-top:5px;font-size:12px;color:#999}
+/*!新手指引*/
+.newbie-imgtxtlist,.newbienav{overflow:hidden}
+.newbie-imgtxtlist ul,.newbienav ul{margin-right:-50px;position:relative}
+.newbienav li{float:left;margin-right:12px;width:186px;height:126px;background-image:url(//ossweb-img.qq.com/images/lol/web201310/newbie/nav.jpg);background-repeat:no-repeat}
+.newbienav li a{display:block;width:186px;height:117px}
+.newbienav .nb1{background-position:0 0}
+.newbienav .nb2{background-position:-198px 0}
+.newbienav .nb3{background-position:-397px 0}
+.newbienav .nb4{background-position:-598px 0}
+.newbienav .nb5{background-position:-794px 0}
+.newbienav-1 .nb1{background-position:0 -128px}
+.newbienav-2 .nb2{background-position:-198px -128px}
+.newbienav-3 .nb3{background-position:-397px -128px}
+.newbienav-4 .nb4{background-position:-598px -128px}
+.newbienav-5 .nb5{background-position:-794px -128px}
+.newbie-concent{margin-top:35px;border-top:3px solid #00a887;font-size:14px;line-height:22px;overflow:hidden}
+.newbie-concent .borlineX{padding-bottom:70px;margin-bottom:70px}
+.newbie-what{padding:55px 40px}
+.w50{width:49%}
+.newbie-textbox{width:46%}
+.newbie-textbox p{padding-bottom:15px;text-indent:2em}
+.newbie-title{padding-bottom:10px;font:bold 30px/40px Microsoft YaHei;color:#323232}
+.newbie-btns{padding-top:20px}
+.newbie-downbtn{padding:120px 0 50px;text-align:center}
+.newbie-what-innr{height:530px}
+.newbie-what-tab li{float:left;width:219px;height:2px;border-top:1px solid #d6d6d6;border-bottom:1px solid #d6d6d6;background:#e4e4e4;position:relative}
+.newbie-what-tab #newbieWhatTab5{width:19px}
+.newbie-what-tab .s{position:relative;top:-10px;display:block;width:19px;height:19px;background-position:-799px -39px;cursor:pointer}
+.newbie-what-tab .t{display:none;position:relative;top:-25px;width:19px;height:21px;background-position:-765px -80px}
+.newbie-what-tab span.current{background-position:-799px -59px}
+.newbie-what-tab span.current .t{display:block}
+.newbie-downpage{padding:66px 0 0;background:url(//ossweb-img.qq.com/images/lol/web201310/newbie/downbg.jpg) no-repeat 0 0}
+.newbie-downpage-btns{padding:355px 0 0 40px}
+.newbie-step{position:relative}
+.newbie-step .lnks{position:absolute;display:block;width:100px;height:36px}
+.newbie-step .lnk1{top:57px;width:157px}
+.newbie-step .lnk2{top:113px;left:230px}
+.newbie-step .lnk3{top:170px;left:230px}
+.newbie-faq{width:70%;padding-right:30px}
+.newbie-faq-list{padding-bottom:20px}
+.newbie-faq-list dd,.newbie-faq-list dt{position:relative;padding-left:75px}
+.newbie-faq-list .tt{position:absolute;top:0;left:0}
+.newbie-pt10{padding-top:10px}
+.f20{font-size:20px;color:#666}
+.phonenum{font-size:30px;color:#00a78b;margin-top:-15px;position:relative}
+.newbie-imglist{padding-top:20px}
+.newbie-imglist li{float:left;text-align:center;padding-right:10px}
+.newbie-imglist img{width:210px;height:125px;margin-bottom:10px;border:1px solid #e3e3e3}
+.newbie-weixin{float:right;padding-left:45px;width:160px}
+.newbie-weixin img{display:block;margin:0 auto;width:auto;height:auto;border:0}
+.newbie-weixin p{margin-bottom:15px}
+.newbie-tab{margin:30px 0}
+.newbie-txlist{padding-bottom:20px}
+.newbie-txlist li{float:left;width:95px;height:40px;padding-top:9px;margin-right:5px;background:#00a887;color:#fff;text-align:center;font-size:12px;line-height:30px}
+.newbie-txlist li.lh2{line-height:16px}
+.newbie-tpsred{display:inline-block;padding:0 3px;background:#dd5238;color:#fff;text-indent:0}
+.newbie-gl-vod{padding:10px 0 90px}
+.newbie-imgtxtlist li{float:left;margin:25px 15px 0 0;width:168px;text-align:center;cursor:pointer}
+.newbie-imgtxtlist a{color:#666}
+.newbie-popbox{width:780px}
+.popinner-vod{width:700px;height:432px;background:#000}
+#newbieNewer{width:100%}
+#newbieNewer .popclose,.newbie-popbox .popclose{position:absolute;top:0;right:10px}
+#newbieNewer .popclose{top:20px}
+#newbieNewerContent{width:100%;margin:0 auto;height:636px}
+.newbie-actlist li{margin-right:32px}
+.installlist li{float:left;width:20%;text-align:center}
+.installlist img{display:block;margin-bottom:10px;border:1px solid #eee}
+.installlist i{display:inline-block;margin-right:2px;width:20px;height:20px;line-height:20px;background-color:#02a787;border-radius:10px;color:#fff;font-style:normal}
+/*!符文天赋*/
+.talentpage{padding:20px 0}
+.runepage{padding:40px 0 20px;background:#000}
+#CssGaga{content:"131222163910,jag,301"}
+/*!下载页样式重置*/
+.download{font:normal 12px/1.6em Microsoft YaHei,Tahoma,simsun}
+/*!版本详情页样式重置*/
+.commenton{ margin-top:30px}
+/*!# sourceMappingURL=v2public.css.map */

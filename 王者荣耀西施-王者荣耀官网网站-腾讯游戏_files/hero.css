@@ -1,0 +1,182 @@
+.ls{ width:772px;}
+.rs{ width:408px; margin-left:20px;}
+.fl{ float: left; }
+.hidden{display:none;}
+.icon,.skill-u1 li,.equip-list li{ background:url(//game.gtimg.cn/images/yxzj/web201706/images/herodetail/item.png) no-repeat; text-indent:-9999px; display:block;}
+.more{display:block;position:absolute;width: 50px;height: 30px;text-align: right;line-height: 30px;color: #999;font-size:14px;}
+.zkcontent {background:#fafafa;}
+.zk-con-box{ width:1200px; margin:0 auto;}
+.tb1,.tb2,.tb3,.tb4,.tb5,.tb6,.tb7,.tb8{width:30px; height:30px;}
+.tb1{background-position:0 0;margin-right:6px;margin-top: -5px;margin-left:-4px;}
+.tb2{ background-position:-30px 0;margin:-4px 5px 0 0;}
+.tb3{ background-position:-60px 0; margin:-2px 8px 0 0;}
+.tb4{ background-position:-90px 0; margin:-1px 8px 0 0;}
+.tb5{background-position:-150px 0;width:40px;margin: -3px 8px 0 0;}
+.tb6{ background-position:-120px 0;margin:-2px 0px 0 0px;}
+.tb7{ background-position:-190px 0; margin:1px 10px 0 0;}
+.tb8{background-position: -220px 0;margin: 5px 0 0 1px;width: 20px;height: 20px;}
+/* 头部 */
+.wrapper {min-width:1200px;width:100%;}
+.zk-con{clear:both;}
+.zk-con1{ padding-top:84px;overflow:hidden;background:#ccc;background-position:center 0;}
+.con1-pic{ width:100%; height:798px;overflow:hidden;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAG1CAYAAADTDiVdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzBCMjMyODY1QkUzMTFFNzhGNTA5M0FBQTA2NTk4OTgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzBCMjMyODc1QkUzMTFFNzhGNTA5M0FBQTA2NTk4OTgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3MEIyMzI4NDVCRTMxMUU3OEY1MDkzQUFBMDY1OTg5OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3MEIyMzI4NTVCRTMxMUU3OEY1MDkzQUFBMDY1OTg5OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PrqeIF4AAABeSURBVHjaYmFgYGAEYgYmBijAZLBQpoY8KdqZTJLUYLOCnoqprp0OBg5pZ8BFBokz6OCwwWbgqGJaKB6B7hm0Vgxa20cdNprmh7d7RqDiEdiEGDnNwuHqDGppBwgwALQSBi8KDudjAAAAAElFTkSuQmCC) 0 bottom repeat-x;}
+.pic-show-box{ width:1200px; height:548px; position:relative;margin:127px auto 0;}
+.pic-show1 img{ display:none;}
+.cover{ width:357px; height:548px; position:absolute; left:0; top:0;padding-left:23px; overflow:hidden;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKAQMAAAC3/F3+AAAABGdBTUEAALGPC/xhBQAAAANQTFRFCg4dV2j5WwAAAAF0Uk5TvfU2F1cAAAALSURBVAjXY2DABwAAHgABboVHMgAAAABJRU5ErkJggg==) repeat;}
+.hero-video {overflow:hidden;position:relative;display:block;width:140px;height:80px;border:solid 1px #727189;border-radius:2px;background:#000;margin:20px 0;}
+.hero-video span {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: #000;opacity: .4;z-index: 2;}
+.hero-video img {width: 100%;position: absolute;right: 0;z-index: 1;top:0;}
+.ico-play {position:absolute;top:50%;left:50%;width:36px;height:36px;margin-left:-18px;margin-top:-18px;background-position:-200px -70px;z-index:5;}
+.cover-title{ font-size:24px; color:#f3c258; line-height:30px; padding-top:30px;}
+.cover-name{ font-size:50px; font-weight:bold; color:#FFF; line-height:74px;}
+.cover-icon{ display:block; width:155px; height:75px; background:url(//game.gtimg.cn/images/yxzj/web201605/page/hero_icon.png) no-repeat; margin-top:20px;}
+.cover-list{ height:136px;}
+.cover-list li{ height:24px; vertical-align:top;margin-bottom:12px;}
+.cover-list-text{height:21px; line-height:19px; *line-height:17px; text-align:center; font-size:16px; color:#fff; border-radius:4px;}
+.cover-list-bar{position:relative;width:205px; height:8px; margin:8px 0 0 45px;background:#000;border-radius:0 4px 4px 0;}
+.cover-list-bar b {position:absolute;top:-8px;left:-27px;width:27px;height:26px;}
+.data-bar1 b{ background-position:0 -170px;}
+.data-bar2 b{ background-position:-30px -170px;}
+.data-bar3 b{ background-position:-60px -170px;}
+.data-bar4 b{ background-position:-90px -170px;}
+.ibar{height:8px; float:left;width:50%;border-radius:0 4px 4px 0;}
+.data-bar1 i {background:#1c8fea;}
+.data-bar2 i {background:#e7ca63;}
+.data-bar3 i {background:#5dd473;}
+.data-bar4 i {background:#e84a33;}
+
+.cover-btn{overflow:hidden;margin-top:25px;}
+.cover-btn a {float:left;margin-right:16px;width:150px;height:40px;border:solid 2px #fff;border-radius:4px;line-height:40px;text-align:center;color:#fff;font-size:16px;}
+.pic-pf{ position:absolute; right:0; top:550px;}
+.pic-pf-list{ float:right;width: 780px;height:110px;overflow: hidden;}
+.pic-pf-list li{ width:89px; height:88px; float:right; display:inline;cursor:pointer;}
+.pic-pf-list li i{float:left;width:65px;height:67px;margin-right:25px;border:solid 4px #7a7a7a;border-radius:0 12px;overflow:hidden;}
+.pic-pf-list li i img {width:67px;height:69px;margin-left:-1px;margin-top:-1px;}
+.pic-pf-list li i.curr{border-color:#f3c258;}
+.pic-pf-list li p{ font-size:14px; color:#FFF; text-align:center;text-shadow: 0 1px 2px #000;}
+.pic-pf .pf{display:block;width: 25px;height: 62px;float:right;border-radius:5px;background:#f3c258;line-height: 26px;text-align:center;font-size:16px;padding-top:15px;color: #000;}
+.herodetail-sort {width: 290px;height: 70px;margin-bottom: 20px;overflow: hidden;display: block;}
+.herodetail-sort i{display: block; width: 100%; height: 100%; overflow: hidden; text-indent: -9999em; background-image: url(//game.gtimg.cn/images/yxzj/web201605/page/hero-sort.png);background-repeat: no-repeat;}
+.herodetail-sort-1{ background-position: 0 -140px}
+.herodetail-sort-2{ background-position: 0 -70px}
+.herodetail-sort-3{ background-position: 0 0}
+.herodetail-sort-4{ background-position: 0 -280px}
+.herodetail-sort-5{ background-position: 0 -350px}
+.herodetail-sort-6{ background-position: 0 -210px}
+
+.crumb{ height:20px; line-height:20px; color:#464547; font-size:16px;padding:35px 0;}
+.crumb a,.crumb span{ margin-right:8px;}
+.crumb a{ text-decoration:underline;}
+
+.tlt{ color:#000; font-size:24px; line-height:24px; height:24px; position:relative;margin-bottom:20px}
+/* 技能说�? */
+.skill-info,.sugg-info {position:relative;min-height: 280px;background:#fff;border:solid 1px #e5e5e5;margin-bottom:50px;}
+.skill-u1{ height:100px; padding:20px 0 0 20px;}
+.skill-u1 li{ width:92px; height:88px;float:left; display:inline; margin-right:29px;cursor:pointer;background-position:-100px -70px;}
+.skill-u1 .no5{display: none;}
+.skill-u1new .no5 {display:block;}
+.skill-u1 li img{width:71px;height:71px;background:#000;margin:8px 0 0 11px;border-radius:50%;}
+.skill-u1 li.curr{background-position:0 -70px;}
+.show-list{display:none;padding-left:21px;position: relative;min-height: 150px;}
+.skill-name b{font-size:16px;color:#424242;margin-right:50px;}
+.skill-name span {margin:0 6px;color:#424242;font-size:14px;}
+.skill-desc {font-size:14px;color:#535252;margin:20px 15px 0 0;min-height:70px;line-height:20px}
+.skill-tips {padding:2px 10px;line-height: 24px;width: 710px;background:#f5f5f5;color:#646464;/* position: absolute; *//* bottom: 10px; */margin-bottom: 10px;}
+
+/* 铭文说明 */
+.sugg-tlt .tlt{ line-height:28px;}
+.sugg-u1{ padding-top:20px; height:187px;}
+.sugg-u1 li{width:33.3%;height: 75px;border-radius:5px; float:left; display:inline;position:relative;text-align:center;}
+.sugg-u1 li .sugg-pic1{width:45px; height:53px;margin:0 auto;}
+.sugg-u1 li p{font-size:14px; line-height:20px; color:#535252;}
+.sugg-u1 li p em{display:block;font-size:16px;color:#424242;font-weight:700;margin:12px 0;}
+.sugg-tips{position:absolute;bottom:12px;left:10px;width:365px;padding:10px;background:#f5f5f5;line-height:20px;color:#484848;margin:0 auto;}
+
+/*技能加点建�?*/
+.sugg-info2 {position:relative;overflow:hidden;height:104px;background:#fff;border:solid 1px #e5e5e5;margin-bottom:36px;}
+.sugg-info2 {padding-left:20px;padding-top:16px;}
+.sugg-info2 p{ display:inline-block; float:left; color:#6d6d6f;}
+.sugg-info2 p.sugg-name{line-height:24px;font-size:16px;margin-right:10px;margin-top:20px;}
+.sugg-name3 {margin-left:20px;}
+.sugg-name span {display:block;}
+.sugg-skill { width:92px; height:88px;float:left;margin-right:22px; display:inline;cursor:pointer;background-position:0 -70px;}
+.sugg-skill:last-child {margin-right: 0;}
+.sugg-skill img {width:71px;height:71px;background:#000;margin:8px 0 0 11px;border-radius:50%;}
+
+
+/* 英雄关系 */
+.hero-info-box {position:relative;height:152px;background:#fff;}
+.hero-hd {width:100%;height:32px;line-height:30px;text-align:center;background:#f1f1f1;}
+.hero-hd li {position:relative;float:left;width:257px;height:29px;border-bottom:solid 3px transparent;cursor:pointer;}
+.hero-hd li span {position:absolute;top:6px;right:0;height:20px;border-right:solid 1px #e1e1e1;}
+.hero-hd .curr {border-bottom-color:#f3c258;}
+.hero-info {position:relative;display:none;height:118px;border:solid 1px #e1e1e1;overflow:hidden;}
+.hero-info1{ margin-top:11px;}
+.hero-info2{ margin-top:18px;}
+.hero-f1{ padding:45px 0 0 22px; width:136px; line-height:22px; color:#333; font-size:18px;}
+.hero-f1 i{ width:30px; height:30px;margin:-3px 12px 0 0;}
+.hero-f1 i.hr1{ background-position:0 -30px;}
+.hero-f1 i.hr2{ background-position:-30px -30px;}
+.hero-f1 i.hr3{ background-position:-60px -30px;}
+.hero-list {padding-top:20px;position:relative;z-index:10;}
+.hero-list li {float:left;width:65px;height:67px;margin-right:25px;border:solid 4px #7a7a7a;border-radius:0 16px;overflow:hidden;}
+.hero-list .cur{border:solid 4px #f3c258;}
+.hero-list li img {width:67px;height:69px;border-radius:0 15px;margin-left:-1px;margin-top:-1px}
+.hero-list-desc {position:absolute;top:50%;left:340px;font-size:14px;color:#333;line-height: 20px;width:410px;}
+.hold-list-desc {display:none;}
+
+/* 出装建议 */
+.equip-hd {width:100%;height:32px;line-height:30px;text-align:center;background:#f1f1f1;}
+.equip-hd li {position:relative;float:left;width:50%;height:29px;border-bottom:solid 3px transparent;cursor:pointer;}
+.equip-hd li span {position:absolute;top:6px;right:0;height:20px;border-right:solid 1px #e1e1e1;}
+.equip-hd .curr {border-bottom-color:#f3c258;}
+.equip-bd {position:relative;height:320px;background:#fff;border:solid 1px #e1e1e1;/* overflow:hidden; */}
+.equip-info {display:none;}
+.equip-list {width:120%;padding:27px 0 0 20px;}
+.equip-list li{width:92px;height:88px;float:left;margin:0 44px 14px 0;display:inline;cursor:pointer;background-position:0 -70px;position: relative;}
+.equip-list li img {width:71px;height:71px;background:#000;margin:8px 0 0 11px;border-radius:50%;}
+.equip-tips{position:absolute;bottom:12px;left:10px;width:365px;padding:10px;background:#f5f5f5;line-height:20px;color:#484848;margin:0 auto;}
+.equip-list li a:hover .itemFromTop {display:block;}
+.itemFromTop{display:none;position:absolute;top:50px;right:100px;background:rgba(0,0,0,.9);opacity:0.9;border:1px solid #459ef4;width:213px;padding:24px 15px 24px 33px;z-index:100;font-family:"microsoft yahei";}
+.itemFromTop .item-title{height:74px}
+.itemFromTop .item-title img{float:left;width:74px;height:74px;margin-right:15px;border-radius: 0;}
+.itemFromTop .item-title .cons{float:left;margin-left:6px;}
+.itemFromTop .item-title h4{text-indent:0;font-size:18px;font-weight:bold;color:#23ff28;line-height:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent: 0;}
+.itemFromTop .item-title .cons p{text-indent:0;font-size:14px;color:#da951c;line-height:30px}
+.itemFromTop .item-desc{text-indent:0;padding:12px 0;color:#369ff9;font-size:14px;line-height:22px}
+.itemFromTop .item-desc p {margin-bottom:10px;}
+.itemFromTop .clearfix:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; } .clearfix {zoom:1;}
+
+/* 英雄攻略、英雄视�? */
+.zk-con5{ padding:50px 0 92px 0;}
+.strategy-box {overflow:hidden;height:428px;border:solid 1px #e1e1e1;background:#fff;}
+.video{ width:732px;}
+.video-tlt{ position:relative;}
+.video-tlt .more{ top:-4px; right:0;}
+.video-info{ overflow:hidden;}
+.video-u1 {padding-left:20px;}
+.video-u1 li{ width:209px; float:left; display:inline; margin-right:28px; position:relative; font-size:0; margin-top:24px;}
+.video-u1 li img {width:100%;height:125px;}
+.video-u1 li .p1{ line-height:22px; font-size:14px; color:#545353; height:44px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; margin-top:3px;}
+.video-u1 li .video-play{width:100%;height: 22px;line-height:22px;color:#fff;font-size:12px;position:absolute;top: 103px;left:0;background: #000;background: rgba(0,0,0,.5);border-radius:0 0 2px 2px;}
+.video-u1 li .play-num{ padding-left:10px;}
+.video-u1 li .play-time{ float:right; padding-right:6px;display: none;}
+.video-u1 li .play{ background-position:-100px -40px; width:12px; height:14px; float:left; margin-right:5px;margin-top:6px;}
+.strategy{ width:465px;}
+.strategy-tlt{ position:relative;}
+.strategy-tlt .tlt{ line-height:27px;}
+.strategy-tlt .more{ top:4px; right:0;}
+.strategy-info{overflow:hidden; margin-top:24px;margin-right:20px;}
+.subscript {float:left;width:62px;height:24px;background-color:#f5f5f5;color:#999;text-align:center;line-height:24px;margin-right:10px;}
+.strategy-info li{color:#505050;font-size:14px;line-height: 24px;margin-bottom:8px;}
+.strategy-info li a{display:block;color:#535252;height:32px;}
+.strategy-info li a:hover{ color:#f3c258;}
+.strategy-info li .p-dec{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.strategy-info li span{float:right;margin-left:10px;color:#909090;display: none;}
+
+/* 故事弹层 */
+.pop-story {display:none;width:1259px;border:solid 2px #3338a4;}
+.pop-hd {position:relative;height:129px;width:100%;background:url(//game.gtimg.cn/images/yxzj/web201706/images/herodetail/pop.png);text-align:center;font-size:50px;color:#fff;font-weight:800;line-height:129px;}
+.pop-hd .close {position:absolute;width:56px;height:56px;top:35px;right:20px;background:url(//game.gtimg.cn/images/yxzj/web201706/images/herodetail/pop.png);background-position:-1260px 0;}
+.pop-bd {padding:40px 0;background:#fff;}
+.pop-bd p {width:90%;margin:0 auto;font-size:20px;line-height:60px;color:#070707;text-indent:0;}
