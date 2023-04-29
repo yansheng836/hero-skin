@@ -1,202 +1,158 @@
-
+<!DOCTYPE html>
 <!-- saved from url=(0039)https://game.qq.com/act/logout.html?t=1 -->
-<html class="no-touch"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<script src="./pt_utility.js.&#19979;&#36733;"></script>
-<script>
-document.domain="qq.com";
-function ptCallback(){
-	var oDate = new Date(), expires;
-	oDate.setTime(0);
-	expires = oDate.toGMTString();
-	document.cookie="uin=; expires="+expires+"; domain=game.qq.com; path=/; ";
-	document.cookie="p_uin=; expires="+expires+"; domain=game.qq.com; path=/; ";
-	document.cookie="skey=; expires="+expires+"; domain=game.qq.com; path=/; ";
-	document.cookie="p_skey=; expires="+expires+"; domain=game.qq.com; path=/; ";
-	document.cookie="pt4_token=; expires="+expires+"; domain=game.qq.com; path=/; ";
-	
-	document.cookie="IED_LOG_INFO2=; expires="+expires+"; domain=game.qq.com; path=/; ";
-	
-	document.cookie="sid=; expires="+expires+"; domain=qq.com; path=/; ";
-	parent.window["logoutCallback"]();
-}
-if ( document.referrer.indexOf('qq.com') >= 0 ){
-	var r = pt_utility.logout(1, ptCallback);
-	if (r!=0) ptCallback();
-}
-</script>
-<style type="text/css">/*
- * contextMenu.js v 1.4.0
- * Author: Sudhanshu Yadav
- * s-yadav.github.com
- * Copyright (c) 2013 Sudhanshu Yadav.
- * Dual licensed under the MIT and GPL licenses
-**/
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQµÇÂ¼×¢Ïú</title>
+    <script type="text/javascript">
+        /**
+        * ¼ÓÔØ½Å±¾»ù´¡·½·¨
+        * @private
+        * @param {string} filepath Â·¾¶
+        * @param {function} callback »Øµ÷·½·¨
+        * @return {undefined} undefined
+        */
+        function loadScript(url, callback) {
+            var head = document.getElementsByTagName("head")[0];
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = url;
+            var timeout = setTimeout(function () {
+                head.removeChild(script);
+                callback && callback.call(this, false);
+            }, 60000);
 
-.iw-contextMenu {
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.10) !important;
-    border: 1px solid #c8c7cc !important;
-    border-radius: 11px !important;
-    display: none;
-    z-index: 1000000132;
-    max-width: 300px !important;
-    width: auto !important;
-}
+            onload(script, function (Ins) {
+                head.removeChild(script);
+                clearTimeout(timeout);
+                callback && callback(true);
+            });
+            /*script¼ÓÔØÊ§°Ü*/
+            onerror(script, function () {
+                head.removeChild(script);
+                clearTimeout(timeout);
+                callback && callback(false);
+            });
+            head.appendChild(script);
+            return true;
+        }
+        /**
+        * ¼ÓÔØ½Å±¾Íê³ÉºóµÄ´¦Àí
+        * @private
+        * @param {dom} node script DOM
+        * @param {function} callback »Øµ÷·½·¨
+        * @return {undefined} undefined
+        */
+        function onload(node, callback) {
+            var isImpOnLoad =
+            "onload" in node
+                ? true
+                : (function () {
+                    node.setAttribute("onload", "");
+                    return typeof node.onload == "function";
+                })();
 
-.dark-mode .iw-contextMenu,
-.TnITTtw-dark-mode.iw-contextMenu,
-.TnITTtw-dark-mode .iw-contextMenu {
-    border-color: #747473 !important;
-}
+            if (document.addEventListener) {
+            node.addEventListener(
+                "load",
+                function () {
+                callback.call(this, node);
+                },
+                false
+            );
+            } else if (!isImpOnLoad) {
+            node.attachEvent("onreadystatechange", function () {
+                var rs = node.readyState.toLowerCase();
+                if (rs === "loaded" || rs === "complete") {
+                node.detachEvent("onreadystatechange");
+                callback.call(this, node.innerHTML);
+                }
+            });
+            } else {
+            //maybe someother browser
+            }
+        }
+        /**
+        *¼ÓÔØ½Å±¾Ê§°ÜµÄ´¦Àí
+        * @private
+        * @param {dom} node script DOM
+        * @param {function} callback »Øµ÷·½·¨
+        * @return {undefined} undefined
+        */
+        function onerror(node, callback) {
+            if (document.addEventListener) {
+            node.addEventListener(
+                "error",
+                function () {
+                callback.call(this, node);
+                },
+                false
+            );
+            } else if ("onerror" in node) {
+            node.onerror = function () {
+                callback.call(this, node);
+            };
+            }
+        }
 
-.iw-cm-menu {
-    background: #fff !important;
-    color: #000 !important;
-    margin: 0px !important;
-    padding: 0px !important;
-    overflow: visible !important;
-}
+        //request ·½·¨
+        function requestParam(pa) {
+            var url = window.location.href.replace(/#+.*$/, ""),
+                params = url.substring(url.indexOf("?") + 1, url.length).split("&"),
+                param = {};
+            for (var i = 0; i < params.length; i++) {
+                var pos = params[i].indexOf("="), //²éÕÒname=value
+                key = params[i].substring(0, pos),
+                val = params[i].substring(pos + 1); //ÌáÈ¡value
+                param[key] = val;
+            }
+            return typeof param[pa] == "undefined" ? "" : param[pa];
+        }
 
-.dark-mode .iw-cm-menu,
-.TnITTtw-dark-mode.iw-cm-menu,
-.TnITTtw-dark-mode .iw-cm-menu {
-    background: #525251 !important;
-    color: #FFF !important;
-}
+        //½µÓò£¬·½±ãºÍparentÍ¨ÐÅ
+        document.domain = 'qq.com';
+        //Çå³ýptÏà¹ØµÄcookie
+        function clearPtCookie(){
+            var oDate = new Date(), expires;
+            oDate.setTime(0);
+            expires = oDate.toGMTString();
+            document.cookie="uin=; expires="+expires+"; domain=game.qq.com; path=/; ";
+            document.cookie="p_uin=; expires="+expires+"; domain=game.qq.com; path=/; ";
+            document.cookie="skey=; expires="+expires+"; domain=game.qq.com; path=/; ";
+            document.cookie="p_skey=; expires="+expires+"; domain=game.qq.com; path=/; ";
+            document.cookie="pt4_token=; expires="+expires+"; domain=game.qq.com; path=/; ";
+            document.cookie="IED_LOG_INFO2=; expires="+expires+"; domain=game.qq.com; path=/; ";
+            document.cookie="sid=; expires="+expires+"; domain=qq.com; path=/; ";
+            parent.window["logoutCallback"]();
+        }
 
-.iw-curMenu {
-}
-
-.iw-cm-menu li {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, Ubuntu, sans-serif !important;
-    list-style: none !important;
-    padding: 10px !important;
-    padding-right: 20px !important;
-    border-bottom: 1px solid #c8c7cc !important;
-    font-weight: 400 !important;
-    cursor: pointer !important;
-    position: relative !important;
-    font-size: 14px !important;
-    margin: 0 !important;
-    line-height: inherit !important;
-    border-radius: 0 !important;
-    display: block !important;
-}
-
-.dark-mode .iw-cm-menu li, .TnITTtw-dark-mode .iw-cm-menu li {
-    border-bottom-color: #747473 !important;
-}
-
-.iw-cm-menu li:first-child {
-    border-top-left-radius: 11px !important;
-    border-top-right-radius: 11px !important;
-}
-
-.iw-cm-menu li:last-child {
-    border-bottom-left-radius: 11px !important;
-    border-bottom-right-radius: 11px !important;
-    border-bottom: none !important;
-}
-
-.iw-mOverlay {
-    position: absolute !important;
-    width: 100% !important;
-    height: 100% !important;
-    top: 0px !important;
-    left: 0px !important;
-    background: #FFF !important;
-    opacity: .5 !important;
-}
-
-.iw-contextMenu li.iw-mDisable {
-    opacity: 0.3 !important;
-    cursor: default !important;
-}
-
-.iw-mSelected {
-    background-color: #F6F6F6 !important;
-}
-
-.dark-mode .iw-mSelected, .TnITTtw-dark-mode .iw-mSelected {
-    background-color: #676766 !important;
-}
-
-.iw-cm-arrow-right {
-    width: 0 !important;
-    height: 0 !important;
-    border-top: 5px solid transparent !important;
-    border-bottom: 5px solid transparent !important;
-    border-left: 5px solid #000 !important;
-    position: absolute !important;
-    right: 5px !important;
-    top: 50% !important;
-    margin-top: -5px !important;
-}
-
-.dark-mode .iw-cm-arrow-right, .TnITTtw-dark-mode .iw-cm-arrow-right {
-    border-left-color: #FFF !important;
-}
-
-.iw-mSelected > .iw-cm-arrow-right {
-}
-
-/*context menu css end */</style><style type="text/css">@-webkit-keyframes load4 {
-    0%,
-    100% {
-        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-    }
-    12.5% {
-        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-    }
-    25% {
-        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-    }
-    37.5% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-    }
-    50% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-    }
-    62.5% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-    }
-    75% {
-        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-    }
-    87.5% {
-        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-    }
-}
-
-@keyframes load4 {
-    0%,
-    100% {
-        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-    }
-    12.5% {
-        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-    }
-    25% {
-        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-    }
-    37.5% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-    }
-    50% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-    }
-    62.5% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-    }
-    75% {
-        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-    }
-    87.5% {
-        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-    }
-}</style><style type="text/css">/* This is not a zero-length file! */</style></head>
+        //Ç¿×¢Ïúpt
+        function forceLogoutPt(callback){
+            loadScript(location.protocol + '//imgcache.qq.com/ptlogin/ac/v9/js/pt_utility.js',function(isLoad){
+                if(isLoad){
+                    var r = pt_utility.logout(1, callback);
+	                if (r!=0){
+                        callback && callback();
+                    }
+                }
+            })
+        }
+        
+        //À´Ô´Ò³Ð£Ñé
+        if(document.referrer.indexOf('qq.com') >= 0){
+            if(1 == requestParam('isNotForceClearPt')){
+                //Ö»Çåcookie
+                clearPtCookie();
+            }else{
+                //Ä¬ÈÏÒªÍË³öpt
+                forceLogoutPt(function(){
+                    clearPtCookie();
+                })
+            }
+        }
+    </script>
+</head>
 <body>
+    
 
-
-
-
-<!--[if !IE]>|xGv00|72da1e37170b628d77ea4086147bbba8<![endif]--></body></html>
+</body></html>

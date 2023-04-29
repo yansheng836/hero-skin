@@ -47,7 +47,7 @@ var pvpFooter = (function(){
 			footerCSS += '.footer-wrap .foot_links,.footer-wrap .foot_links a:link,.footer-wrap .foot_links a:visited{color:#646467;text-decoration: none;}';
 			footerCSS += '.footer-wrap .foot_links{position: relative;margin:0;width:650px;}';
 			footerCSS += '.footer-wrap .copyright_en{padding-top:6px;}';
-			footerCSS += '.footer-wrap .copyright_zh{position: absolute;right:0;top:26px;}';
+			footerCSS += '.footer-wrap .copyright_zh{float:right;padding-top:6px;}';
 			footerCSS += '.footer-wrap .foot-tips{position: absolute;left:0;top:170px;padding-top:0;width:508px;font-size: 12px;color: #666;}';
 			footerCSS += '.footer-wrap .foot-tips .fb{color: #333;font-weight: bold;}';
 			footerCSS += '.footer-wrap .foot-tips em{font-style:normal;margin-right:12px;color:#6d6d6d;}';
@@ -80,7 +80,15 @@ var pvpFooter = (function(){
 	init = function(){
 		util.addFooterCSS();
 		util.addFooterHTML();
-		fn.jsLoader("//game.gtimg.cn/images/js/2018foot/foot.js");
+		fn.jsLoader("//game.gtimg.cn/images/js/2018foot/foot.js", function(){
+			!window.setPrivateLink && setTimeout(function(){
+				window.GameFooter && window.GameFooter.addLinks({
+						service: {link: 'https://game.qq.com/tencent_other_contract.shtml'},
+						private: {text: '王者荣耀隐私保护指引',link: 'https://rule.tencent.com/rule/preview/d277ee20-2709-4cd5-882b-cbd485753346'},
+						children: {link: 'https://game.qq.com/tencent_other_children_privacy.shtml'}
+				});
+			}, 500);
+		});
 	};
 	return{
 		init : init

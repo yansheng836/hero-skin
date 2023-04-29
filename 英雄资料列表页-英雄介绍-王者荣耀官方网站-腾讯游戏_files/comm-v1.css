@@ -197,11 +197,14 @@ body{padding-top:42px;background:#fff;font:14px/1.5 "Microsoft YaHei",Tahoma,"si
 .wx-login{top:143px;left:60px;width:197px;height:46px;background:url(about:blank);}
 .qq-login{top:143px;left:272px;width:197px;height:46px;background:url(about:blank);}
 .pop2{width:530px;height:354px;background:url(//game.gtimg.cn/images/yxzj/web201605/main/sec.jpg) no-repeat;} 
+.pop3{width:530px;height:420px;background:url(//game.gtimg.cn/images/yxzj/web201605/main/sec2.jpg) no-repeat;} 
 .se-input{padding:117px 0 0 50px;}
 .se-input select{display:block;width:430px;height:37px;line-height:37px;margin-bottom:10px;}
+.se-checkbox {position: relative;width: 404px;padding-left: 26px;padding-top: 10px;font-size: 14px;color: #fff;line-height: 24px;}
+.se-checkbox input {position: absolute;left: 0;top: 14px;margin:0;width: 16px;height: 16px;-webkit-appearance: auto;appearance: auto;}
 .se-btn{padding:16px 0 0 146px;position: absolute;bottom: 45px; left: 0;right: 0;}
 .se-btn a{width:116px;height:34px;margin-right:13px;opacity: 0;}
-/*----‰Ω?----*/
+/*----‰Ωç----*/
 .icon{ background:url(//game.gtimg.cn/images/yxzj/web201605/page/sprite.png) no-repeat;text-indent:-9999px;display:block;}
 .con1-pos{width:100%;margin-bottom:40px;height:20px;line-height:20px;color:#464547;font-size:16px;}
 .con1-pos .tb1{ background-position:0 -4px;width:18px;height:18px;margin-right:9px;}
