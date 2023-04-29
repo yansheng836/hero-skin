@@ -302,10 +302,10 @@ table{border-collapse:collapse;border-spacing:0}
 .act-item:hover>.innerhover-border{display:block;animation:bottomIn .2s;-webkit-animation:bottomIn .2s}
 /*!!活动中心样式 end */
 /*!! 侧边栏 start */
-.rightnav-bar{width:70px;height:auto;box-sizing:border-box;padding-top:6px;overflow:hidden;position:fixed;right:-70px;bottom:18%;background-color:#fff;border-radius:9px 0 0 9px;-webkit-transition:right .5s .2s;transition:right .5s .2s;z-index:199}
+.rightnav-bar{width:70px;height:auto;box-sizing:border-box;padding-top:6px;overflow:hidden;position:fixed;right:-70px;bottom:140px;background-color:#fff;border-radius:9px 0 0 9px;-webkit-transition:right .5s .2s;transition:right .5s .2s;z-index:199}
 .rightnav-bar.show{right:0}
-.rightnav-bar>ul{margin-left:4px;height:298px;padding-bottom:18px;box-sizing:border-box;-webkit-transition:height 1s .2s ease;transition:height 1s .2s ease}
-.rightnav-bar.showTop ul{height:410px}
+.rightnav-bar>ul{margin-left:4px;height:298px;padding-bottom:10px;box-sizing:border-box;-webkit-transition:height 1s .2s ease;transition:height 1s .2s ease}
+.rightnav-bar.showTop ul{height:auto}
 .rightnav-bar.showTop .rn-polo{animation:showPolo 1.4s .2s ease 1;-webkit-animation:showPolo 1.4s .2s ease 1}
 @keyframes showPolo{
 0%{-webkit-transform:translateY(70px) scaleX(.8) scaleY(1.2);transform:translateY(70px) scaleX(.8) scaleY(1.2)}
@@ -344,5 +344,10 @@ table{border-collapse:collapse;border-spacing:0}
 .rn-polo i{background-position:-193px -12px;width:33px;height:29px}
 .rn-polo img{display:none;position:absolute;width:35px;top:1px;left:16px}
 .nav-fix-ban{display: block;width: 90px;height: 90px;position: fixed;right: -10px;bottom: 48%;z-index:198}
+.rightnav-qrcode { position: fixed;right: -200px;bottom: 580px;background: url(//game.gtimg.cn/images/lol/v3/rightnav-qrcode.png) no-repeat center; width: 188px;height: 256px;z-index: 199;box-sizing: border-box;padding: 90px 0 0 32px;-webkit-transition:right .5s .2s;transition:right .5s .2s;}
+.rightnav-qrcode.show {right: 6px;}
+.rightnav-qrcode .rnq-tips {position: absolute;top: 8px;left: 10px;color: #fff;font-size: 14px;font-weight: bold;}
+.rightnav-qrcode .rnq-qrcode {display: block;margin: 0 auto 4px;}
+.rightnav-qrcode .rnq-title {color: #fff;font-size: 18px;font-weight: bold;text-align: center;}
 /*!! 侧边栏 end */
 /*!# sourceMappingURL=comm.css.map */

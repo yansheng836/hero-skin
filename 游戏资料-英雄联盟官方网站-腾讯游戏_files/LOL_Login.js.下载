@@ -209,7 +209,8 @@ window.T_Login = {
       }
   },
   /*社区接口前缀*/
-  apiWeGame: '//lol.ams.game.qq.com/lol/autocms/v1/transit/LOL/LOLWeb/Official/',
+//   apiWeGame: '//lol.ams.game.qq.com/lol/autocms/v1/transit/LOL/LOLWeb/Official/',
+  apiWeGame: '//lol.sw.game.qq.com/lol/lwdcommact/a20220923lolapi/a20220923lolapi/info',
   /**20190408新加入的方法,在checklogin里调用 */
   delayCookie:function(){
       var cookieUin = milo.cookie.get('uin', '');
@@ -370,11 +371,48 @@ window.T_Login = {
   },
   /*请求头部玩家游戏数据*/
   getPlayerInfo: function () {
-      var goUrl = this.apiWeGame + 'MobilePlayerInfo,PlayerInfo,PlayerBattleSummary,PlayerHonor,PlayerRankInfo?use=zm,uid,acc&area=' + this.gAccountArea + '&season=' + this.nowSeason;
+    //   var goUrl = this.apiWeGame + 'MobilePlayerInfo,PlayerInfo,PlayerBattleSummary,PlayerHonor,PlayerRankInfo?use=zm,uid,acc&area=' + this.gAccountArea + '&season=' + this.nowSeason;
+    
+      var goUrl = this.apiWeGame +'?area=' + this.gAccountArea;
+     
       new T_RequestApi({
           apiUrl: goUrl,
           attach: this,
           successBack: function (data) {
+            console.log(data,'data1111111')
+              if (data.code === 0) {
+                  //存放玩家游戏数据
+                
+                if(LoginManager.getUserUin() == '280595580' || LoginManager.getUserUin() == '3127389997' || LoginManager.getUserUin() == '879493801' || LoginManager.getUserUin() == '319938728'){
+                    data.data.totalNum = 0;
+                    data.data.winNum = 0;
+                    data.data.winRate = 0;
+                }
+
+                  this.attach.gAccountData = data;
+                  //标记大区请求结束
+                  this.askingArea = false;
+                  //报告大区切换事件成功
+                  this.attach.trigger(this.attach.eventType.boundArea);
+              } else {
+                  this.requestOne();
+              }
+          },
+          failBack: function (e) {
+              console.log(e);
+              console.log('查询玩家社区信息失败,可能是服务繁忙导致的');
+              //有可能是服务器没有响应全部的数据,标记大区请求结束,并切换到绑定大区状态
+              this.attach.getWegameAreaFail();
+          }
+      });
+  },
+  getPlayerInfo2: function () {
+       var goUrl = this.apiWeGame + 'MobilePlayerInfo,PlayerInfo,PlayerBattleSummary,PlayerHonor,PlayerRankInfo?use=zm,uid,acc&area=' + this.gAccountArea + '&season=' + this.nowSeason;
+      new T_RequestApi({
+          apiUrl: goUrl,
+          attach: this,
+          successBack: function (data) {
+            console.log(data,'data1111111')
               if (+data.MobilePlayerInfo.status === 0
                   && +data.PlayerInfo.status === 0
                   && +data.PlayerBattleSummary.status === 0

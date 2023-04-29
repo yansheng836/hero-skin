@@ -270,8 +270,45 @@ function htmlspecialchars(str) {
             //开始处理
             var data = T_Login.gAccountData;
             var $head = $('.comm-head');
-
+            console.log(data,'data12334')
             //处理头像和昵称
+            
+            if (data.data) {                
+                $head.find('.head-userinfo-avatar img').attr('src', data.data.headImg);
+                $head.find('.head-userinfo-normal .logined>.logined-name').text(data.data.nickName);
+                $('#commHeadMatchCount').text(data.data.totalNum);
+                $('#commHeadWinRate').text(data.data.winRate+"%");
+                var PlayerRankInfo = {"tier":data.data.tier,"queue":data.data.queue}
+                var rankList = T_Login.getTierText(PlayerRankInfo);
+                console.log(rankList,'rankList')
+                rankList.extended_tier_url && $('#commHeadTierImg').attr('src', rankList.extended_tier_url);
+                rankList.extended_tier && $('#commHeadTier').text(rankList.extended_tier);
+                if(data.data.tier !== 255){
+                    rankList.extended_queue && $('#commHeadQueue').text(rankList.extended_queue);
+                }
+            }
+            //转换登录部分的显示样式
+            $head.find('.unlogin').hide();
+            $head.find('.logined').show();
+            $head.find('.select-area').text(T_Login.getAreaById(T_Login.gAccountArea));
+            $head.find('.user-name').text(data.data.nickName);
+            
+            // var loginUserUin=tLogin.LoginManager.getUserUin();
+            // var whiteUinsList=['1841463564','1104199713','3153095528','1095009123','3127389997','879493801'];
+            // for(var wi=0;wi<whiteUinsList.length;wi++){
+            //     if(loginUserUin==whiteUinsList[wi]){
+            //         return;
+            //     }
+            // }
+        },
+        /*处理并显示头部玩家数据*/
+        handleAndSetPlayerInfo2: function () {
+            //开始处理
+            var data = T_Login.gAccountData;
+            var $head = $('.comm-head');
+            console.log(data,'data12334')
+            //处理头像和昵称
+            
             if (data.MobilePlayerInfo.msg.res.uuid_prifle_list) {
                 var zmInfo = data.MobilePlayerInfo.msg.res.uuid_prifle_list[0];
                 if (zmInfo['logo_url']) {
@@ -285,7 +322,14 @@ function htmlspecialchars(str) {
             $head.find('.logined').show();
             $head.find('.select-area').text(T_Login.getAreaById(T_Login.gAccountArea));
             $head.find('.user-name').text(data.PlayerInfo.msg.name);
-
+            
+            var loginUserUin=tLogin.LoginManager.getUserUin();
+            var whiteUinsList=['1841463564','1104199713','3153095528','1095009123','3127389997','879493801'];
+            for(var wi=0;wi<whiteUinsList.length;wi++){
+                if(loginUserUin==whiteUinsList[wi]){
+                    return;
+                }
+            }
             //战绩信息
             var totalWinNum = 0; //总局数饼图胜场数
             var totalLoseNum = 0; //总局数饼图败场数
