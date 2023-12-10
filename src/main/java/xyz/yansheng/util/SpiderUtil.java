@@ -70,7 +70,8 @@ public class SpiderUtil {
 
         // div herolist-content ul.herolist.clearfix li
         Elements liElements = doc.select("ul.herolist.clearfix li");
-        // System.out.println(liElements);
+//        Elements liElements = doc.select("herolist-content.li");
+//         System.out.println(liElements);
 
         int size = liElements.size();
 
@@ -88,8 +89,17 @@ public class SpiderUtil {
                 hero.setHeroUrl(heroUrl);
 
                 // 英雄ename
-                String ename = heroUrl.substring(heroUrl.lastIndexOf('/') + 1);
-                ename = ename.substring(0, 3);
+//                String ename = heroUrl.substring(heroUrl.lastIndexOf('/') + 1);
+//                ename = ename.substring(0, 3);
+//                System.out.println(ename);
+//                hero.setEname(Integer.parseInt(ename));
+                Element aElement2 = liElement.selectFirst("img");
+                String heroUrl2 = aElement2.attr("src");
+//                System.out.println(heroUrl2.lastIndexOf('/'));
+                String ename = heroUrl2.substring(heroUrl2.lastIndexOf('/'));
+//                System.out.println(ename);
+                ename = ename.substring(1, 4);
+//                System.out.println(ename);
                 hero.setEname(Integer.parseInt(ename));
 
                 // 英雄cname

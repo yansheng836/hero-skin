@@ -31,6 +31,7 @@ public class App {
         // 在线数据不实时，好像加了js，暂时不会爬取；先使用爬取下载的本地网页
         String url = "https://pvp.qq.com/web201605/herolist.shtml";
         String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏.html";
+//        String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏2.html";
 
         ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
