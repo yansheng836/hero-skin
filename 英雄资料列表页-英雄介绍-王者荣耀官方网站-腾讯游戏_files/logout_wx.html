@@ -3,6 +3,16 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
 
 <script>
+function isSupportDomain() {
+    try {
+        document.domain = 'qq.com';
+        if (document.domain === 'qq.com') return true;
+        return false;
+    } catch(err) {
+        return false
+    }
+}
+var pageSupportDomain = true;
 function clearWxCodeInfoCallback(){
 	var expires=new Date(0).toGMTString();
 	document.cookie="p_skey=; expires="+expires;
@@ -15,7 +25,7 @@ function clearWxCodeInfoCallback(){
 	document.cookie="acctype=; expires="+expires;
 	document.cookie="appid=; expires="+expires;
 	
-	//path为/下面再清理一次
+	//path涓&#65533;/涓嬮潰鍐嶆竻鐞嗕竴娆&#65533;
 	document.cookie="p_skey=; expires="+expires+"; path=/; domain=apps.game.qq.com";
 	document.cookie="p_uin=; expires="+expires+"; path=/; domain=apps.game.qq.com";
 	document.cookie="uin=; expires="+expires+"; path=/; domain=apps.game.qq.com";
@@ -25,11 +35,18 @@ function clearWxCodeInfoCallback(){
 	document.cookie="access_token=; expires="+expires+"; path=/;domain=apps.game.qq.com";
 	document.cookie="acctype=; expires="+expires+"; path=/; domain=apps.game.qq.com";
 	document.cookie="appid=; expires="+expires+"; path=/; domain=apps.game.qq.com";
-	
-	parent.window["logoutWxCallback"]();
+	if (pageSupportDomain) {
+		parent.window["logoutWxCallback"]();
+	} else {
+		window.parent.postMessage(JSON.stringify({
+			action: "loginManager_logout_WX",
+			callbackName: "logoutWxCallback",
+		}), "*");
+	}
 }
 if (document.referrer.indexOf('qq.com') >= 0){
-	document.domain = 'qq.com';
+	// document.domain = 'qq.com';
+	pageSupportDomain = isSupportDomain();
 	clearWxCodeInfoCallback();
 }
 </script>
@@ -37,4 +54,33 @@ if (document.referrer.indexOf('qq.com') >= 0){
 <body>
 
 
-</body></html>
+</body><script id="allow-copy_script">(function agent() {
+    let unlock = false
+    document.addEventListener('allow_copy', (event) => {
+      unlock = event.detail.unlock
+    })
+
+    const copyEvents = [
+      'copy',
+      'cut',
+      'contextmenu',
+      'selectstart',
+      'mousedown',
+      'mouseup',
+      'mousemove',
+      'keydown',
+      'keypress',
+      'keyup',
+    ]
+    const rejectOtherHandlers = (e) => {
+      if (unlock) {
+        e.stopPropagation()
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation()
+      }
+    }
+    copyEvents.forEach((evt) => {
+      document.documentElement.addEventListener(evt, rejectOtherHandlers, {
+        capture: true,
+      })
+    })
+  })()</script></html>

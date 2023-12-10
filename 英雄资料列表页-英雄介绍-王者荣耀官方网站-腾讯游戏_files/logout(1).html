@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QQ登录注销</title>
     <script type="text/javascript">
+        function isSupportDomain() {
+            try {
+                document.domain = 'qq.com';
+                if (document.domain === 'qq.com') return true;
+                return false;
+            } catch(err) {
+                return false
+            }
+        }
+        var pageSupportDomain = isSupportDomain();
         /**
         * 加载脚本基础方法
         * @private
@@ -110,7 +120,7 @@
         }
 
         //降域，方便和parent通信
-        document.domain = 'qq.com';
+        // document.domain = 'qq.com';
         //清除pt相关的cookie
         function clearPtCookie(){
             var oDate = new Date(), expires;
@@ -123,7 +133,14 @@
             document.cookie="pt4_token=; expires="+expires+"; domain=game.qq.com; path=/; ";
             document.cookie="IED_LOG_INFO2=; expires="+expires+"; domain=game.qq.com; path=/; ";
             document.cookie="sid=; expires="+expires+"; domain=qq.com; path=/; ";
-            parent.window["logoutCallback"]();
+            if (pageSupportDomain) {
+		        parent.window["logoutCallback"]();
+	        } else {
+	        	window.parent.postMessage(JSON.stringify({
+	        		action: "loginManager_logout_QQ",
+	        		callbackName: "logoutCallback",
+	        	}), "*");
+	        }
         }
 
         //强注销pt
@@ -155,4 +172,33 @@
 <body>
     
 
-</body></html>
+</body><script id="allow-copy_script">(function agent() {
+    let unlock = false
+    document.addEventListener('allow_copy', (event) => {
+      unlock = event.detail.unlock
+    })
+
+    const copyEvents = [
+      'copy',
+      'cut',
+      'contextmenu',
+      'selectstart',
+      'mousedown',
+      'mouseup',
+      'mousemove',
+      'keydown',
+      'keypress',
+      'keyup',
+    ]
+    const rejectOtherHandlers = (e) => {
+      if (unlock) {
+        e.stopPropagation()
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation()
+      }
+    }
+    copyEvents.forEach((evt) => {
+      document.documentElement.addEventListener(evt, rejectOtherHandlers, {
+        capture: true,
+      })
+    })
+  })()</script></html>
