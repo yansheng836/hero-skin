@@ -1,3 +1,7 @@
+[TOC]
+
+---
+
 # Hero-Skin
 
 Java爬取王者荣耀和英雄联盟的英雄皮肤。
@@ -195,4 +199,81 @@ Java爬取王者荣耀和英雄联盟的英雄皮肤。
 |  2021年6月27日17:00:33  |   155    |   3752   |    -     | 1217 |   2535   |
 |  2021年7月10日16:12:33  |   155    |          | （实际） | 1389 |          |
 |  2023年4月30日01:42:53  |   163    |          |          | 1680 |          |
+
+### 2024年5月11日17:38:51问题处理
+
+挺长时间了（最后一次能下载的时间是2023‎年‎11‎月‎11‎日，‏‎17:16:11），都只能下载对应的json，但是下载不了图片，都是404。
+
+#### 问题分析
+
+##### json 图片都访问不了
+
+https://game.gtimg.cn/images/lol/act/img/center/c314073d-ff9d-433a-81cc-5081fc93b54a.jpg
+https://game.gtimg.cn/images/lol/act/img/center/7f8c8fb2-fabd-4053-8818-395a0c94b904.jpg
+
+##### 首页有效照片
+
+1明烛
+大
+https://game.gtimg.cn/images/lol/act/img/skin/big_c314073d-ff9d-433a-81cc-5081fc93b54a.jpg
+小
+https://game.gtimg.cn/images/lol/act/img/skin/small_c314073d-ff9d-433a-81cc-5081fc93b54a.jpg
+
+花仙贤者 米利欧
+2大
+https://game.gtimg.cn/images/lol/act/img/skin/big_7f8c8fb2-fabd-4053-8818-395a0c94b904.jpg
+
+小
+
+https://game.gtimg.cn/images/lol/act/img/skin/small_7f8c8fb2-fabd-4053-8818-395a0c94b904.jpg
+
+#### 具体排查-安妮
+
+https://lol.qq.com/data/info-defail.shtml?id=1 介绍页的现在的照片
+
+安妮
+
+小（smallskin：https://game.gtimg.cn/images/lol/act/img/skin/small1000.jpg）
+
+https://game.gtimg.cn/images/lol/act/img/skin/small_8ad0a2a0-8492-44d6-8837-bab6ffc7e5af.jpg
+
+大（bigskin：https://game.gtimg.cn/images/lol/act/img/skin/big1000.jpg）
+
+https://game.gtimg.cn/images/lol/act/img/skin/big_8ad0a2a0-8492-44d6-8837-bab6ffc7e5af.jpg
+
+手机（phone：https://game.gtimg.cn/images/lol/act/img/skinloading/1000.jpg）
+
+暂未找到（下面这个不生效）
+
+https://game.gtimg.cn/images/lol/act/img/skinloading/8ad0a2a0-8492-44d6-8837-bab6ffc7e5af.jpg
+
+#### 按照旧的模式
+
+旧的还能访问：（魔域梦魇 安妮）
+
+https://game.gtimg.cn/images/lol/act/img/skin/small1031.jpg
+
+但是后面出的皮肤就访问不了了：（北极星使者 安妮）
+
+https://game.gtimg.cn/images/lol/act/img/skin/small1040.jpg
+
+#### 新的模式
+
+
+
+### 扩展
+
+web大图
+
+https://101.qq.com/#/hero-detail?heroid=1&tab=skin
+
+电脑端大图
+
+https://game.gtimg.cn/images/lol/act/img/skin/big_0b95894e-0df2-470e-b282-6c5f5cf41955.jpg
+
+手机端大图
+
+https://game.gtimg.cn/images/lol/act/img/skinloading/0b95894e-0df2-470e-b282-6c5f5cf41955.jpg
+
+
 

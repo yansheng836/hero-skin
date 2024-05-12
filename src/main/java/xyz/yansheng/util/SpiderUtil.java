@@ -281,6 +281,7 @@ public class SpiderUtil {
 
         // String url = "http://game.gtimg.cn/images/lol/act/img/js/hero/1.js";
         String url = "http://game.gtimg.cn/images/lol/act/img/js/hero/" + hero.getEname() + ".js";
+//        System.out.println("url:"+url);
 
         new File("./log").mkdirs();
         String logFileName = "./log/lol-per-hero-js-" + LocalDate.now() + ".log";
@@ -320,6 +321,7 @@ public class SpiderUtil {
         //         System.out.println("skins:" + skins);
         // System.out.println("skins:" + skins.size());
         String skinName = "";
+        String skinId2 = "";
         title = "";
         // 判断皮肤是否为基本皮肤 chromasBelongId = 0 只统计基本皮肤
         String chromasBelongId;
@@ -333,11 +335,19 @@ public class SpiderUtil {
                 skinName = skinName + skin + "|";
                 String skinId = skins.getJSONObject(i).getString("skinId");
                 title = title + skinId + "|";
+
+//                2024年5月11日18:32:41 获取皮肤图片id
+//                https://game.gtimg.cn/images/lol/act/img/center/0b95894e-0df2-470e-b282-6c5f5cf41955.jpg
+                String skinId2Temp = skins.getJSONObject(i).getString("centerImg");
+                skinId2 = skinId2 + skinId2Temp.replace("https://game.gtimg.cn/images/lol/act/img/center/","") + "|";
+
                 //                System.out.println("skinName:" + skinName + ",chromasBelongId:" + chromasBelongId);
             }
         }
         skinName = skinName.substring(0, skinName.lastIndexOf('|'));
         title = title.substring(0, title.lastIndexOf('|'));
+        skinId2 = skinId2.substring(0, skinId2.lastIndexOf('|'));
+//        System.out.println("skinId2:" +skinId2);
 
         // 去除特殊字符，比如 “K/DA ALL OUT 伊芙琳”
         skinName = skinName.replaceAll("/", "-");
@@ -355,6 +365,7 @@ public class SpiderUtil {
 
         hero.setSkinName(skinName);
         hero.setSkins(skins1);
+        hero.setSkinsIds(Arrays.asList(skinId2.split("\\|")));
         hero.setTitle(title);
         return hero;
     }

@@ -71,6 +71,10 @@ public class Hero implements Serializable {
      * 皮肤名列表，如：[归虚梦演, 幻纱之灵]，按照推出顺序，先出的在前面
      */
     private List<String> skins;
+    /**
+     * 皮肤id，如：[0b95894e-0df2-470e-b282-6c5f5cf41955.jpg, 8ad0a2a0-8492-44d6-8837-bab6ffc7e5af.jpg]，按照推出顺序，先出的在前面
+     */
+    private List<String> skinsIds;
 
     // 1.按照分析，创建对应文件夹
     // 1.1.https://game.gtimg.cn/images/yxzj/img201606/heroimg/518/518-smallskin-1.jpg
@@ -146,6 +150,11 @@ public class Hero implements Serializable {
             // https://game.gtimg.cn/images/lol/act/img/skin/big1000.jpg
             // "iconImg": "https://game.gtimg.cn/images/lol/act/img/skin/small1000.jpg",
             // https://game.gtimg.cn/images/lol/act/img/skinloading/1000.jpg
+
+//            2024年5月11日18:53:36 新
+//          小  https://game.gtimg.cn/images/lol/act/img/skin/small_8ad0a2a0-8492-44d6-8837-bab6ffc7e5af.jpg
+//          大  https://game.gtimg.cn/images/lol/act/img/skin/big_8ad0a2a0-8492-44d6-8837-bab6ffc7e5af.jpg
+//          手机端  https://game.gtimg.cn/images/lol/act/img/skinloading/0b95894e-0df2-470e-b282-6c5f5cf41955.jpg
             String phonePrefix = "https://game.gtimg.cn/images/lol/act/img/skinloading/";
             String wallpaperPrefix = "https://game.gtimg.cn/images/lol/act/img/skin/";
             String smallskin = "small";
@@ -153,15 +162,21 @@ public class Hero implements Serializable {
             String bigskin = "big";
             String suffix = ".jpg";
             String[] skinsArray = title.split("\\|");
+//            System.out.println(this.skinsIds);
+//            System.out.println(this.skinsIds.get(0));
             for (int i = 0; i < skinsArray.length; i++) {
-                String psu = wallpaperPrefix + smallskin +  skinsArray[i].toString() + suffix;
+//                String psu = wallpaperPrefix + smallskin + skinsArray[i].toString() + suffix;
+                String psu = wallpaperPrefix + smallskin + "_" + this.skinsIds.get(i);
+
 //                String pmu = phonePrefix + ename + "/" + ename + mobileskin + i + suffix;
-                String pbu = phonePrefix + skinsArray[i].toString() + suffix;
+                String pbu = phonePrefix + this.skinsIds.get(i);
+
 //                String wmu = wallpaperPrefix + ename + "/" + ename + mobileskin + i + suffix;
-                String wbu = wallpaperPrefix + bigskin + skinsArray[i].toString() + suffix;
-                 phoneSmallskinUrl.add(psu);
+//                String wbu = wallpaperPrefix + bigskin + skinsArray[i].toString() + suffix;
+                String wbu = wallpaperPrefix + bigskin + "_" + this.skinsIds.get(i);
+                phoneSmallskinUrl.add(psu);
                 // phoneMobileskinUrl.add(pmu);
-                 phoneBigskinUrl.add(pbu);
+                phoneBigskinUrl.add(pbu);
                 // wallpaperMobileskinUrl.add(wmu);
                 wallpaperBigskinUrl.add(wbu);
             }
@@ -171,7 +186,7 @@ public class Hero implements Serializable {
 
     public String toStringSimple() {
         return "Hero [id=" + id + ", ename=" + ename + ", cname=" + cname + ", title=" + title + ", skinName="
-            + skinName + "]";
+                + skinName + "]";
     }
 
 }

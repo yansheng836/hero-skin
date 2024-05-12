@@ -38,24 +38,31 @@ public class LolApp {
 
         ArrayList<Hero> heros = SpiderUtil.getLolHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
-        // System.out.println(heros.get(0).toString());
-        // for (Hero hero : heros) {
-        // System.out.println(hero.toString());
-        // }
+        System.out.println(heros.get(0).toString());
+//        测试用的
+//        for (Hero hero : heros) {
+//            System.out.println(hero.toString());
+//        }
+//        System.exit(1);
 
+        System.out.println("\n");
         // 2.从每个英雄主页heroUrl中获取英雄的皮肤信息（title，skinName，skins）
         int count = 0;
         for (Hero hero : heros) {
             SpiderUtil.getLolHeroSkins2(hero);
+//            System.out.println(hero.toString());
             // 生成皮肤相关信息
             hero.generateLolField();
             count++;
+//            System.out.println(hero.toString());
+//            break;
         }
-        //      System.exit(1);
+//        System.exit(1);
+
         int sum = 0;
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
-            System.out.println("hero:" + hero);
+//            System.out.println("hero:" + hero);
         }
 
         infoString = "到目前为止，英雄联盟一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。";
@@ -84,7 +91,7 @@ public class LolApp {
 
         // 输出格式化后的字符串 https://blog.csdn.net/bestxianfeng163/article/details/100073318
         String pretty = JSON.toJSONString(map, SerializerFeature.PrettyFormat, SerializerFeature.WriteDateUseDateFormat,
-            SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
+                SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
 
         String pathname = "./lol-heros.json";
         File file = new File(pathname);
@@ -103,6 +110,7 @@ public class LolApp {
         List<String> dirs = FileUtil.mkdir(sign);
         for (String dir : dirs) {
             FileUtil.downloadImages(heros, dir);
+            break;
         }
         System.out.println("照片已经下载结束！！！！！");
 

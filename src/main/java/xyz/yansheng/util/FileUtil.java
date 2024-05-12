@@ -151,6 +151,7 @@ public class FileUtil {
 //                 System.out.println("imgUrl:" + imgUrl);
                 downloadImage(imgUrl, pathname);
             }
+//            break;
         }
     }
 
