@@ -36,16 +36,17 @@ public class LolApp {
         // String url = "https://pvp.qq.com/web201605/herolist.shtml";
         String localUrl = "./游戏资料-英雄联盟官方网站-腾讯游戏.html";
 
+        System.out.println("正在爬取数据，请稍后……");
         ArrayList<Hero> heros = SpiderUtil.getLolHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
-        System.out.println(heros.get(0).toString());
+//        System.out.println(heros.get(0).toString());
 //        测试用的
 //        for (Hero hero : heros) {
 //            System.out.println(hero.toString());
 //        }
 //        System.exit(1);
 
-        System.out.println("\n");
+//        System.out.println("\n");
         // 2.从每个英雄主页heroUrl中获取英雄的皮肤信息（title，skinName，skins）
         int count = 0;
         for (Hero hero : heros) {
@@ -104,14 +105,14 @@ public class LolApp {
 
         // System.exit(1);
         // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
-        int sign = 1;
+        int sign = 0;
 
         System.out.println("正在下载照片，请稍候......");
         String signType = "英雄联盟";
         List<String> dirs = FileUtil.mkdir(sign, signType);
         for (String dir : dirs) {
             FileUtil.downloadImages(heros, dir);
-            break;
+//            break;
         }
         System.out.println("照片已经下载结束！！！！！");
 

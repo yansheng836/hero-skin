@@ -27,7 +27,7 @@ public class FileUtil {
     static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-images";
     static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-images";
 
-
+//    lol 对于文件夹
     static final String PHONE_SAMLLSKIN_IMAGES2 = "./1phone-smallskin-lol";
     static final String PHONE_MOBILESKIN_IMAGES2 = "./2phone-mobileskin-lol";
     static final String PHONE_BIGSKIN_IMAGES2 = "./3phone-bigskin-lol";
@@ -140,6 +140,7 @@ public class FileUtil {
             // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
             String id = hero.getId().toString();
             String cname = hero.getCname();
+            System.out.println("正在下载英雄 "+cname+" 的皮肤图片……");
             String title = hero.getTitle();
             String[] skinidArray = title.split("\\|");
 
@@ -148,32 +149,22 @@ public class FileUtil {
 
             switch (dir) {
                 case PHONE_SAMLLSKIN_IMAGES:
-                    urls = hero.getPhoneSmallskinUrl();
-                    break;
                 case PHONE_SAMLLSKIN_IMAGES2:
                     urls = hero.getPhoneSmallskinUrl();
                     break;
                 case PHONE_MOBILESKIN_IMAGES:
-                    urls = hero.getPhoneMobileskinUrl();
-                    break;
                 case PHONE_MOBILESKIN_IMAGES2:
                     urls = hero.getPhoneMobileskinUrl();
                     break;
                 case PHONE_BIGSKIN_IMAGES:
-                    urls = hero.getPhoneBigskinUrl();
-                    break;
                 case PHONE_BIGSKIN_IMAGES2:
                     urls = hero.getPhoneBigskinUrl();
                     break;
                 case WALLPAPER_MOBILESKIN_IMAGES:
-                    urls = hero.getWallpaperMobileskinUrl();
-                    break;
                 case WALLPAPER_MOBILESKIN_IMAGES2:
                     urls = hero.getWallpaperMobileskinUrl();
                     break;
                 case WALLPAPER_BIGSKIN_IMAGES:
-                    urls = hero.getWallpaperBigskinUrl();
-                    break;
                 case WALLPAPER_BIGSKIN_IMAGES2:
                     urls = hero.getWallpaperBigskinUrl();
                     break;
@@ -198,8 +189,8 @@ public class FileUtil {
                 } else {
                     pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
                 }
-                System.out.println("imgUrl:" + imgUrl);
-                System.out.println("pathname:" + pathname);
+//                System.out.println("imgUrl:" + imgUrl);
+//                System.out.println("pathname:" + pathname);
                 downloadImage(imgUrl, pathname);
             }
 //            break; // 测试时用，只下载第一个英雄的照片

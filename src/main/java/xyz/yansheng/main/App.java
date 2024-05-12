@@ -33,6 +33,7 @@ public class App {
         String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏.html";
 //        String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏2.html";
 
+        System.out.println("正在爬取数据，请稍后……");
         ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
         int size = heros.size();
         // for (Hero hero : heros) {
