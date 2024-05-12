@@ -104,10 +104,11 @@ public class LolApp {
 
         // System.exit(1);
         // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
-        int sign = 0;
+        int sign = 1;
 
         System.out.println("正在下载照片，请稍候......");
-        List<String> dirs = FileUtil.mkdir(sign);
+        String signType = "英雄联盟";
+        List<String> dirs = FileUtil.mkdir(sign, signType);
         for (String dir : dirs) {
             FileUtil.downloadImages(heros, dir);
             break;

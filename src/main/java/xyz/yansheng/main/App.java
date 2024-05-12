@@ -92,7 +92,8 @@ public class App {
         int sign = 0;
 
         System.out.println("正在下载照片，请稍候......");
-        List<String> dirs = FileUtil.mkdir(sign);
+        String signType = "王者荣耀";
+        List<String> dirs = FileUtil.mkdir(sign,signType);
         for (String dir : dirs) {
             FileUtil.downloadImages(heros, dir);
         }

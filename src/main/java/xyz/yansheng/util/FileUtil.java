@@ -27,6 +27,13 @@ public class FileUtil {
     static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-images";
     static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-images";
 
+
+    static final String PHONE_SAMLLSKIN_IMAGES2 = "./1phone-smallskin-lol";
+    static final String PHONE_MOBILESKIN_IMAGES2 = "./2phone-mobileskin-lol";
+    static final String PHONE_BIGSKIN_IMAGES2 = "./3phone-bigskin-lol";
+    static final String WALLPAPER_MOBILESKIN_IMAGES2 = "./4wallpaper-mobileskin-lol";
+    static final String WALLPAPER_BIGSKIN_IMAGES2 = "./5wallpaper-bigskin-lol";
+
     public static final String CLASS_NAME = "xyz.yansheng.util.FileUtil";
 
     /**
@@ -54,35 +61,64 @@ public class FileUtil {
      *
      * @param sign sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
      */
-    public static List<String> mkdir(int sign) {
+    public static List<String> mkdir(int sign,String signType) {
         List<String> dirs = new ArrayList<String>(5);
-
-        switch (sign) {
-            case 0:
-                dirs.add(PHONE_SAMLLSKIN_IMAGES);
-                dirs.add(PHONE_MOBILESKIN_IMAGES);
-                dirs.add(PHONE_BIGSKIN_IMAGES);
-                dirs.add(WALLPAPER_MOBILESKIN_IMAGES);
-                dirs.add(WALLPAPER_BIGSKIN_IMAGES);
-                break;
-            case 1:
-                dirs.add(PHONE_SAMLLSKIN_IMAGES);
-                break;
-            case 2:
-                dirs.add(PHONE_MOBILESKIN_IMAGES);
-                break;
-            case 3:
-                dirs.add(PHONE_BIGSKIN_IMAGES);
-                break;
-            case 4:
-                dirs.add(WALLPAPER_MOBILESKIN_IMAGES);
-                break;
-            case 5:
-                dirs.add(WALLPAPER_BIGSKIN_IMAGES);
-                break;
-            default:
-                System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
-                break;
+        if(signType.equals("王者荣耀")){
+            switch (sign) {
+                case 0:
+                    dirs.add(PHONE_SAMLLSKIN_IMAGES);
+                    dirs.add(PHONE_MOBILESKIN_IMAGES);
+                    dirs.add(PHONE_BIGSKIN_IMAGES);
+                    dirs.add(WALLPAPER_MOBILESKIN_IMAGES);
+                    dirs.add(WALLPAPER_BIGSKIN_IMAGES);
+                    break;
+                case 1:
+                    dirs.add(PHONE_SAMLLSKIN_IMAGES);
+                    break;
+                case 2:
+                    dirs.add(PHONE_MOBILESKIN_IMAGES);
+                    break;
+                case 3:
+                    dirs.add(PHONE_BIGSKIN_IMAGES);
+                    break;
+                case 4:
+                    dirs.add(WALLPAPER_MOBILESKIN_IMAGES);
+                    break;
+                case 5:
+                    dirs.add(WALLPAPER_BIGSKIN_IMAGES);
+                    break;
+                default:
+                    System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
+                    break;
+            }
+        }else if(signType.equals("英雄联盟")){
+            switch (sign) {
+                case 0:
+                    dirs.add(PHONE_SAMLLSKIN_IMAGES2);
+                    dirs.add(PHONE_MOBILESKIN_IMAGES2);
+                    dirs.add(PHONE_BIGSKIN_IMAGES2);
+                    dirs.add(WALLPAPER_MOBILESKIN_IMAGES2);
+                    dirs.add(WALLPAPER_BIGSKIN_IMAGES2);
+                    break;
+                case 1:
+                    dirs.add(PHONE_SAMLLSKIN_IMAGES2);
+                    break;
+                case 2:
+                    dirs.add(PHONE_MOBILESKIN_IMAGES2);
+                    break;
+                case 3:
+                    dirs.add(PHONE_BIGSKIN_IMAGES2);
+                    break;
+                case 4:
+                    dirs.add(WALLPAPER_MOBILESKIN_IMAGES2);
+                    break;
+                case 5:
+                    dirs.add(WALLPAPER_BIGSKIN_IMAGES2);
+                    break;
+                default:
+                    System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
+                    break;
+            }
         }
         // 创建目录
         for (String dir : dirs) {
@@ -114,16 +150,31 @@ public class FileUtil {
                 case PHONE_SAMLLSKIN_IMAGES:
                     urls = hero.getPhoneSmallskinUrl();
                     break;
+                case PHONE_SAMLLSKIN_IMAGES2:
+                    urls = hero.getPhoneSmallskinUrl();
+                    break;
                 case PHONE_MOBILESKIN_IMAGES:
+                    urls = hero.getPhoneMobileskinUrl();
+                    break;
+                case PHONE_MOBILESKIN_IMAGES2:
                     urls = hero.getPhoneMobileskinUrl();
                     break;
                 case PHONE_BIGSKIN_IMAGES:
                     urls = hero.getPhoneBigskinUrl();
                     break;
+                case PHONE_BIGSKIN_IMAGES2:
+                    urls = hero.getPhoneBigskinUrl();
+                    break;
                 case WALLPAPER_MOBILESKIN_IMAGES:
                     urls = hero.getWallpaperMobileskinUrl();
                     break;
+                case WALLPAPER_MOBILESKIN_IMAGES2:
+                    urls = hero.getWallpaperMobileskinUrl();
+                    break;
                 case WALLPAPER_BIGSKIN_IMAGES:
+                    urls = hero.getWallpaperBigskinUrl();
+                    break;
+                case WALLPAPER_BIGSKIN_IMAGES2:
                     urls = hero.getWallpaperBigskinUrl();
                     break;
                 default:
@@ -147,11 +198,11 @@ public class FileUtil {
                 } else {
                     pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
                 }
-//                 System.out.println("pathname:" + pathname);
-//                 System.out.println("imgUrl:" + imgUrl);
+                System.out.println("imgUrl:" + imgUrl);
+                System.out.println("pathname:" + pathname);
                 downloadImage(imgUrl, pathname);
             }
-//            break;
+//            break; // 测试时用，只下载第一个英雄的照片
         }
     }
 
