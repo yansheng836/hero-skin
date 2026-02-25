@@ -12,10 +12,10 @@ table{border-collapse:collapse;border-spacing:0;}
 td,th,ul,ol{padding:0;}
 cite{font-style:normal;}
 /*------common------*/
-body{max-width:1920px;margin:0 auto}
+body{margin:0 auto;}
 .pr{position:relative}
 .pa{position:absolute}
-.fl{float:left}
+.fl{float:left;}
 .fr{float:right}
 .clearfix{zoom:1}
 .clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
@@ -154,7 +154,7 @@ body{padding-top:42px;background:#fff;font:14px/1.5 "Microsoft YaHei",Tahoma,"si
 .info-box .txt2{color:#b3bbc5;}
 .info-box .txt2 a{color:#2d84d3;}
 .old-header{background-color: #fafafa;}
-.zkcontent{ width:100%; min-width:1200px;min-height:620px; height:auto; margin:0 auto; background:url(//game.gtimg.cn/images/yxzj/web201605/page/ny_con_bg.jpg) no-repeat center top;}
+.zkcontent{ width:100%; min-width:1600px;min-height:620px; height:auto; margin:0 auto; background-color: #f2efe6;}
 
 /*----footer1----*/
 .foot-media,.foot-t .media-pic{display: none;}
@@ -207,9 +207,10 @@ body{padding-top:42px;background:#fff;font:14px/1.5 "Microsoft YaHei",Tahoma,"si
 /*----位----*/
 .icon{ background:url(//game.gtimg.cn/images/yxzj/web201605/page/sprite.png) no-repeat;text-indent:-9999px;display:block;}
 .con1-pos{width:100%;margin-bottom:40px;height:20px;line-height:20px;color:#464547;font-size:16px;}
-.con1-pos .tb1{ background-position:0 -4px;width:18px;height:18px;margin-right:9px;}
+/* .con1-pos .tb1{ background-position:0 -4px;width:18px;height:18px;margin-right:9px;} */
+.con1-pos .tb1 {background: url(//game.gtimg.cn/images/yxzj/web201706/images/down/newlist_flo.png) no-repeat;margin-right:9px;width: 18px;height: 18px;}
 .con1-pos a,.con1-pos span{ margin-right:8px;}
-.con1-pos a{ text-decoration:underline;}
+.con1-pos a{ text-decoration:none;}
 /*-----------*/
 .dia-zhushou{width:306px;height:297px;background:url(//game.gtimg.cn/images/yxzj/web201605/page/zhushou.png);}
 .dia-weixin{width:306px;height:297px;background:url(//game.gtimg.cn/images/yxzj/web201605/page/weixin.png);}

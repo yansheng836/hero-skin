@@ -1,496 +1,1046 @@
-//µ¼º½À¸×¢Ïú´¥·¢ÊÂ¼ş
-setTimeout(function () {
-	$('.logout_btn').click(function () { $('.icon.loginout').trigger('click') });
-}, 2000);
 /**
- * pvp Header JS
- * Author: sonichuang
- * Create: 2017-05-31
+ * PCç«¯ å¤´éƒ¨å¯¼èˆªæ 
+ * @author dannyyuan
  */
-var pvpHeader = (function () {
-	var util = {},
-		fn = {},
-		$header = "",
-		init = function () { };
+var pvpHeader2023 = (function () {
+  var version = 'Header ç‰ˆæœ¬ï¼š2025.01.08.0';
+  var data = {}; // æ•°æ®
+  var menuColor = '#FFFFFF'; // ä¸€çº§èœå•çš„é¢œè‰²
 
-	var isOldHeader = $("body").hasClass("old-header") ? true : false;
+  /**
+   * åˆå§‹åŒ–
+   * @param width é¡µé¢è®¾è®¡å®½åº¦
+   * @param height é¡µé¢è®¾è®¡é«˜åº¦
+   * @param scaleMode å±å¹•é€‚é…æ–¹æ¡ˆï¼ˆwidthï¼šå®½åº¦é€‚é…ã€heightï¼šé«˜åº¦é€‚é…ï¼‰
+   */
+  var init = function (width, height, scale) {
+    console.log(version);
+    show();
+    resetSize(width, height, scale);
+  };
 
-	fn = {
-		jsLoader: function (url, callback, options) {
-			options = options || {};
-			var head = document.getElementsByTagName('head')[0] || document.documentElement,
-				script = document.createElement('script'),
-				done = false;
-			script.src = url;
-			if (options.charset) {
-				controller
-				script.charset = options.charset;
-			}
-			script.onerror = script.onload = script.onreadystatechange = function () {
-				if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
-					done = true;
-					if (callback) {
-						callback();
-					}
-					script.onerror = script.onload = script.onreadystatechange = null;
-					head.removeChild(script);
-				}
-			};
-			head.insertBefore(script, head.firstChild);
-		}
-	};
+  /**
+   * é‡è®¾å°ºå¯¸
+   * @param width é¡µé¢è®¾è®¡å®½åº¦
+   * @param height é¡µé¢è®¾è®¡é«˜åº¦
+   * @param scaleMode å±å¹•é€‚é…æ–¹æ¡ˆï¼ˆwidthï¼šå®½åº¦é€‚é…ã€heightï¼šé«˜åº¦é€‚é…ï¼‰
+   */
+  var resetSize = function (width, height, scale) {
+    data.desighWidth = width && width > 0 ? width : 1920;
+    data.desighHeight = height && height > 0 ? height : 900;
+    data.stageContext = new HeaderStageContext(data.desighWidth, data.desighHeight);
+    data.stageContext.type = 'h';// hï¼šæ¨ªå±ã€vï¼šç«–å±
+    data.stageContext.align = '';// é»˜è®¤ä¸º"":å±…ä¸­,t:é é¡¶,l:é å·¦,r:é å³,b:é åº•,å¯ä»¥ç»“åˆä¸€èµ·ç”¨ï¼Œæ¯”å¦‚tl,tr,bl,br
+    data.stageContext.scaleMode = scale && scale !== '' ? scale : 'height';// widthï¼šå®½åº¦é€‚é…ã€heightï¼šé«˜åº¦é€‚é…
 
-	util.addHeaderHTML = function () {
-		if (isOldHeader) {
-			var loginSup = '';
-			var loginSub = '';
-			loginSub += '<!--=========ÖÜÃâÓ¢ĞÛºÍÓÃ»§µÇÂ¼==========-->';
-			loginSub += '<div class="info-box clearfix">';
-			loginSub += '  <div class="hero-box fl pr">';
-			loginSub += '	<p id="FreeHeros-Title"><b>ÖÜÃâÓ¢ĞÛ£¨<span id="freeHerosPeriod"></span>£©</b></p>';
-			loginSub += '	<ul id="FreeHeros-Cont" class="hero-list clearfix">¼ÓÔØÖĞ...</ul>';
-			loginSub += '	<a href="/web201605/herolist.shtml" onclick="PTTSendClick(\'head\',\'morehero\',\'¸ü¶àÓ¢ÄÑ\');" target="_blank" title="¸ü¶àÓ¢ĞÛ" class="more-hero pa">¸ü<br>¶à<br>Ó¢<br>ĞÛ</a>';
-			loginSub += '  </div>';
-			loginSub += '  <div class="login-box clearfix fl pr">';
-			loginSub += '	<a class="avatar pa spr" href="/web201605/personal.shtml">';
-			loginSub += '	  <img src="//game.gtimg.cn/images/yxzj/web201605/main/avatar1.jpg" width="75" height="75">';
-			loginSub += '	  <span class="pa spr level-ico db">0</span>';
-			loginSub += '	</a>';
-			loginSub += '	<!--=====µÇÂ¼ºóÒÑÑ¡Ôñ´óÇø=====-->';
-			loginSub += '	<div id="logined_selected" class="per-infor fl" style="display:none;">';
-			loginSub += '	  <p class="user-name f12">';
-			loginSub += '		<em>ÓÃ»§Ãû³Æ</em>';
-			loginSub += '		<i id="nickname">--</i>';
-			loginSub += '		<a class="logout_btn" href="javascript:void(0)">×¢Ïú</a>';
-			loginSub += '		<a class="select_role" style="color:#2d84d3" href="javascript:void(0)">ÇĞ»»´óÇø&gt;</a>';
-			loginSub += '	  </p>';
-			loginSub += '	  <ul class="userinfo-list tc">';
-			loginSub += '		<li><em class="grade_level">¾óÇ¿ÇàÍ­III</em><i>¶ÎÎ»</i></li>';
-			loginSub += '		<li><em class="win_count">-</em><i>Ê¤³¡</i></li>';
-			loginSub += '		<li><em class="hero_count">-</em><i>Ó¢ĞÛÊı</i></li>';
-			loginSub += '		<li><em class="skin_count">-</em><i>Æ¤·ôÊı</i></li>';
-			loginSub += '	  </ul>';
-			loginSub += '	</div>';
-			loginSub += '	<!--=====µÇÂ¼Ç°=====-->';
-			loginSub += '	<div id="unlogin" class="per-infor txt2 fl" style="display:block;">';
-			loginSub += '	  <p class="user-name">';
-			loginSub += '		Ç×°®µÄÕÙ»½Ê¦£¬»¶Ó­';
-			loginSub += '  <a href="javascript:TGDialogS(\'login_select\');" onclick="PTTSendClick(\'head\',\'loginBtnSub\',\'µÇÂ¼\');">µÇÂ¼</a>';
-			loginSub += '	  </p>';
-			loginSub += '	</div>';
-			loginSub += '	<!--=====µÇÂ¼ºóÎ´Ñ¡Ôñ´óÇø=====-->';
-			loginSub += '	<div id="logined_not_selected" class="per-infor txt2 fl" style="display:none;">';
-			loginSub += '	  <p class="user-name">';
-			loginSub += '		ÄúÒÑµÇÂ¼£¬Çë<a class="select_role" href="javascript:void(0)">Ñ¡Ôñ´óÇø</a>£¬»òÕß<a class="logout_btn" href="javascript:void(0)">×¢Ïú</a>';
-			loginSub += '		<!--ÄúÒÑµÇÂ¼£¬¸öÈËÖĞĞÄÔİÎ´¿ª·Å<a class="logout_btn" href="javascript:void(0)">×¢Ïú</a>-->';
-			loginSub += '	  </p>';
-			loginSub += '	  <!--p>µÇÂ¼ºó²é¿´×Ô¼ºµÄÓ¢ĞÛÁªÃËÓÎÏ·ĞÅÏ¢£¬°üÀ¨ÕÙ»½Ê¦µÈ¼¶¡¢ÓÎÏ·Ê¤³¡Êı¡¢ÕË»§ĞÅÏ¢¡¢ÉùÍûÖµ µÈ¡£</p-->';
-			loginSub += '	</div>';
-			loginSub += '  </div>';
-			loginSub += '</div><!--=========ÖÜÃâÓ¢ĞÛºÍÓÃ»§µÇÂ¼==========-->';
-			loginSub += '<a target="_blank" href="javascript:;" onClick="PTTSendClick(\'btn\',\'subtopkv\',\'½øÈë×¨Ìâ\');"  class="kv-link" title="²é¿´ÏêÇé">²é¿´ÏêÇé</a>';
-		} else {
-			var loginSub = '';
-			var loginSup = '';
-			loginSup += '      <!--=====µÇÂ¼Ä£¿é=====-->';
-			loginSup += '      <div class="login_pannel clearfix pa">';
-			loginSup += '        <a class="avatar user_pic " href="/web201605/personal.shtml">';
-			loginSup += '          <img alt="avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAABGdBTUEAALGPC/xhBQAAARpQTFRF88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JY88JYAAAA88JYAMCn0QAAAF10Uk5TZBSP1dYNDujnLPuA3/zQAos0UjmnB8KcgZrNkfGwCdhthtnjysFgCFAZSuQWKYNXh9IbREw+9iRhdyPlZRNdvRwnMRrvNf3F3isBtz+eRfPha+v3O+718Gm0eB4AqcfmkwAAAUBJREFUOMvt1FWTg0AMAOCeu7u71t3dFS+FJv//b9wCnbu5YwI83VPzsBvYb2aRbHzgOXxzartTLbGhVPVAN9Z0NurrXVdaE9GkKNZcaFPBVBJ6kEyh0nSksoqYAVgEyCCqsgMdcIjIpxOYSPMs4wYkHY3RiPwSLufNbDyiqIp/Q6Iob6MqRZ9t9ImiNzZ6R9ELG72k6Dl22q1v1mp38JSiE9SgLpR3mNssC3XQ2DVBD62lBR2zRSPR8JiiR9jIrgDEwhiOAazqDTyjaI7trMQhwqYIxBU2XVH01nibCYTYGGIPzuKBLJdrkwb86A9YVCfpI1uNBkHmZAhGDSqQ9MUspwLkwGcV2StJh9bHn8J09hs+Sfo2/EXFd6ezVZB+aP/D+cQebM+odN9z6wPFvkl3ux66y95WBSr7J/NW/F/0C0EhZNPgBN3FAAAAAElFTkSuQmCC" width="42" height="42">';
-			loginSup += '        </a>';
-			loginSup += '        <!--=====µÇÂ¼ºóÒÑÑ¡Ôñ´óÇø=====-->';
-			loginSup += '        <div id="logined_selected" class="per-infor" style="display:none;">';
-			loginSup += '          <p class="user-name f12">';
-			loginSup += '            <i id="nickname">--</i>';
-			loginSup += '            <a class="logout_btn" href="javascript:void(0)">×¢Ïú</a>';
-			loginSup += '            <!--<a class="select_role" style="color:#2d84d3" href="javascript:void(0)">ÇĞ»»´óÇø&gt;</a>-->';
-			loginSup += '          </p>';
-			loginSup += '          <p class="personal_link"><a href="//pvp.qq.com/web201605/personal.shtml">µã»÷²é¿´ÓÎÏ·Õ½¼¨</a></p>';
-			loginSup += '          <ul class="userinfo-list tc">';
-			loginSup += '            <li><em class="grade_level">¾óÇ¿ÇàÍ­III</em><i>¶ÎÎ»</i></li>';
-			loginSup += '            <li><em class="win_count">-</em><i>Ê¤³¡</i></li>';
-			loginSup += '            <li><em class="hero_count">-</em><i>Ó¢ĞÛÊı</i></li>';
-			loginSup += '            <li><em class="skin_count">-</em><i>Æ¤·ôÊı</i></li>';
-			loginSup += '          </ul>';
-			loginSup += '        </div>';
-			loginSup += '        <div id="unlogin" class="per-infor unlogin_pannel">';
-			loginSup += '          <span class="unlogin_user_pic"></span>';
-			loginSup += '          <div class="unlogin_info">';
-			loginSup += '            <a href="javascript:TGDialogS(\'login_select\');" onclick="PTTSendClick(\'head\',\'loginBtnSup\',\'»¶Ó­µÇÂ¼\');">»¶Ó­µÇÂ¼</a>';
-			loginSup += '            <p>µÇÂ¼ºó²é¿´ÓÎÏ·Õ½¼¨</p>';
-			loginSup += '          </div>';
-			loginSup += '        </div>';
-			loginSup += '        <!--=====µÇÂ¼ºóÎ´Ñ¡Ôñ´óÇø=====-->';
-			loginSup += '        <div id="logined_not_selected" class="per-infor" style="display:none;">';
-			loginSup += '          <div class="user-name">';
-			loginSup += '            ÄúÒÑµÇÂ¼';
-			loginSup += '            <p>Çë<a class="select_role" href="javascript:void(0)">Ñ¡Ôñ´óÇø</a>£¬»òÕß<a class="logout_btn" href="javascript:void(0)">×¢Ïú</a></p>';
-			loginSup += '            <!--ÄúÒÑµÇÂ¼£¬¸öÈËÖĞĞÄÔİÎ´¿ª·Å<a class="logout_btn" href="javascript:void(0)">×¢Ïú</a>-->';
-			loginSup += '          </div>';
-			loginSup += '        </div>';
-			loginSup += '      </div><!--=====µÇÂ¼Ä£¿é=====-->';
-		}
-		var headerHTML = '';
-		headerHTML += '<div id="header" class="header tganime-header-fix">';
-		headerHTML += '<div class="header-nav">';
-		headerHTML += '    <div class="header-inner">';
-		headerHTML += '      <h1><a href="//pvp.qq.com/" class="logo pa" title="ÍõÕßÈÙÒ«" onclick="PTTSendClick(\'link\',\'logo\',\'logo\');">ÍõÕßÈÙÒ«</a></h1>';
-		headerHTML += '      <!--=========Ö÷µ¼º½==========-->';
-		headerHTML += '      <ul class="main-nav clearfix">';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="/web201605/herolist.shtml" target="_blank" title="ÓÎÏ·×ÊÁÏ" onclick="PTTSendClick(\'link\',\'data\',\'ÓÎÏ·×ÊÁÏ\');">ÓÎÏ·×ÊÁÏ<em>DATA</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="/raiders/" target="_blank" title="ÄÚÈİÖĞĞÄ" onclick="PTTSendClick(\'link\',\'strategy\',\'ÄÚÈİÖĞĞÄ\');">ÄÚÈİÖĞĞÄ<em>CONTENTS</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="https://kpl.qq.com/?ADTAG=pvp.index.nav.matchcenter" target="_blank" title="ÈüÊÂÖĞĞÄ" onclick="PTTSendClick(\'link\',\'match\',\'ÈüÊÂÖĞĞÄ\');">ÈüÊÂÖĞĞÄ<em>MATCH</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="/cp/a20171023pvppc/" target="_blank" title="°ÙÌ¬ÍõÕß" onclick="PTTSendClick(\'link\',\'CULTURE\',\'°ÙÌ¬ÍõÕß\');">°ÙÌ¬ÍõÕß<em>CULTURE</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="javascript:void(0)" title="ÉçÇø»¥¶¯" onclick="PTTSendClick(\'link\',\'Community\',\'ÉçÇø»¥¶¯\');">ÉçÇø»¥¶¯<em>COMMUNITY</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="javascript:void(0)" title="Íæ¼ÒÖ§³Ö" onclick="PTTSendClick(\'link\',\'player\',\'Íæ¼ÒÖ§³Ö\');">Íæ¼ÒÖ§³Ö<em>PLAYER</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '        <li>';
-		headerHTML += '          <a href="javascript:void(0)" title="IPĞÂÓÎ" onclick="PTTSendClick(\'link\',\'ipnewgame\',\'IPĞÂÓÎ\');">IPĞÂÓÎ<em>NEW GAMES</em></a>';
-		headerHTML += '        </li>';
-		headerHTML += '      </ul>';
-		headerHTML += loginSup;
-		headerHTML += '    </div>';
-		headerHTML += '    <!--=====¶ş¼¶µ¼º½=====-->';
-		headerHTML += '      <div id="J_subNav" class="sub-nav">';
-		headerHTML += '        <ul class="sub-nav-inner">';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '             <a href="/cp/a20170829bbgxsm/index.html" target="_blank" title="°æ±¾½éÉÜ" onclick="PTTSendClick(\'link\',\'version\',\'°æ±¾½éÉÜ\');">°æ±¾½éÉÜ</a>';
-		headerHTML += '             <a href="/web201605/introduce.shtml" target="_blank" title="ÓÎÏ·½éÉÜ" onclick="PTTSendClick(\'link\',\'gameinfomation\',\'ÓÎÏ·½éÉÜ\');">ÓÎÏ·½éÉÜ</a>';
-		headerHTML += '             <a href="/web201605/herolist.shtml" target="_blank" title="Ó¢ĞÛ×ÊÁÏ" onclick="PTTSendClick(\'link\',\'hero\',\'Ó¢ĞÛ×ÊÁÏ\');">Ó¢ĞÛ×ÊÁÏ</a>';
-		headerHTML += '             <a href="/coming/v2/" target="_blank" title="±¬ÁÏÕ¾" onclick="PTTSendClick(\'link\',\'data_coming\',\'±¬ÁÏÕ¾\');"><i class="icon-hot"></i>±¬ÁÏÕ¾</a>';
-		headerHTML += '             <a href="/ip/index.html?adtag=pvp.pc" target="_blank" title="ÊÀ½ç¹ÛÌåÑéÕ¾" onclick="PTTSendClick(\'link\',\'data_story\',\'ÊÀ½ç¹ÛÌåÑéÕ¾\');"><i class="icon-fans"></i>ÊÀ½ç¹ÛÌåÑéÕ¾</a>';
-		headerHTML += '             <a href="/web201605/wallpaper.shtml" target="_blank" title="ÓÎÏ·±ÚÖ½" onclick="PTTSendClick(\'link\',\'wallpaper\',\'ÓÎÏ·±ÚÖ½\');">ÓÎÏ·±ÚÖ½</a>';
-		headerHTML += '          </li>';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '             <a href="/raiders/" target="_blank" title="¹¥ÂÔÖĞĞÄ" onclick="PTTSendClick(\'link\',\'strategy_center\',\'¹¥ÂÔÖĞĞÄ\');">¹¥ÂÔÖĞĞÄ</a>';
-		headerHTML += '             <a href="https://pvp.icreate.qq.com/" target="_blank" title="¿ª·ÅËØ²Ä¿â" onclick="PTTSendClick(\'link\',\'strategy_sucai\',\'¿ª·ÅËØ²Ä¿â\');">¿ª·ÅËØ²Ä¿â</a>';
-		headerHTML += '             <a href="https://yyds.qq.com/creation" target="_blank" title="ÄÚÈİ¹²´´Æ½Ì¨" onclick="PTTSendClick(\'link\',\'creation\',\'ÄÚÈİ¹²´´Æ½Ì¨\');"><i class="icon-fans"></i>ÄÚÈİ¹²´´Æ½Ì¨</a>';
-		headerHTML += '             <a href="https://pvp.qq.com/cp/a20220914wza/" target="_blank" title="ÊÖÓï´ò·¨²Î¿¼" onclick="PTTSendClick(\'link\',\'wza\',\'ÊÖÓï´ò·¨²Î¿¼\');"><i class="icon-fans"></i>ÊÖÓï´ò·¨²Î¿¼</a>';
-		headerHTML += '          </li>';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '             <a href="https://pvp.qq.com/cp/kic2023/index.html" target="_blank" title="ÍõÕßÊÀ¹ÚKIC" onclick="PTTSendClick(\'link\',\'match_worldcup\',\'ÍõÕßÊÀ¹ÚKIC\');"><i class="icon-hot"></i>ÍõÕßÊÀ¹ÚKIC</a>';
-		headerHTML += '            <a href="/match/kpl/kingproleague/index.html" target="_blank" title="KPLÖ°ÒµÁªÈü" onclick="PTTSendClick(\'link\',\'match_KPL\',\'KPL\');">KPL</a>';
-		headerHTML += '            <a href="/match/kgl/index.html" target="_blank" title="K¼×ÁªÈü" onclick="PTTSendClick(\'link\',\'match_Kjia\',\'K¼×ÁªÈü\');">K¼×ÁªÈü</a>';
-		headerHTML += '             <a href="https://pvp.qq.com/match/WCC/KCC2023S1/index.html" target="_blank" title="ÌôÕ½Õß±­" onclick="PTTSendClick(\'link\',\'match_kcc\',\'ÌôÕ½Õß±­\');">ÌôÕ½Õß±­</a>';
-		headerHTML += '             <a href="/cp/a20220328qgds/index.shtml" target="_blank" title="È«¹ú´óÈü" onclick="PTTSendClick(\'link\',\'match_city\',\'È«¹ú´óÈü\');"><i class="icon-hot"></i>È«¹ú´óÈü</a>';
-		// headerHTML += '            <a href="/match/KWO/index.html" target="_blank" title="Å®×Ó¹«¿ªÈü" onclick="PTTSendClick(\'link\',\'match_kwo\',\'Å®×Ó¹«¿ªÈü\');">Å®×Ó¹«¿ªÈü</a>';
-		headerHTML += '             <a href="/cp/a20220315open/index.shtml" target="_blank" title="ÍõÕß¸ßĞ£ÁªÈü" onclick="PTTSendClick(\'link\',\'match_gaoxiao\',\'ÍõÕß¸ßĞ£ÁªÈü\');">¸ßĞ£ÁªÈü</a>';
-		headerHTML += '             <a href="/saibao/index.shtml" target="_blank" title="ÍõÕßÈü±¦" onclick="PTTSendClick(\'link\',\'match_saibao\',\'saibao\');"><i class="icon-fans"></i>ÍõÕßÈü±¦</a>';
-		headerHTML += '             <a href="/matchdata/index.html" target="_blank" title="ÈüÊÂÊı¾İ" onclick="PTTSendClick(\'link\',\'match_datamore\',\'ÈüÊÂÊı¾İ\');">ÈüÊÂÊı¾İ</a>';
-		headerHTML += '          </li>';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '             <a href="/memory/index.html" target="_blank" title="ÈÙÒ«¡¤´«³Ğ" onclick="PTTSendClick(\'link\',\'culture\',\'ÈÙÒ«¡¤´«³Ğ\');">ÈÙÒ«¡¤´«³Ğ</a>';
-		headerHTML += '             <a href="/history/" target="_blank" title="ÍõÕßÎÄ»¯Õ¾" onclick="PTTSendClick(\'link\',\'history\',\'ÍõÕßÎÄ»¯Õ¾\');">ÍõÕßÎÄ»¯Õ¾</a>';
-		headerHTML += '             <a href="/wonder/" target="_blank" title="ÍòÇ§ÊÀ½ç" onclick="PTTSendClick(\'link\',\'wonder\',\'ÍòÇ§ÊÀ½ç\');">ÍòÇ§ÊÀ½ç</a>';
-		headerHTML += '             <a href="https://pvp.qq.com/cp/a20221020wzjwhb/" target="_blank" title="ÍõÕß¾øÎò" onclick="PTTSendClick(\'link\',\'wzjw\',\'ÍõÕß¾øÎò\');"><i class="icon-fans"></i>ÍõÕß¾øÎò</a>';
-		headerHTML += '             <a href="/cp/a20190102starlight/index.html" target="_blank" title="ĞÇ¹âµîÌÃ" onclick="PTTSendClick(\'link\',\'star\',\'ĞÇ¹âµîÌÃ\');" >ĞÇ¹âµîÌÃ</a>';
-		headerHTML += '             <a href="/cp/a20210427ipgzzt/" target="_blank" title="IP¹²´´¼Æ»®" onclick="PTTSendClick(\'link\',\'ip\',\'IP¹²´´¼Æ»®\');"><i class="icon-fans"></i>IP¹²´´¼Æ»®</a>';
-		headerHTML += '             <a href="//igame.qq.com/newcss/pvp/privilegePC/index.html" target="_blank" title="ÉÌ»§ÌØÈ¨" onclick="PTTSendClick(\'link\',\'wifi\',\'ÉÌ»§ÌØÈ¨\');">ÉÌ»§ÌØÈ¨</a>';
-		headerHTML += '             <a href="https://wangzhe.recogame.com/wangzhe.html" target="_blank" title="ÁúÒíÍõÕß¿¨" onclick="PTTSendClick(\'link\',\'wangka\',\'ÁúÒíÍõÕß¿¨\');"><i class="icon-fans"></i>ÁúÒíÍõÕß¿¨</a>';
-		headerHTML += '          </li>';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '            <a href="//pvp.qq.com/hdy/p1/index.html" title="´´Òâ»¥¶¯Óª" onclick="PTTSendClick(\'link\',\'creative_community\',\'´´Òâ»¥¶¯Óª\');"><i class="icon-hot"></i>´´Òâ»¥¶¯Óª</a>';
-		headerHTML += '            <a href="javascript:void(0)" title="ÍõÕßÓªµØ" onclick="TGDialogS(\'zhushou\');PTTSendClick(\'link\',\'Community_tools\',\'ÍõÕßÓªµØ\');"><i class="icon-hot"></i>ÍõÕßÓªµØ</a>';
-		headerHTML += '            <a href="javascript:void(0)" title="Î¢ĞÅÈ¦×Ó" onclick="TGDialogS(\'weiquan\');PTTSendClick(\'link\',\'Community_wx\',\'Î¢ĞÅÈ¦×Ó\');">Î¢ĞÅÈ¦×Ó</a>';
-		headerHTML += '            <a href="//weibo.com/heromoba" target="_blank" title="¹Ù·½Î¢²©" onclick="PTTSendClick(\'link\',\'Community_wb\',\'¹Ù·½Î¢²©\');">¹Ù·½Î¢²©</a>';
-		headerHTML += '            <a href="javascript:void(0)" title="Î¢ĞÅ¹«ÖÚºÅ" onclick="TGDialogS(\'weixin\');PTTSendClick(\'link\',\'Community_wxgzh\',\'Î¢ĞÅ¹«ÖÚºÅ\');">Î¢ĞÅ¹«ÖÚºÅ</a>';
-		headerHTML += '            <a href="javascript:void(0)" title="ÊÖQ¶©ÔÄºÅ" onclick="TGDialogS(\'qq\');PTTSendClick(\'link\',\'Community_qqdyh\',\'ÊÖQ¶©ÔÄºÅ\');">ÊÖQ¶©ÔÄºÅ</a>';
-		headerHTML += '          </li>';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '             <a href="https://game.qq.com/act/a20210705protect/index.html" target="_blank" title="ÌÚÑ¶ÓÎÏ··À³ÁÃÔ" onclick="PTTSendClick(\'link\',\'player_addict\',\'ÌÚÑ¶ÓÎÏ··À³ÁÃÔ\');">ÌÚÑ¶ÓÎÏ··À³ÁÃÔ</a>';
-		headerHTML += '             <a href="https://jiazhang.qq.com/jz/home.html" target="_blank" title="³É³¤ÊØ»¤Æ½Ì¨" onclick="PTTSendClick(\'link\',\'player_watch\',\'³É³¤ÊØ»¤Æ½Ì¨\');"><i class="icon-guard"></i>³É³¤ÊØ»¤Æ½Ì¨</a>';
-		headerHTML += '             <a href="/cp/a20190909talk/index.html" target="_blank" title="¶Ô¾Ö»·¾³Çé±¨Õ¾" onclick="PTTSendClick(\'link\',\'player_drj\',\'¶Ô¾Ö»·¾³Çé±¨Õ¾\');">¶Ô¾Ö»·¾³Çé±¨Õ¾</a>';
-		headerHTML += '             <a href="javascript:void(0)" title="¿Í·ş×¨Çø" onclick="TGDialogS(\'kefu\');PTTSendClick(\'link\',\'player_kf\',\'¿Í·ş×¨Çø\');">¿Í·ş×¨Çø</a>';
-		headerHTML += '             <a href="/webplat/info/news_version3/15592/24091/24092/24095/m15241/201508/370256.shtml" title="Àñ°ü¶Ò»»" onclick="PTTSendClick(\'link\',\'player_feedback\',\'Àñ°ü¶Ò»»\');" target="_blank">Àñ°ü¶Ò»»</a>';
-		headerHTML += '             <a href="https://tool.helper.qq.com/v3/wzry/official_website/index.html" title="×ÔÖú·şÎñ" onclick="PTTSendClick(\'link\',\'player_service\',\'×ÔÖú·şÎñ\');" target="_blank">×ÔÖú·şÎñ</a>';
-		headerHTML += '          </li>';
-		headerHTML += '          <li class="down-nav">';
-		headerHTML += '             <a href="https://world.qq.com/?ADTAG=pvp.nav.hokpc" target="_blank" title="ÊÀ½ç" onclick="PTTSendClick(\'link\',\'shijie\',\'ÊÀ½ç\');"><i class="icon-fans"></i>ÍõÕßÈÙÒ«¡¤ÊÀ½ç</a>';
-		headerHTML += '             <a href="https://poxiao.qq.com/?ADTAG=pvp.nav.hokpc" target="_blank" title="ÆÆÏş" onclick="PTTSendClick(\'link\',\'poxiao\',\'ÆÆÏş\');"><i class="icon-fans"></i>ÍõÕßÈÙÒ« ĞÇÖ®ÆÆÏş</a>';
-		headerHTML += '             <a href="https://pvp.qq.com/web201605/newsDetail.shtml?G_Biz=18&tid=488378" target="_blank" title="Æô³Ì" onclick="PTTSendClick(\'link\',\'qicheng\',\'Æô³Ì\');"><i class="icon-fans"></i>´úºÅ:Æô³Ì</a>';
-		headerHTML += '             <a href="https://wxq.qq.com/?ADTAG=pvp.qqpc" target="_blank" title="ÍõÕßÍòÏóÆå" onclick="PTTSendClick(\'link\',\'wxq\',\'ÍõÕßÍòÏóÆå\');"><i class="icon-fans"></i>ÍõÕßÍòÏóÆå</a>';
-		headerHTML += '          </li>';
-		headerHTML += '        </ul>';
-		headerHTML += '      </div>';
-		headerHTML += '      </div>';
-		headerHTML += loginSub;
-		headerHTML += '</div>';
-		headerHTML += '<div class="header-dialog">';
-		headerHTML += '  <div class="pop pr tganime-fadein on" style="display:none;" id="login_select">';
-		headerHTML += '    <a href="javascript:showDialog.hide()" class="close pa db ht">¹Ø±Õ</a>';
-		headerHTML += '    <a href="javascript:void(0)" id="wxlogin" class="wx-login pa db ht">Î¢ĞÅÓÃ»§µÇÂ¼</a>';
-		headerHTML += '    <a href="javascript:void(0)" id="qqlogin" class="qq-login pa db ht">QQÓÃ»§µÇÂ¼</a>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="pop3 pr" style="display:none;" id="area_select">';
-		headerHTML += '    <a href="javascript:showDialog.hide()" class="close pa db ht">¹Ø±Õ</a>';
-		headerHTML += '    <div class="se-input">';
-		headerHTML += '      <select name="channelContentId" id="channelContentId"><option selected>Ñ¡ÔñÇşµÀ</option></select>';
-		headerHTML += '      <select name="areaContentId" id="areaContentId"><option selected>Ñ¡Ôñ´óÇø</option></select>';
-		headerHTML += '      <select name="roleContentId" id="roleContentId"><option selected>Ñ¡Ôñ½ÇÉ«</option></select>';
-		headerHTML += '    	 <div class="se-checkbox">';
-		headerHTML += '    		 <input type="checkbox" id="se-checkbox"><label for="se-checkbox" id="se-checkbox-txt">ÎÒÍ¬ÒâÊÚÈ¨¡°±¾Ò³Ãæ»ñÈ¡²¢´æ´¢ÎÒµÄÓÎÏ·Çø·şºÍ½ÇÉ«Ïà¹ØĞÅÏ¢ÓÃÓÚÕı³£µÄ³é½±¡¢ÁìÈ¡¡¢·¢»õ¡¢Ç©µ½µÈ²Ù×÷¡±</label>';
-		headerHTML += '    	 </div>';
-		headerHTML += '    </div>';
-		headerHTML += '    <div class="se-btn clearfix">';
-		headerHTML += '      <a id="RoleSelectBtn" href="javascript:;" class="fl ht">È·¶¨</a>';
-		headerHTML += '      <a href="javascript:showDialog.hide()" class="fl ht">È¡Ïû</a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="zhushou pr" id="zhushou" style="display:none">';
-		headerHTML += '    <div class="dia-zhushou pr">';
-		headerHTML += '       <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="weixin pr" id="weixin" style="display:none">';
-		headerHTML += '    <div class="dia-weixin pr">';
-		headerHTML += '       <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="story pr" id="story" style="display:none">';
-		headerHTML += '    <div class="dia-story">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="skin pr" id="skin" style="display:none">';
-		headerHTML += '    <div class="dia-skin">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="version pr" id="version" style="display:none">';
-		headerHTML += '    <div class="dia-version">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '   <div class="weiquan pr" id="weiquan" style="display:none">';
-		headerHTML += '    <div class="dia-weiquan">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="hero_pop pr" id="hero_pop" style="display:none">';
-		headerHTML += '    <div class="dia-hero-pop">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="kefu pr" id="kefu" style="display:none">';
-		headerHTML += '    <div class="dia-kefu">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '      <p>Î¢ĞÅÉ¨Ò»É¨£¬ÁªÏµ¿Í·ş</p>';
-		headerHTML += '    </div> ';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="qq pr" id="qq" style="display:none">';
-		headerHTML += '    <div class="dia-qq">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="wgc pr" id="wgc" style="display:none">';
-		headerHTML += '    <div class="dia-wgc">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="qgc pr" id="qgc" style="display:none">';
-		headerHTML += '    <div class="dia-qgc">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="applets pr" id="applets" style="display:none">';
-		headerHTML += '    <div class="dia-applets">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '  <div class="applets2 pr" id="applets2" style="display:none">';
-		headerHTML += '    <div class="dia-applets2">';
-		headerHTML += '      <a class="dia-close" href="javascript:showDialog.hide()" title="¹Ø±Õ"></a>';
-		headerHTML += '    </div>';
-		headerHTML += '  </div>';
-		headerHTML += '</div>';
-		$("#header").remove(); // if include header.inc, remove div#header
-		$("body").prepend(headerHTML);
-		$header = $("#header");
-	};
+    onPageResize();
+    window.addEventListener('resize', onPageResize);
+  }
 
-	util.headerFunc = function () {
-		if (isOldHeader) {
-			util.headerFreeHeroPeriod();
-			util.headerFreeHeroInit();
-			util.setKVLink();
-		}
-	};
+  /**
+   * æ”¹å˜èœå•æ–‡å­—é¢œè‰²
+   * @param color ä¸€çº§èœå•çš„é¢œè‰²ï¼ˆå¸¦#å·çš„é¢œè‰²å­—ç¬¦ä¸²ï¼‰
+   */
+  var changeFontColor = function (color) {
+    menuColor = color;
+    var menuList = document.getElementsByClassName('menu1-word-contianer-2023');
+    for(var i = 0; i < menuList.length; i++) {
+      menuList[i].style.color = menuColor;
+    }
 
-	util.headerFreeHeroInit = function () {
-		sUrl = '//game.gtimg.cn/images/yxzj/img201606/heroimg/';
-		$("#FreeHeros-Cont").on("mouseenter", "li", function () {
-			var _self = $(this),
-				_selfImg = _self.find("img"),
-				hid = _selfImg.data("id");
-			// console.log(hid);
-			// _selfImg.attr('src', sUrl + hid + '/' + hid + '-freehover.png');
-			_self.siblings("li").find("img").each(function (i) {
-				hhid = $(this).data("id");
-				// console.log(hhid);
-				// $(this).attr("src", sUrl + hhid + '/' + hhid + '.jpg');
-			});
-			_self.addClass("active").siblings("li").removeClass("active");
+    if(typeof pvpLogin2023 === 'object') {
+      pvpLogin2023.changeFontColor(menuColor);
+    }
+  };
 
-		});
-		$.ajax({
-			url: '//pvp.qq.com/web201605/js/herolist.json',
-			dataType: 'json',
-			success: function (data) {
-				// console.log(data);
-				var freeHeroData = [],
-					freeHeroHtml = "";
-				for (var i = 0; i < data.length; i++) {
-					var payarr = [],
-						payarr = ('' + data[i].pay_type).split(',');
-					if (payarr == 10 || payarr[0] == 10 || payarr[1] == 10) {
-						freeHeroData.push(data[i]);
-					}
-				}
-				// console.log(freeHeroData);
-				for (var i = 0; i < freeHeroData.length; i++) {
-					var hid = freeHeroData[i].ename;
-					freeHeroHtml += '<li>';
-					freeHeroHtml += '	<a href="//pvp.qq.com/web201605/herodetail/' + hid + '.shtml" target="_blank" onclick="PTTSendClick(\'header\',\'freeHero-' + i + '\',\'ÖÜÃâÓ¢ĞÛ\');">';
-					freeHeroHtml += '		<img class="small" data-id="' + hid + '" src="' + sUrl + '' + hid + '/' + hid + '.jpg" width="69" height="69">';
-					freeHeroHtml += '		<img class="large" data-id="' + hid + '" src="' + sUrl + '' + hid + '/' + hid + '-freehover.png" width="224" height="69">';
-					freeHeroHtml += '	</a>';
-					freeHeroHtml += '</li>';
-				}
-				// console.log(freeHeroHtml);
-				$("#FreeHeros-Cont").html(freeHeroHtml);
-				$("#FreeHeros-Cont li").eq(0).trigger("mouseenter");
-			},
-			error: function (xhr, type) {
-				console.log("get herolist.json error!")
-			}
-		});
-	};
+  /**
+   * æ˜¾ç¤ºç™»å½•æ¨¡å—
+   */
+  var showLogin = function () {
+    jsLoader('https://game.gtimg.cn/images/js/pvpcommon/pc/login.js', function () {
+      pvpLogin2023.show(document.getElementById('login-2023'), function(canUseLogin) {
+        pvpLogin2023.changeFontColor(menuColor);
 
-	util.headerFreeHeroPeriod = function () {
-		/* Ó¢ĞÛÏŞ·ÑÊ±¼äÌî³ä£¬Ò»°ãÎªÖÜ1-ÖÜÈÕ */
-		// »ñÈ¡µ±Ç°·şÎñÆ÷Ê±¼ä
-		function getServerTime(callback) {
-			$.getScript('//apps.game.qq.com/CommArticle/app/reg/gdate.php?t=' + new Date().getTime(), function () {
-				var serverDate = json_curdate,
-					date = new Date(serverDate.replace(/-/g, "/"));
-				callback && callback(date);
-			});
-		}
-		function getDateStr(date, offset) {
-			var dateSet = date || new Date(),
-				offset = offset || 0;
-			var h = new Date();
-			h.setDate(dateSet.getDate() + offset);
-			var set = [];
-			set.push(h.getFullYear());
-			set.push(h.getMonth() + 1);
-			set.push(h.getDate());
-			// return set[0] + '-' + set[1] + '-' + set[2];
-			return set[1] + 'ÔÂ' + set[2] + 'ÈÕ';
-		}
-		var freeHeroDayFill = function (d) {
-			var d = d || new Date();
-			var day = d.getDay();
-			var d1, d2;
-			switch (day) {
-				case 0: //ÈÕ
-					d1 = getDateStr(d, +1);
-					d2 = getDateStr(d, +7);
-					break;
-				case 1: //Ò»
-					d1 = getDateStr(d, 0);
-					d2 = getDateStr(d, +6);
-					break;
-				case 2: //¶ş
-					d1 = getDateStr(d, -1);
-					d2 = getDateStr(d, +5);
-					break;
-				case 3: //Èı
-					d1 = getDateStr(d, -2);
-					d2 = getDateStr(d, +4);
-					break;
-				case 4: //ËÄ
-					d1 = getDateStr(d, -3);
-					d2 = getDateStr(d, +3);
-					break;
-				case 5: //Îå
-					d1 = getDateStr(d, -4);
-					d2 = getDateStr(d, +2);
-					break;
-				case 6: //Áù
-					d1 = getDateStr(d, -5);
-					d2 = getDateStr(d, +1);
-					break;
-			}
-			if (d1 && d2) { $("#freeHerosPeriod").html(d1 + "-" + d2) }
-		}
-		// ÄÃµ±Ç°·şÎñÆ÷Ê±¼ä¼ÆËãµÃ³ö±¾ÖÜ1 - ÏÂÖÜÈÕ
-		getServerTime(freeHeroDayFill);
-	};
+        // å¦‚æœæ˜¯æ—§ milo åˆ™ä¸æ”¯æŒç™»å½•
+        if(canUseLogin) {
+          pvpLogin2023.getLoginState(function(data){
+            if(data.isLogin) {
+              document.getElementById('download-button-2023').style.right = '230px';
+            }
+          });
+        } else {
+          pvpLogin2023.hide();
+          console.warn('æ—§ç‰ˆ milo ä¸æ”¯æŒæ–°ç‰ˆç™»å½•');
+        }
+      });
+    });
+  };
 
-	util.setKV = function () {
-		var $wrapper = $(".wrapper");
-		if (!$wrapper[0]) { return }
-		$.getScript("//game.qq.com/time/qqadv/Info_new_15191.js", function () {
-			var kvPos = "pos16040";
-			if (!oDaTaNew15191 || !oDaTaNew15191[kvPos]) return
-			var kvImg = "//game.gtimg.cn/upload/adw/" + oDaTaNew15191[kvPos][2],
-				kvLink = oDaTaNew15191[kvPos][1];
-			$(".wrapper").css("background-image", 'url(' + kvImg + ')');
-			$("#kvLink").attr("url", kvLink);
-			// console.log($(".wrapper").css("background-image"))
-		})
-	};
+  // æ˜¾ç¤º Header
+  var show = function () {
+    createCSS();
+    createHTML();
 
-	util.setKVLink = function () {
-		function setLink() {
-			var link = $(".kv-bg .kv_link").attr("href");
-			if (link) {
-				$("#header .kv-link").attr("href", link)
-			} else {
-				$("#header .kv-link").hide();
-			}
-		}
-		$.getScript("//pvp.qq.com/webplat/info/news_version3/15592/29030/29082/38446/m11738/index.js", function () {
-			$(".wrapper").css("background-image", 'url(' + newsIndexData[0].sInfoImageAddr + ')');
-		})
-		setTimeout(setLink, 500);
-	};
+    var div = document.createElement('div');
+    div.setAttribute('class', 'header-container-2023');
+    div.setAttribute('id', 'header-2023');
+    div.innerHTML = data.headerHTML;
+    var firstChild = document.body.firstChild;
+    document.body.insertBefore(div, firstChild);
 
+    // if(!isIndex()) {
+    //   var list = document.querySelectorAll('.menu1-2023');
+    //   for(var i = 0; i < list.length; i++) {
+    //     list[i].style.width = '150px';
+    //   }
+    // }
 
-	init = function () {
-		function n() {
-			util.addHeaderHTML();
-			util.headerFunc();
+    showLogin();
+  };
 
-			//ÔØÈëPC¹ÙÍøSEOÍ³¼Æ×é¼ş
-			fn.jsLoader("//game.gtimg.cn/images/yxzj/web201706/js/pvppc.js");
+  // å±å¹•å°ºå¯¸å‘ç”Ÿå˜åŒ–
+  var onPageResize = function () {
+    // console.log("onPageResize");
+    // Headerè‡ªé€‚åº”ç­–ç•¥ï¼šlogoè´´ç€å·¦ä¸Šè§’ï¼Œç™»å½•è´´ç€å³ä¸Šè§’ï¼Œä¸€çº§èœå•å±…ä¸­
+    var view = getViewSize();
+    var showScale = view.scaleX;
+    // console.log('view=', view);
+    if(isIndex()) {
+      document.getElementById('header-2023').style.transform = 'scale(' + showScale * uiScale() + ', ' + showScale * uiScale() + ')';
+      document.getElementById('header-2023').style.left = Math.max(0, view.x) + 'px';
+      document.getElementById('menu-container-2023').style.left = (data.desighWidth - 1190) / 2 + 'px';// èœå•å±…ä¸­
+    } else {
+      // å¤´éƒ¨
+      var viewWidth = Math.max(1600, data.viewWidth);// å®½åº¦æœ€å°é™åˆ¶ä¸º1600
+      // showScale = viewWidth / 1600;
+      // console.log('uiScale=', uiScale())
+      document.getElementById('header-2023').style.width = viewWidth + 'px';
 
-			// util.addFooterHTML();
-			// util.footerFunc();
-			// util.setKV();
-		}
-		function nJS() {
-			fn.jsLoader("//pvp.qq.com/web201605/js/logic.js", function () {
-				n()
-			})
-		}
-		var libFile = (window.milo) ? "" : "//game.gtimg.cn/images/js/milo/milo.js"
-		libFile ? fn.jsLoader(libFile, nJS()) : nJS();
-	};
+      var bannerScale = Math.max(1600, data.viewWidth) / 1920;
+      var bannerImage = document.getElementById('banner-image-2023');
+      if(bannerImage) {
+        bannerImage.style.width = 1920 * bannerScale + 'px';
+        bannerImage.style.height = 360 * bannerScale + 'px';
+      }
+      var detailButton = document.getElementById('detail-button-2023');
+      if(detailButton) {
+        detailButton.style.width = 236 * bannerScale + 'px';
+        detailButton.style.height = 60 * bannerScale + 'px'
+        detailButton.style.left = 150 * bannerScale + 'px';
+        detailButton.style.top = 340 * bannerScale + 'px';
+      }
 
-	return {
-		init: init
-	}
-})()
-pvpHeader.init();
+      // èœå•å±…ä¸­
+      document.getElementById('menu-container-2023').style.left = (viewWidth - 1070) / 2 + 'px';
+
+      // IP
+      document.getElementById('ip-drawer-bg-2023').style.width = 1920 * view.scaleX * uiScale() + 'px';
+      document.getElementById('ip-drawer-bg-2023').style.height = 236 + 'px';
+    }
+
+  };
+
+  // æ„å»ºCSS
+  var createCSS = function () {
+    var css = '';
+    // å®¹å™¨
+    var containerPosition = isIndex() ? 'position: absolute; top: 0;' : 'position: relative;';
+    css += '.header-container-2023 {' + containerPosition + ' width: 1920px; min-height: 80px; padding-top: 80px; box-sizing: border-box; transform-origin: 0% 0%; z-index: 10;}';
+
+    // logo
+    css += '.logo-container-2023 {position: absolute; left: 35px; top: 15px; cursor: pointer;}';
+
+    // ç™»å½•
+    css += '.login-container-2023 {position: absolute; right: 20px; top: 22px;}';
+
+    // ä¸‹è½½æ¸¸æˆ
+    css += '.download-button-2023 {position: absolute; display: none; right: 170px; top: 20px; cursor: pointer; user-select: none;}';
+    css += '.download-word-2023 {position: absolute; width: 124px; height: 38px; left: 0px; top: -1px; line-height: 38px; font-size: 16px; font-weight: bold; color: #30210d; text-align: center;}';
+
+    // æ˜¾ç¤ºæ›´å¤šIP
+    css += '.show-more-ip-2023 {position: absolute; left: 200px; top: 16px; transform: scale(0.8, 0.8)}';
+    css += '.ip-drawer-2023 {position: absolute; top: -236px; z-index: 20; width: 1920px; height: 236px; transform-origin: 0% 0%; }';
+
+    // èœå•
+    css += '.menu-container-2023 {position: absolute; top: 0; width: 1190px; user-select: none; display: flex;}';
+    css += 'ul,li {list-style: none; padding: 0; margin: 0;}';
+    // css += 'li {padding-top: 0px; padding-bottom: 20px;}';
+    css += '.li-2023 {padding-top: 0px; padding-bottom: 20px;}';
+
+    // ä¸€çº§èœå•
+    css += isIndex() ? '.menu1-2023 {width: 170px; text-align: center; padding-top: 18px;}' : '.menu1-2023 {width: 150px; text-align: center; padding-top: 18px;}';
+    css += '.menu1-word-contianer-2023 {color: #FFFFFF;}';
+    css += '.menu1-big-word-2023 {font-size: 16px;}';
+    css += '.menu1-big-word-link-2023 {font-size: 16px; cursor: pointer;}';
+    css += '.menu1-small-word-2023 {font-size: 12px; opacity: 0.35;}';
+    css += '.menu1-2023 .menu2-bg-2023 {display: none;}';
+    css += '.menu1-2023:hover .menu2-bg-2023 {display: block; transition-duration: 0.3s; transition-timing-function: ease; transition-delay: 0s;}';
+
+    // äºŒçº§èœå•
+    css += '.menu2-bg-2023 {width: 150px; background-color: rgba(11, 11, 11, 0.5); margin-top: 20px; color: #FFFFFF; z-index: 15;}';
+    css += isIndex() ? '.menu2-bg-2023 {margin-left: 10px;} ' : '.menu2-bg-2023 {margin-left: 0px;} ';
+    css += '.menu2-triangle-tip-2023 {position: relative; top: -16px; opacity: 1;}';
+    css += '.menu2-2023 {font-size: 13px; opacity: 0.7; cursor: pointer; text-align: left; position: relative; left: 28px;}';
+    css += '.menu2-2023:hover {color: #FFA500; opacity: 1;}';
+    css += '.menu2-word-2023-1 {padding-left: 20px;}';
+    css += '.menu2-word-2023-2 {padding-left: 20px;}';
+    css += '.menu2-word-2023-3 {padding-left: 20px;}';
+    css += '.menu2-word-2023-4 {padding-left: 5px;}';
+    css += '.menu2-word-2023-5 {padding-left: 3px;}';
+    css += '.menu2-word-2023-6 {padding-left: 10px;}';
+
+    // äºŒçº§èœå•ç‰¹æ®Šæ ‡å¿—
+    css += '.menu2-new-2023 {font-size: 13px; opacity: 0.7; cursor: pointer; text-align: left; position: relative; background-image: url("https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/new.png"); background-repeat: no-repeat; background-position: 0px 0px;}';
+    css += '.menu2-new-2023-position-2 {left: 18px; padding-left: 10px;}';
+    css += '.menu2-new-2023-position-3 {left: 18px; padding-left: 10px;}';
+    css += '.menu2-new-2023-position-4 {left: 8px; padding-left: 20px;}';
+    css += '.menu2-new-2023-position-5 {left: 8px; padding-left: 20px;}';
+    css += '.menu2-new-2023-position-6 {left: 8px; padding-left: 15px;}';
+    css += '.menu2-new-2023:hover {color: #FFA500; opacity: 1;}';
+    css += '.menu2-hot-2023 {font-size: 13px; opacity: 0.7; cursor: pointer; text-align: left; position: relative; background-image: url("https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/hot.png"); background-repeat: no-repeat; background-position: 0px 0px;}';
+    css += '.menu2-hot-2023:hover {color: #FFA500; opacity: 1;}';
+
+    // å®¢æœäºŒç»´ç å¼¹çª—
+    css += '.service-container-2023 {position: absolute; display: block; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 25;}';
+    css += '.service-qrcode-2023 {position: absolute; width: 368px; height: 358px; left: 50%; top: 300px; transform: translateX(-50%);}'
+    css += '.service-close-button-2023 {position: absolute; width: 45px; height: 45px; top: 10px; right: 10px; cursor: pointer;}';
+    css += '.service-word-2023 {position: absolute; bottom: 50px; width: 368px; text-align: center; font-size: 18px; color: #b7bde1}'
+
+    // å†…é¡µCSS
+    if(!isIndex()) {
+      css += '.header-container-2023 {background-color: #191919;}';// åŠ ä¸Šåº•æ¡†
+      css += '.banner-image-2023 {display: block; width: 1920px; height: 360px;}';
+      css += '.detail-button-2023 {position: absolute; left: 150px; top: 340px; cursor: pointer;}';
+    }
+
+    if(document.all) {
+      document.createStyleSheet().cssText = css
+    } else {
+      var headerCSS = document.createElement('style');
+      headerCSS.innerHTML = css;
+      document.head.appendChild(headerCSS);
+    }
+  };
+
+  // æ„å»ºèœå•HTML
+  var createHTML = function () {
+    data.headerHTML = '';
+
+    var html = '';
+
+    // å†…é¡µéœ€è¦æ˜¾ç¤ºèƒŒæ™¯å›¾
+    if(needBG()) {
+      html += '<img id="banner-image-2023" class="banner-image-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/bannerImage.jpg">';
+      html += '<img id="detail-button-2023" class="detail-button-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/detailButton.png" onclick="window.open(\'https://pvp.qq.com/cp/a20170829bbgxsm/index.html\', \'_blank\'); PTTSendClick(\'link\',\'home\',\'é¦–é¡µ\');">';
+    }
+
+    // logo
+    html += '<div id="logo-2023" class="logo-container-2023" onclick="onShowIPDrawer(true)">'; // onmouseenter
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/logo.png">';
+    html += '    <div class="show-more-ip-2023">';
+    html += '        <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/moreIPButton.png">';
+    html += '    </div>';
+    html += '</div>';//logo ç»“æŸ
+
+    // ç™»å½•
+    html += '<div id="login-2023" class="login-container-2023">';
+    html += '</div>';//ç™»å½• ç»“æŸ
+
+    // ä¸‹è½½æŒ‰é’®
+    html += '<div id="download-button-2023" class="download-button-2023">';
+    html += '<img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/downloadButtonBG.png">';
+    html += '<div class="download-word-2023">ä¸‹è½½æ¸¸æˆ</div>'
+    html += '</div>';//ä¸‹è½½æŒ‰é’® ç»“æŸ
+
+    // èœå•å®¹å™¨å¼€å§‹
+    html += '<div id="menu-container-2023" class="menu-container-2023">';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-link-2023" onclick="onOpenMain()">é¦–é¡µ</div>';
+    html += '        <div class="menu1-small-word-2023">HOME</div>';
+    html += '    </div>';
+    html += '</li>';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-2023">æ¸¸æˆèµ„æ–™</div>';
+    html += '        <div class="menu1-small-word-2023">DATA</div>';
+    html += '    </div>';
+    html += '    <div class="menu2-bg-2023">';
+    html += '        <img class="menu2-triangle-tip-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/menuTriangle.png">';
+    html += '        <ul>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/a20170829bbgxsm/index.html\', \'_blank\'); PTTSendClick(\'link\',\'version\',\'ç‰ˆæœ¬ä¸“åŒº\');"><span class="menu2-word-2023-1">ç‰ˆæœ¬ä¸“åŒº</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/web201605/herolist.shtml\', \'_blank\'); PTTSendClick(\'link\',\'hero\',\'è‹±é›„èµ„æ–™\');"><span class="menu2-word-2023-1">è‹±é›„èµ„æ–™</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/coming/v2/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'blz\',\'çˆ†æ–™ç«™\');"><span class="menu2-word-2023-1">çˆ†æ–™ç«™</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/web201605/wallpaper.shtml\', \'_blank\'); PTTSendClick(\'link\',\'wallpaper\',\'æ¸¸æˆå£çº¸\');"><span class="menu2-word-2023-1">æ¸¸æˆå£çº¸</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/ip/index.html\', \'_blank\'); PTTSendClick(\'link\',\'worldview\',\'ä¸–ç•Œè§‚ç«™\');"><span class="menu2-word-2023-1">ä¸–ç•Œè§‚ç«™</span></li>';
+    html += '        </ul>';
+    html += '    </div>';
+    html += '</li>';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-2023">å†…å®¹ä¸­å¿ƒ</div>';
+    html += '        <div class="menu1-small-word-2023">CONTENTS</div>';
+    html += '    </div>';
+    html += '    <div class="menu2-bg-2023">';
+    html += '        <img class="menu2-triangle-tip-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/menuTriangle.png">';
+    html += '        <ul>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/raiders/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'strategy_center\',\'æ”»ç•¥ä¸­å¿ƒ\');"><span class="menu2-word-2023-2">æ”»ç•¥ä¸­å¿ƒ</span></li>';
+    html += '            <li class="menu2-new-2023 li-2023 menu2-new-2023-position-2" onclick="window.open(\'https://yingdi.qq.com/creation/\', \'_blank\'); PTTSendClick(\'link\',\'creation\',\'å†…å®¹å…±åˆ›å¹³å°\');"><span class="menu2-word-2023-2">å†…å®¹å…±åˆ›å¹³å°</span></li>';
+    html += '        </ul>';
+    html += '    </div>';
+    html += '</li>';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-2023">èµ›äº‹ä¸­å¿ƒ</div>';
+    html += '        <div class="menu1-small-word-2023">MATCH</div>';
+    html += '    </div>';
+    html += '    <div class="menu2-bg-2023">';
+    html += '        <img class="menu2-triangle-tip-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/menuTriangle.png">';
+    html += '        <ul>';
+    html += '            <li class="menu2-hot-2023 menu2-2023 li-2023 menu2-new-2023-position-3" onclick="window.open(\'https://kpl.qq.com/\', \'_blank\'); PTTSendClick(\'link\',\'match_KPL\',\'KPL\');"><span class="menu2-word-2023-3">KPL</span></li>';
+    // html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/kic2023/index.html\', \'_blank\'); PTTSendClick(\'link\',\'match_worldcup\',\'ç‹è€…ä¸–å† KIC\');"><span class="menu2-word-2023-3">ç‹è€…ä¸–å† KIC</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/match/kgl/index.html\', \'_blank\'); PTTSendClick(\'link\',\'match_Kjia\',\'Kç”²è”èµ›\');"><span class="menu2-word-2023-3">Kç”²</span></li>';
+    html += '            <li class="menu2-hot-2023 menu2-2023 li-2023 menu2-new-2023-position-3" onclick="window.open(\'https://pvp.qq.com/match/kcc2024/index.html\', \'_blank\'); PTTSendClick(\'link\',\'match_KCC\',\'KCC\');"><span class="menu2-word-2023-3">æŒ‘æˆ˜è€…æ¯</span></li>';
+    // html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/match/WCC/KCC2023S1/index.html\', \'_blank\'); PTTSendClick(\'link\',\'match_kcc\',\'æŒ‘æˆ˜è€…æ¯\');"><span class="menu2-word-2023-3">æŒ‘æˆ˜è€…æ¯</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/a20220328qgds/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'match_city\',\'å…¨å›½å¤§èµ›\');"><span class="menu2-word-2023-3">å…¨å›½å¤§èµ›</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/a20220315open/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'match_gaoxiao\',\'ç‹è€…é«˜æ ¡è”èµ›\');"><span class="menu2-word-2023-3">é«˜æ ¡è”èµ›</span></li>';
+    html += '            <li class="menu2-new-2023 menu2-2023 li-2023 menu2-new-2023-position-3" onclick="window.open(\'https://pvp.qq.com/saibao/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'match_saibao\',\'saibao\');"><span class="menu2-word-2023-3">èµ›äº‹æˆæƒ</span></li>';
+    html += '            <li class="menu2-new-2023 menu2-2023 li-2023 menu2-new-2023-position-3" onclick="window.open(\'https://pvp.qq.com/cp/a20240508sssq/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'match_hezuo\',\'hezuo\');"><span class="menu2-word-2023-3">æˆæƒåˆä½œèµ›</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/matchdata/index.html\', \'_blank\'); PTTSendClick(\'link\',\'match_datamore\',\'èµ›äº‹æ•°æ®\');"><span class="menu2-word-2023-3">èµ›äº‹æ•°æ®</span></li>';
+    html += '        </ul>';
+    html += '    </div>';
+    html += '</li>';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-2023">ç‹è€…æ–‡åŒ–</div>';
+    html += '        <div class="menu1-small-word-2023">CULTURE</div>';
+    html += '    </div>';
+    html += '    <div class="menu2-bg-2023">';
+    html += '        <img class="menu2-triangle-tip-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/menuTriangle.png">';
+    html += '        <ul>';
+    // html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/history\', \'_blank\'); PTTSendClick(\'link\',\'history\',\'ç‹è€…æ–‡åŒ–ç«™\');"><span class="menu2-word-2023-4">ç‹è€…æ–‡åŒ–ç«™</span></li>';
+    // html += '            <li class="menu2-new-2023 li-2023 menu2-new-2023-position-4" onclick="window.open(\'https://pvp.qq.com/cp/a20210427ipgzzt/\', \'_blank\'); PTTSendClick(\'link\',\'ip\',\'IPå…±åˆ›è®¡åˆ’\');"><span class="menu2-word-2023-4">IPå…±åˆ›è®¡åˆ’</span></li>';
+    // html += '            <li class="menu2-new-2023 menu2-2023 li-2023 menu2-new-2023-position-4" onclick="window.open(\'https://wangzhe.recogame.com/wangzhe.html\', \'_blank\'); PTTSendClick(\'link\',\'wangka\',\'é¾™ç¿¼ç‹è€…å¡\');"><span class="menu2-word-2023-4">é¾™ç¿¼ç‹è€…å¡</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/hdy/createwebsite/index.html\', \'_blank\'); PTTSendClick(\'link\',\'creative_community\',\'å…±åˆ›ç ”å‘é™ˆåˆ—é¦†\');"><span class="menu2-word-2023-4">å…±åˆ›ç ”å‘é™ˆåˆ—é¦†</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://value.qq.com/\', \'_blank\'); PTTSendClick(\'link\',\'day_up\',\'å¤©å¤©å‘ä¸Š\');"><span class="menu2-word-2023-4">ç‹è€…è£è€€å¤©å¤©å‘ä¸Š</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/a20250612wzzgw/\', \'_blank\'); PTTSendClick(\'link\',\'movie\',\'IPå‰§é›†è§‚å½±ç«™\');"><span class="menu2-word-2023-4">IPå‰§é›†è§‚å½±ç«™</span></li>';
+    html += '        </ul>';
+    html += '    </div>';
+    html += '</li>';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-2023">ç©å®¶æ”¯æŒ</div>';
+    html += '        <div class="menu1-small-word-2023">PLAYER</div>';
+    html += '    </div>';
+    html += '    <div class="menu2-bg-2023">';
+    html += '        <img class="menu2-triangle-tip-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/menuTriangle.png">';
+    html += '        <ul>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/a20161115tyf/index.shtml\', \'_blank\'); PTTSendClick(\'link\',\'player_tyf\',\'ä½“éªŒæœä¸“åŒº\');"><span class="menu2-word-2023-5">ä½“éªŒæœä¸“åŒº</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://game.qq.com/act/a20210705protect/index.html\', \'_blank\'); PTTSendClick(\'link\',\'player_addict\',\'è…¾è®¯æ¸¸æˆé˜²æ²‰è¿·\');"><span class="menu2-word-2023-5">è…¾è®¯æ¸¸æˆé˜²æ²‰è¿·</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://jiazhang.qq.com/index.html\', \'_blank\'); PTTSendClick(\'link\',\'player_watch\',\'æˆé•¿å®ˆæŠ¤å¹³å°\');"><span class="menu2-word-2023-5">æˆé•¿å®ˆæŠ¤å¹³å°</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/cp/a20190909talk/index.html\', \'_blank\'); PTTSendClick(\'link\',\'player_drj\',\'å¯¹å±€ç¯å¢ƒæƒ…æŠ¥ç«™\');"><span class="menu2-word-2023-5">å¯¹å±€ç¯å¢ƒæƒ…æŠ¥ç«™</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="onShowServicePopup(true); PTTSendClick(\'link\',\'player_kf\',\'å®¢æœä¸“åŒº\');"><span class="menu2-word-2023-5">å®¢æœä¸“åŒº</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://pvp.qq.com/web201706/newsdetail.shtml?tid=398886\', \'_blank\'); PTTSendClick(\'link\',\'player_feedback\',\'ç¤¼åŒ…å…‘æ¢\');"><span class="menu2-word-2023-5">ç¤¼åŒ…å…‘æ¢</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://tool.helper.qq.com/v3/wzry/official_website/index.html\', \'_blank\'); PTTSendClick(\'link\',\'player_service\',\'è‡ªåŠ©æœåŠ¡\');"><span class="menu2-word-2023-5">è‡ªåŠ©æœåŠ¡</span></li>';
+    html += '            <li class="menu2-2023 li-2023" onclick="window.open(\'https://igame.qq.com/tip/igame-web/privilege-web/\', \'_blank\'); PTTSendClick(\'link\',\'wifi\',\'å•†æˆ·ç‰¹æƒ\');"><span class="menu2-word-2023-5">å•†æˆ·ç‰¹æƒ</span></li>';
+    html += '            <li class="menu2-new-2023 menu2-2023 li-2023 menu2-new-2023-position-5" onclick="window.open(\'https://pvp.qq.com/cp/a20220914wza/\', \'_blank\'); PTTSendClick(\'link\',\'wza\',\'æ‰‹è¯­æ‰“æ³•å‚è€ƒ\');"><span class="menu2-word-2023-5">æ‰‹è¯­æ‰“æ³•å‚è€ƒ</span></li>';
+    html += '        </ul>';
+    html += '    </div>';
+    html += '</li>';
+
+    html += '<li class="menu1-2023 li-2023">';
+    html += '    <div class="menu1-word-contianer-2023">';
+    html += '        <div class="menu1-big-word-2023">IPæ–°æ¸¸</div>';
+    html += '        <div class="menu1-small-word-2023">NEW GAMES</div>';
+    html += '    </div>';
+    html += '    <div class="menu2-bg-2023">';
+    html += '        <img class="menu2-triangle-tip-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/menuTriangle.png">';
+    html += '        <ul>';
+    // html += '            <li class="menu2-new-2023 li-2023 menu2-new-2023-position-6" onclick="window.open(\'https://poxiao.qq.com/?ADTAG=pvp.nav.hokpc\', \'_blank\'); PTTSendClick(\'link\',\'poxiao\',\'ç ´æ™“\');"><span class="menu2-word-2023-6">ç‹è€…è£è€€Â·æ˜Ÿä¹‹ç ´æ™“</span></li>';
+    html += '            <li class="menu2-new-2023 li-2023 menu2-new-2023-position-6" onclick="window.open(\'https://world.qq.com/?ADTAG=pvp.nav.hokpc\', \'_blank\'); PTTSendClick(\'link\',\'shijie\',\'ä¸–ç•Œ\');"><span class="menu2-word-2023-6">ç‹è€…è£è€€Â·ä¸–ç•Œ</span></li>';
+    html += '            <li class="menu2-new-2023 li-2023 menu2-new-2023-position-6" onclick="window.open(\'https://wxq.qq.com/?adtag=pvppc\', \'_blank\'); PTTSendClick(\'link\',\'wxq\',\'ç‹è€…ä¸‡è±¡æ£‹\');"><span class="menu2-word-2023-6">ç‹è€…ä¸‡è±¡æ£‹</span></li>';
+    html += '        </ul>';
+    html += '    </div>';
+    html += '</li>';
+    html += '</div>';// èœå•å®¹å™¨ç»“æŸ
+
+    // IPå®¹å™¨
+    html += '<div id="ip-drawer-2023" class="ip-drawer-2023" onclick="onShowIPDrawer(false)" onmouseleave="onShowIPDrawer(false)">';
+    html += '    <img id="ip-drawer-bg-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/ipBG.png">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/ipTitle.png" style="position: absolute; left: 30px; top: 40px;">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/pvpIP.jpg" style="position: absolute; left: 170px; top: 35px; cursor: pointer;" onclick="goIp(\'pvp\')"  onmouseenter="onChangeIPSelectedTip(0)">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/worldIP.png" style="position: absolute; left: 470px; top: 35px; cursor: pointer;" onclick="goIp(\'ngr\')"  onmouseenter="onChangeIPSelectedTip(1)">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/wxqIP.png" style="position: absolute; left: 770px; top: 35px; cursor: pointer;" onclick="goIp(\'wxq\')"  onmouseenter="onChangeIPSelectedTip(2)">';
+    // html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/poxiaoIP.png" style="position: absolute; left: 1070px; top: 35px; cursor: pointer;" onclick="window.open(\'https://poxiao.qq.com/?ADTAG=pvp.nav.hokpc\', \'_blank\')"  onmouseenter="onChangeIPSelectedTip(3)">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/innerBorder.png" style="position: absolute; left: 175px; top: 40px; pointer-events: none;">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/innerBorder.png" style="position: absolute; left: 475px; top: 40px; pointer-events: none;">';
+    html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/innerBorder.png" style="position: absolute; left: 775px; top: 40px; pointer-events: none;">';
+    // html += '    <img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/innerBorder.png" style="position: absolute; left: 1075px; top: 40px; pointer-events: none;">';
+    html += '    <img id="ip-selected-border" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/selectedBorder.png" style="position: absolute; left: 170px; top: 35px; pointer-events: none;">';
+    html += '</div>';// IPå®¹å™¨ç»“æŸ
+
+    data.headerHTML += html;
+  };
+
+  // æ˜¾ç¤ºå¤´éƒ¨IPæŠ½å±‰
+  onShowIPDrawer = function (show) {
+    if(show) {
+      document.getElementById('ip-drawer-2023').style.transform = 'translateY(236px)';
+      document.getElementById('ip-drawer-2023').style.transition = 'transform 0.3s ease-out';
+      onChangeIPSelectedTip(0);
+      PTTSendClick('pop', 'ipgame-pop', 'æŠ½å±‰IPä½æ›å…‰');
+    } else {
+      document.getElementById('ip-drawer-2023').style.transform = 'translateY(-236px)';
+      document.getElementById('ip-drawer-2023').style.transition = 'transform 0.5s ease-out';
+    }
+  };
+
+  goIp = function (ip) {
+    switch (ip) {
+      case 'ngr':
+        window.PTTSendClick && window.PTTSendClick('btn', 'ipgame-ngr-click', 'ngrè·³è½¬ç‚¹å‡»');
+        window.open('https://world.qq.com/?ADTAG=pvp.nav.hokpc', '_blank');
+        break;
+      
+      case 'wxq':
+        window.PTTSendClick && window.PTTSendClick('btn', 'ipgame-wxq-click', 'wxqè·³è½¬ç‚¹å‡»');
+        window.open('https://wxq.qq.com/?adtag=pvppc', '_blank');
+        break;
+    
+      default:
+        window.PTTSendClick && window.PTTSendClick('btn', 'ipgame-pvp-click', 'pvpè·³è½¬ç‚¹å‡»');
+        location.href = '/';
+        break;
+    }
+  };
+
+  // æ”¹å˜å¤´éƒ¨IPçš„é€‰ä¸­æ€
+  onChangeIPSelectedTip = function (index) {
+    switch(index) {
+      case 0:
+        document.getElementById('ip-selected-border').style.left = '170px';
+        break;
+
+      case 1:
+        document.getElementById('ip-selected-border').style.left = '470px';
+        break;
+
+      case 2:
+        document.getElementById('ip-selected-border').style.left = '770px';
+        break;
+
+      case 3:
+        document.getElementById('ip-selected-border').style.left = '1070px';
+        break;
+    }
+  };
+
+  var indexPathArr = ['/', '/index.html', '/index.shtml', '/web202311', '/web202311/index.html', '/gameaccount', '/web202311/gameaccount'];
+  // æ˜¯å¦éœ€è¦æ˜¾ç¤ºèƒŒæ™¯å›¾
+  var needBG = function () {
+    var pathArr = indexPathArr.concat(['/web201605/herodetail']);
+    return !checkPathInTarget(pathArr);
+    // return false; // æœ¬åœ°æµ‹è¯•
+  }
+
+  // æ˜¯å¦é¦–é¡µ
+  var isIndex = function() {
+    var isIndex = checkPathInTarget(indexPathArr);
+    return isIndex;
+    // return true; // æœ¬åœ°æµ‹è¯•
+  }
+
+  // æ£€æŸ¥é¡µé¢è·¯å¾„æ˜¯å¦åœ¨ç›®æ ‡æ•°ç»„é‡Œ
+  var checkPathInTarget = function(arr) {
+    // console.log('window.location.pathname=', window.location.pathname);
+    // console.log('checkPathInTarget=', arr);
+    var pathArr = window.location.pathname.split('/');
+    if(pathArr.length > 2) {
+      pathArr.pop();
+    }
+    var pathname = pathArr.join('/');
+    // console.log('pathname=', pathname);
+    if(arr.indexOf(pathname) !== -1)
+      return true;
+    return false;
+  }
+
+  /**
+   * æ˜¾ç¤ºä¸‹è½½æŒ‰é’®
+   * @param show æ˜¯å¦æ˜¾ç¤º
+   * @param clickCallback ç‚¹å‡»æ—¶çš„å›è°ƒ
+   */
+  showDownloadButton = function(show, clickCallback) {
+    document.getElementById('download-button-2023').style.display = 'block';
+    document.getElementById('download-button-2023').onclick = clickCallback;
+  }
+
+  // æ˜¾ç¤ºå®¢æœäºŒç»´ç å¼¹çª—
+  onShowServicePopup = function (show) {
+    if(show) {
+      var html = '';
+      html += '<div id="service-popup" class="service-container-2023">';
+      html += '<div class="service-qrcode-2023">'
+      html += '<img src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/servicePopup.png">';
+      html += '<img class="service-close-button-2023" src="https://game.gtimg.cn/images/yxzj/pvpcommonimage/header/serviceCloseButton.png" onclick="onShowServicePopup(false)">';
+      html += '<div class="service-word-2023">å¾®ä¿¡æ‰«ä¸€æ‰«ï¼Œè”ç³»å®¢æœ</div>'
+      html += '</div>';
+      html += '</div>';
+
+      var popupDiv = document.createElement('div');
+      popupDiv.innerHTML = html;
+      document.body.appendChild(popupDiv);
+    } else {
+      var popup = document.getElementById('service-popup');
+      // console.log('popup=', popup);
+      if(popup && popup.parentElement) {
+        popup.parentElement.removeChild(popup);
+      }
+    }
+  };
+
+  // æ‰“å¼€é¦–é¡µ
+  onOpenMain = function () {
+    // if (needBG()) {
+      window.open('https://pvp.qq.com/', '_self');
+      // window.open('https://pvp.qq.com/web202311/index.html', '_self');
+    // } else {
+    //   window.location.reload();
+    // }
+  };
+
+  // è·å–æµè§ˆå™¨å¯è§†èŒƒå›´
+  var getViewSize = function () {
+    var viewWidth = 0;// æµè§ˆå™¨å¯è§†å®½åº¦
+    var viewHeight = 0;// æµè§ˆå™¨å¯è§†é«˜åº¦
+    if (document.documentElement && document.documentElement.clientWidth && document.documentElement.clientHeight) {
+      viewWidth = document.documentElement.clientWidth;
+      viewHeight = document.documentElement.clientHeight;
+    } else {
+      if (window.innerWidth) {
+        viewWidth = window.innerWidth;
+      } else if (document.body && document.body.clientWidth) {
+        viewWidth = document.body.clientWidth;
+      }
+      if (window.innerHeight) {
+        viewHeight = window.innerHeight;
+      } else if (document.body && document.body.clientHeight) {
+        viewHeight = document.body.clientHeight;
+      }
+    }
+    data.viewWidth = viewWidth;
+    data.viewHeight = viewHeight;
+    // console.log('viewWidth=', viewWidth, ', viewHeight=', viewHeight);
+    var rect = data.stageContext.update(viewWidth, viewHeight, 90);
+    // console.log("rect=", rect)
+    return rect;
+  }
+
+  // è·å–æµè§ˆå™¨å¯è§†èŒƒå›´çš„è¾¹ç¼˜åæ ‡
+  var getViewBorder = function () {
+    var rect = getViewSize();
+    var widget = Widget.parsePoint(rect, rect.align);// è¾¹ç¼˜è®¡ç®—
+    return widget;
+  }
+
+  /**
+   * åœ¨ç¼©æ”¾åçš„é¡µé¢çš„å¯è§†èŒƒå›´å†…å››ä¸ªè§’çš„åæ ‡ï¼ˆä¸»è¦ç”¨äºè®¡ç®—è´´è¾¹UIçš„ä½ç½®ï¼‰
+   * @param elementWidth è¦è®¡ç®—ä½ç½®çš„å…ƒç´ çš„å®½åº¦
+   * @param elementHeight è¦è®¡ç®—ä½ç½®çš„å…ƒç´ çš„é«˜åº¦
+   */
+  var getPageCorner = function (elementWidth, elementHeight) {
+    var left = getViewBorder().left > 0 ? getViewBorder().left : 0;
+    var right = getViewBorder().right - getViewBorder().left > data.desighWidth
+        ? data.desighWidth - elementWidth
+        : getViewBorder().right - elementWidth;
+    var { top } = getViewBorder();
+    var bottom = getViewBorder().bottom - elementHeight;
+
+    var centerX = getViewBorder().x - elementWidth / 2;
+    var centerY = getViewBorder().y - elementHeight / 2;
+
+    return {
+      left,
+      right,
+      top,
+      bottom,
+      centerX,
+      centerY,
+    };
+  }
+
+  /**
+   * UIç¼©æ”¾æ¯”ä¾‹
+   */
+  var uiScale = function () {
+    var viewWidth = getPageCorner(0, 0).right - getPageCorner(0, 0).left;// å®é™…çš„å±å¹•å®½åº¦
+    // console.log('viewWidth=', viewWidth);
+    var scale = viewWidth / data.desighWidth;
+    // console.log('uiScale=', scale);
+    return scale;
+  }
+
+  /**
+   * åŠ è½½JS
+   * @param url jsåœ°å€
+   * @param callback åŠ è½½æˆåŠŸçš„å›è°ƒ
+   * @param options é¢å¤–å‚æ•°é…ç½®
+   */
+  var jsLoader = function (url, callback, options) {
+    options = options || {};
+    var head = document.getElementsByTagName('head')[0] || document.documentElement;
+    var script = document.createElement('script');
+    var done = false;
+    script.src = url;
+    script.charset = "utf-8";
+    if (options.charset) {
+      script.charset = options.charset;
+    }
+
+    script.onerror = script.onload = script.onreadystatechange = function () {
+      if (!done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')) {
+        done = true;
+        if (callback) {
+          callback();
+        }
+
+        script.onerror = script.onload = script.onreadystatechange = null;
+        head.removeChild(script);
+      }
+    };
+    head.insertBefore(script, head.firstChild);
+  }
+
+  return {
+    init,
+    resetSize,
+    changeFontColor,
+    showLogin,
+    showDownloadButton,
+  };
+}());
+
+//========================================== HeaderStageContext Begin ==========================================//
+class HeaderStageContext {
+  /**
+   * åˆå§‹åŒ–ç”»å¸ƒå®½é«˜
+   * @param width å®½
+   * @param height é«˜
+   */
+  constructor(width = 0, height = 0) {
+    this.setSize(width, height);
+  }
+
+  /**
+   *  æ¨ªç«–å±
+   *  @param value H æˆ– V
+   */
+  set type(value) {
+    this._type = value;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  /**
+   * å¯¹é½æ–¹å¼
+   * @param value é»˜è®¤ä¸º"" å±…ä¸­ï¼Œå¯ä»¥ç»“åˆä¸€èµ·ç”¨ï¼Œæ¯”å¦‚tl,tr,bl,br
+   t,é é¡¶
+   l,é å·¦
+   r,é å³
+   bï¼Œé åº•
+   */
+  set align(value) {
+    this._align = value;
+  }
+
+  get align() {
+    return this._align;
+  }
+
+  /**
+   * ç¼©æ”¾æ–¹å¼
+   * @param value ç¼©æ”¾æ¨¡å¼ é»˜è®¤[exactfit]
+   "exactfit"; é«˜å®½ç­‰äºå±å¹•é«˜å®½
+   "noborder"; è£å‰ªé“ºæ»¡
+   "noscale"; ä¸ç¼©æ”¾
+   "showall"; æ˜¾ç¤ºå…¨éƒ¨
+   "width"; å®½åº¦ç­‰äºå±å¹•å®½
+   "height";é«˜åº¦ç­‰äºå±å¹•é«˜
+   */
+  set scaleMode(value) {
+    this._scaleMode = value;
+  }
+
+  get scaleMode() {
+    return this._scaleMode;
+  }
+
+  /**
+   * è®¾ç½®ç”»å¸ƒå®½
+   * @param value å®½
+   */
+  set width(value) {
+    this._width = value;
+  }
+
+  get width() {
+    return this._width;
+  }
+
+  /**
+   * è®¾ç½®ç”»å¸ƒé«˜
+   * @param value é«˜
+   */
+  set height(value) {
+    this._height = value;
+  }
+
+  get height() {
+    return this._height;
+  }
+
+  /**
+   * ç”»å¸ƒå®½é«˜
+   * @param width å®½
+   * @param height é«˜
+   */
+  setSize(width, height) {
+    this._width = width;
+    this._height = height;
+  }
+
+  /**
+   * "exactfit"; é«˜å®½ç­‰äºå±å¹•é«˜å®½
+   * @private
+   * @param width å½“å‰stageå®½
+   * @param height å½“å‰stageé«˜
+   * */
+  _exactFit(width, height) {
+    return { x: 0, y: 0, width: this.width, height: this.height, scaleX: width / this.width, scaleY: height / this.height, rotation: 0 };
+  }
+
+  /**
+   * "noBorder"; è£å‰ªé“ºæ»¡
+   * @private
+   * @param width å½“å‰stageå®½
+   * @param height å½“å‰stageé«˜
+   * */
+  _noBorder(width, height) {
+    var ratio = this.height / this.width;
+    var scale = 1;
+    if (ratio < height / width) {
+      scale = height / this.height;
+    } else {
+      scale = width / this.width;
+    }
+    return { x: 0, y: 0, width: this.width * scale, height: this.height * scale, scaleX: scale, scaleY: scale, rotation: 0 };
+  }
+
+  /**
+   * "noScale"; ä¸ç¼©æ”¾
+   * @private
+   * @param width å½“å‰stageå®½
+   * @param height å½“å‰stageé«˜
+   */
+  _noScale() {
+    return { x: 0, y: 0, width: this.width, height: this.height, scaleX: 1, scaleY: 1, rotation: 0 };
+  }
+
+  /**
+   * "showAll";æ˜¾ç¤ºæ‰€æœ‰
+   * @private
+   * @param width å½“å‰stageå®½
+   * @param height å½“å‰stageé«˜
+   */
+
+  _showAll(width, height) {
+    var ratio = this.height / this.width;
+    var scale = 1;
+    if (ratio < height / width) {
+      scale = width / this.width;
+    } else {
+      scale = height / this.height;
+    }
+    return { x: 0, y: 0, width: this.width * scale, height: this.height * scale, scaleX: scale, scaleY: scale, rotation: 0 };
+  }
+
+  /**
+   * è®¡ç®—å®½ç­‰stageå®½æ¯”ä¾‹
+   * @private
+   * @param width å½“å‰stageå®½
+   * @param height å½“å‰stageé«˜
+   */
+  _exactWidth(width) {
+    var scale = 1;
+    scale = width / this.width;
+    return { x: 0, y: 0, width: this.width * scale, height: this.height * scale, scaleX: scale, scaleY: scale, rotation: 0 };
+  }
+
+  /**
+   * è®¡ç®—é«˜ç­‰stageé«˜æ¯”ä¾‹
+   * @private
+   * @param width å½“å‰stageå®½
+   * @param height å½“å‰stageé«˜
+   */
+  _exactHeight(width, height) {
+    var scale = 1;
+    scale = height / this.height;
+    return { x: 0, y: 0, width: this.width * scale, height: this.height * scale, scaleX: scale, scaleY: scale, rotation: 0 };
+  }
+
+  /**
+   * update å¼€å§‹è¿ç®—
+   * @param stageWidth å½“å‰stageå®½
+   * @param stageHeight å½“å‰stageé«˜
+   * @param rotation å½“å‰stage æ—‹è½¬å€¼ -180 åˆ°180
+   */
+  update(stageWidth, stageHeight, rotation) {
+    var isH = this.type.toLocaleLowerCase() === 'h';
+    // console.log('isH=', isH);
+
+    /**
+     * åˆ¤æ–­æ—‹è½¬ H V
+     * */
+    if (isH) {
+      if (rotation !== 0) {
+        var width = stageWidth; var height = stageHeight;
+      } else {
+        var width = stageHeight; var height = stageWidth;
+      }
+    } else {
+      if (rotation === 0) {
+        var width = stageWidth; var height = stageHeight;
+      } else {
+        var width = stageHeight; var height = stageWidth;
+      }
+    }
+
+    var obj;
+    var isAling = false;
+    /**
+     * å¤„ç†ç¼©æ”¾æ–¹å¼
+     */
+    switch (this._scaleMode.toLowerCase()) {
+      case 'exactfit':
+        obj = this._exactFit(width, height);
+        break;
+
+      case 'noborder':
+        isAling = true;
+        obj = this._noBorder(width, height);
+        break;
+
+      case 'noscale':
+        isAling = true;
+        obj = this._noScale(width, height);
+        break;
+
+      case 'showall':
+        isAling = true;
+        obj = this._showAll(width, height);
+        break;
+
+      case 'width':
+        isAling = true;
+        obj = this._exactWidth(width, height);
+        break;
+
+      case 'height':
+        isAling = true;
+        obj = this._exactHeight(width, height);
+        break;
+
+      default:
+        obj = { x: 0, y: 0, width, height, scaleX: 1, scaleY: 1, rotation };
+        break;
+    }
+
+    if (isH) {
+      switch (rotation) {
+        case -90:
+        case 90:
+          obj.rotation = 0;
+          break;
+        default:
+          obj.rotation = -90;
+          break;
+      }
+    } else {
+      obj.rotation = rotation;
+    }
+    var isRt = obj.rotation !== -90 && (!isH || obj.rotation !== 0);
+    var rwidth = (width - obj.width) * 1;
+    var rheight = (height - obj.height) * 1;
+
+    /**
+     * å¤„ç†å¯¹é½æ–¹å¼
+     * */
+    if (isAling) {
+      switch (this.align.toLowerCase()) {
+        case 'l':
+          obj.x = isRt ? (obj.rotation !== 0 ? rwidth : 0) : 0;
+          obj.y = (height - obj.height) / 2;
+          break;
+
+        case 't':
+          obj.x = (width - obj.width) / 2;
+          obj.y = isRt ? 0 : isH ? (obj.rotation !== 0 ? rheight : 0) : rheight;
+          break;
+
+        case 'r':
+          obj.x = isRt ? (width - obj.width) - (obj.rotation === 0 ? 0 : rwidth) : (width - obj.width);
+          obj.y = (height - obj.height) / 2;
+          break;
+
+        case 'b':
+          obj.x = (width - obj.width) / 2;
+          obj.y = isRt ? (height - obj.height) : (isH ? (obj.rotation !== 0 ? 0 : rheight) : 0);
+          break;
+
+        case 'lt':
+        case 'tl':
+          obj.x = isRt ? (obj.rotation !== 0 ? rwidth : 0) : 0;
+          obj.y = isRt ? 0 : isH ? (obj.rotation !== 0 ? rheight : 0) : rheight;
+          break;
+
+        case 'tr':
+        case 'rt':
+          obj.x = isRt ? (width - obj.width) - (obj.rotation === 0 ? 0 : rwidth) : (width - obj.width);
+          obj.y = isRt ? 0 : isH ? (obj.rotation !== 0 ? rheight : 0) : rheight;
+          break;
+
+        case 'bl':
+        case 'lb':
+          obj.x = isRt ? (obj.rotation !== 0 ? rwidth : 0) : 0;
+          obj.y = isRt ? (height - obj.height) : (isH ? (obj.rotation !== 0 ? 0 : rheight) : 0);
+          break;
+
+        case 'br':
+        case 'rb':
+          obj.x = isRt ? (width - obj.width) - (obj.rotation === 0 ? 0 : rwidth) : (width - obj.width);
+          obj.y = isRt ? (height - obj.height) : (isH ? (obj.rotation !== 0 ? 0 : rheight) : 0);
+          break;
+
+        default:
+          obj.x = (width - obj.width) / 2;
+          obj.y = (height - obj.height) / 2;
+          break;
+      }
+    }
+
+    /**
+     * å¤„ç†æ—‹è½¬åçš„ä½ç§»
+     */
+    if (obj.rotation  !== 0) {
+      var ox = obj.x;
+      var oy = obj.y;
+      if (obj.rotation  === -90) {
+        obj.x = (obj.scaleY * this.height) + oy;
+        obj.y = ox;
+      } else {
+        obj.y = (obj.scaleX * this.width) + ox;// -(this.width-obj.width)
+        obj.x = oy;
+      }
+    }
+    obj.stageWidth = width;
+    obj.stageHeight = height;
+    return obj;
+  }
+}
+//========================================== HeaderStageContext End ==========================================//
+
+//========================================== Widget Begin ==========================================//
+class Widget {
+  static parsePoint(rect, align)   {
+    var isH; var rx; var ry; var left; var right; var top; var bottom;
+    if (isH) {
+      switch (rect.rotation) {
+        case -90:
+        case 90:
+          left = -(rect.y) / rect.scaleY;
+          top = -(rect.stageHeight - (rect.x)) / rect.scaleX;
+          right = left + rect.stageWidth / rect.scaleX;
+          bottom = top + rect.stageHeight / rect.scaleY;
+          break;
+        case 0:
+          left = -(rect.x) / rect.scaleX;
+          top = -(rect.y) / rect.scaleY;
+          right = left + rect.stageWidth / rect.scaleX;
+          bottom = top + rect.stageHeight / rect.scaleX;
+          break;
+      }
+    } else {
+      switch (rect.rotation) {
+        case 0:
+          top = -(rect.y) / rect.scaleY;
+          left = -(rect.x) / rect.scaleX;
+          right = left + rect.stageWidth / rect.scaleX;
+          bottom = top + rect.stageHeight / rect.scaleY;
+          break;
+        case -90:
+          top = -(rect.stageHeight - (rect.x)) / rect.scaleX;
+          left = -(rect.y) / rect.scaleY;
+          right = left + rect.stageWidth / rect.scaleX;
+          bottom = top + rect.stageHeight / rect.scaleY;
+          break;
+        case 90:
+          left = -(rect.stageWidth - (rect.y)) / rect.scaleY;
+          top =  -(rect.x) / rect.scaleX;
+          right = left + rect.stageWidth / rect.scaleY;
+          bottom = top + rect.stageHeight / rect.scaleX;
+          break;
+      }
+    }
+
+    rx = left + (right - left) / 2;
+    ry = top + (bottom - top) / 2;
+    if (align !== undefined) {
+      switch (align.toLocaleLowerCase()) {
+        case 't':
+          ry = top;
+          break;
+        case 'l':
+          rx = left;
+          break;
+        case 'r':
+          rx = right;
+          break;
+        case 'b':
+          ry = bottom;
+          break;
+        case 'tl':
+        case 'lt':
+          rx = left;
+          ry = top;
+          break;
+        case 'tr':
+        case 'rt':
+          rx = right;
+          ry = top;
+          break;
+        case 'bl':
+        case 'lb':
+          rx = left;
+          ry = bottom;
+          break;
+        case 'rb':
+        case 'br':
+          rx = right;
+          ry = bottom;
+          break;
+      }
+    }
+    return { x: rx, y: ry, top, left, right, bottom };
+  }
+}
+//========================================== Widget End ==========================================//
+
+pvpHeader2023.init();
