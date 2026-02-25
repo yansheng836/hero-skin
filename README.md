@@ -50,9 +50,57 @@ Java爬取王者荣耀和英雄联盟的英雄皮肤。
 
 ### 存在问题
 
+#### 1.只能爬取本地网页
+
 爬取的网页数据不是最新的，如直接爬取最新的英雄为93，506，云中君；但是将该网页下载后再爬取，最新,96，523，西施。
 
 处理方法：可以将网页先下载下来，爬取本地文件。
+
+#### 2.2026年2月25日16:30:34网页变化
+
+英雄没有了ename信息，各种类型壁纸url需要用新方式获取，而且好像凑不齐5种类型的壁纸了，后面发现可以自行调整尺寸。
+
+##### 原各类型壁纸尺寸
+
+参考：https://github.com/yansheng836/hero-skin-image/blob/main/wzry-heros.json
+
+苍
+
+phoneBigskinUrl，https://game.gtimg.cn/images/yxzj/img201606/heroimg/177/177-bigskin-1.jpg，1200-530
+
+phoneMobileskinUrl，https://game.gtimg.cn/images/yxzj/img201606/heroimg/177/177-mobileskin-1.jpg，600-410
+
+phoneSmallskinUrl，https://game.gtimg.cn/images/yxzj/img201606/heroimg/558/558-smallskin-1.jpg，67-67
+
+wallpaperBigskinUrl，https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/558/558-bigskin-1.jpg，1920-882
+
+wallpaperMobileskinUrl，https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/558/558-mobileskin-1.jpg，727-1070
+
+##### 新壁纸-弗洛伦
+
+https://pvp.qq.com/web201605/herodetail/fuluolun.shtml
+
+```html
+<img src="https://game-1255653016.file.myqcloud.com/manage/custom_wzry_E1/bec9e5ca9cec82677f55a0c5c7af99a6.png?imageMogr2/crop/120x120/gravity/center" alt="" data-imgname="https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/1920x882/gravity/center" data-title="百花剑豪" data-icon="0">
+```
+
+小图：https://game-1255653016.file.myqcloud.com/manage/custom_wzry_E1/bec9e5ca9cec82677f55a0c5c7af99a6.png?imageMogr2/crop/120x120/gravity/center
+
+原图：https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg
+
+全屏wallpaperBigskinUrl：https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/1920x882/gravity/center
+
+phoneBigskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/1200x530/gravity/center，1200-530
+
+phoneMobileskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/600x410/gravity/center，600-410
+
+phoneSmallskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/67x67/gravity/center，67-67
+
+wallpaperBigskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/1920x882/gravity/center，1920-882
+
+wallpaperMobileskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/727x1070/gravity/center，727-1070
+
+
 
 ### bug
 
