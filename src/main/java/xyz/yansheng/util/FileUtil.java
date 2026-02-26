@@ -27,7 +27,7 @@ public class FileUtil {
     static final String WALLPAPER_MOBILESKIN_IMAGES = "./4wallpaper-mobileskin-images";
     static final String WALLPAPER_BIGSKIN_IMAGES = "./5wallpaper-bigskin-images";
 
-//    lol 对于文件夹
+    //    lol 对于文件夹
     static final String PHONE_SAMLLSKIN_IMAGES2 = "./1phone-smallskin-lol";
     static final String PHONE_MOBILESKIN_IMAGES2 = "./2phone-mobileskin-lol";
     static final String PHONE_BIGSKIN_IMAGES2 = "./3phone-bigskin-lol";
@@ -61,9 +61,9 @@ public class FileUtil {
      *
      * @param sign sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
      */
-    public static List<String> mkdir(int sign,String signType) {
+    public static List<String> mkdir(int sign, String signType) {
         List<String> dirs = new ArrayList<String>(5);
-        if(signType.equals("王者荣耀")){
+        if (signType.equals("王者荣耀")) {
             switch (sign) {
                 case 0:
                     dirs.add(PHONE_SAMLLSKIN_IMAGES);
@@ -91,7 +91,7 @@ public class FileUtil {
                     System.err.println("标志sign错误，要求：只能是0-5之间的6个数");
                     break;
             }
-        }else if(signType.equals("英雄联盟")){
+        } else if (signType.equals("英雄联盟")) {
             switch (sign) {
                 case 0:
                     dirs.add(PHONE_SAMLLSKIN_IMAGES2);
@@ -140,7 +140,7 @@ public class FileUtil {
             // 获取需要用到的数据：英雄id，英雄名，英雄皮肤列表；英雄皮肤图片网址
             String id = hero.getId().toString();
             String cname = hero.getCname();
-            System.out.println("正在下载英雄 "+cname+" 的皮肤图片……");
+            System.out.println("正在下载英雄 " + cname + " 的皮肤图片到目录 " + dir + " ……");
             String title = hero.getTitle();
             String[] skinidArray = title.split("\\|");
 
@@ -194,7 +194,7 @@ public class FileUtil {
 //                System.out.println("pathname:" + pathname);
                 downloadImage(imgUrl, pathname);
             }
-            break; // 测试时用，只下载第一个英雄的照片
+//            break; // 测试时用，只下载第一个英雄的照片
         }
     }
 

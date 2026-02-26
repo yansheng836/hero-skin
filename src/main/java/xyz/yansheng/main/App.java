@@ -44,23 +44,25 @@ public class App {
 //        }
 
         // 2.从每个英雄主页heroUrl中获取英雄的皮肤信息（title，skinName，skins）
-        int count = 0;
-        for (Hero hero : heros) {
-            SpiderUtil.getHeroSkins(hero);
-            // 生成图片url
-            hero.generateField();
-            System.out.println(hero.toString());
-            // System.out.println(hero.toStringSimple());
-            count++;
-            if (count == 2) {
-                break;// 测试用
-            }
-        }
+//        int count = 0;
+//        for (Hero hero : heros) {
+//            SpiderUtil.getHeroSkins(hero);
+//            // 生成图片url
+//            hero.generateField();
+//            System.out.println(hero.toString());
+//            // System.out.println(hero.toStringSimple());
+//            count++;
+//            if (count == 2) {
+//                break;// 测试用
+//            }
+//        }
         // System.exit(1);
+
         int sum = 0;
         for (Hero hero : heros) {
+//            System.out.println(hero.toString());
             sum = sum + hero.getSkins().size();
-            break; // 测试用
+//            break; // 测试用
         }
         String infoString;
         infoString = "到目前为止，王者荣耀一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。";

@@ -155,13 +155,13 @@ public class SpiderUtil {
                 // 英雄cname
                 String cname = heroObj.getString("yxmclb_9965");
                 hero.setCname(cname);
-                System.out.println("cname:" + cname);
+//                System.out.println("cname:" + cname);
 
                 String baseSkinImage = heroObj.getString("fmlb_4536");
 //                System.out.println("baseSkinImage:"+baseSkinImage);
                 String skinName = heroObj.getString("pfmclb_5571");
                 skinName = skinName.replaceAll("&\\d+", "");
-                System.out.println("skinName:" + skinName);
+//                System.out.println("skinName:" + skinName);
                 hero.setSkinName(skinName);
 //                System.exit(1);
 
@@ -170,88 +170,85 @@ public class SpiderUtil {
 //                hero.setEname(Integer.parseInt(ename));
 //                https://pvp.qq.com/web201605/herodetail/fuluolun.shtml
                 hero.setHeroUrl("https://pvp.qq.com/web201605/herodetail/" + ename + ".shtml");
+
+//                处理皮肤
+                String title = "";
+                List<String> skins = new ArrayList<>();
+//                skins.add(skinArr[0]);
+//                    hero.setSkins(skins);
+
+                List<String> phoneSmallskinUrl = new ArrayList<>();
+                phoneSmallskinUrl.add(baseSkinImage + "?imageMogr2/crop/67x67/gravity/center");
+//                    hero.setPhoneSmallskinUrl(phoneSmallskinUrl);
+                List<String> phoneMobileskinUrl = new ArrayList<>();
+                phoneMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/600x410/gravity/center");
+//                    hero.setPhoneMobileskinUrl(phoneMobileskinUrl);
+                List<String> phoneBigskinUrl = new ArrayList<>();
+                phoneBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1200x530/gravity/center");
+//                    hero.setPhoneBigskinUrl(phoneBigskinUrl);
+
+                List<String> wallpaperMobileskinUrl = new ArrayList<>();
+                wallpaperMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/727x1070/gravity/center");
+//                    hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
+                List<String> wallpaperBigskinUrl = new ArrayList<>();
+                wallpaperBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1920x882/gravity/center");
+//                    hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
+
 //                只有一个皮肤的情况
                 if (!skinName.contains("|")) {
-                    hero.setTitle(skinName);
+                    title = skinName;
 
-                    List<String> skins = new ArrayList<>();
                     skins.add(skinName);
-                    hero.setSkins(skins);
-
-                    List<String> phoneSmallskinUrl = new ArrayList<>();
-                    phoneSmallskinUrl.add(baseSkinImage + "?imageMogr2/crop/67x67/gravity/center");
-                    hero.setPhoneSmallskinUrl(phoneSmallskinUrl);
-                    List<String> phoneMobileskinUrl = new ArrayList<>();
-                    phoneMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/600x410/gravity/center");
-                    hero.setPhoneMobileskinUrl(phoneMobileskinUrl);
-                    List<String> phoneBigskinUrl = new ArrayList<>();
-                    phoneBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1200x530/gravity/center");
-                    hero.setPhoneBigskinUrl(phoneBigskinUrl);
-
-                    List<String> wallpaperMobileskinUrl = new ArrayList<>();
-                    wallpaperMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/727x1070/gravity/center");
-                    hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
-                    List<String> wallpaperBigskinUrl = new ArrayList<>();
-                    wallpaperBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1920x882/gravity/center");
-                    hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
+//                    hero.setSkins(skins);
 //                    System.out.println(hero);
                 } else {
                     // 处理皮肤，注意：如果是原皮，这里是没有的
-                    System.out.println("cname:" + cname);
-                    System.out.println("skinName:" + skinName);
+//                    System.out.println("cname:" + cname);
+//                    System.out.println("skinName:" + skinName);
                     String[] skinArr = skinName.split("\\|");
-
-
-                    List<String> skins = new ArrayList<>();
-                    skins.add(skinArr[0]);
-//                    hero.setSkins(skins);
-
-                    List<String> phoneSmallskinUrl = new ArrayList<>();
-                    phoneSmallskinUrl.add(baseSkinImage + "?imageMogr2/crop/67x67/gravity/center");
-//                    hero.setPhoneSmallskinUrl(phoneSmallskinUrl);
-                    List<String> phoneMobileskinUrl = new ArrayList<>();
-                    phoneMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/600x410/gravity/center");
-//                    hero.setPhoneMobileskinUrl(phoneMobileskinUrl);
-                    List<String> phoneBigskinUrl = new ArrayList<>();
-                    phoneBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1200x530/gravity/center");
-//                    hero.setPhoneBigskinUrl(phoneBigskinUrl);
-
-                    List<String> wallpaperMobileskinUrl = new ArrayList<>();
-                    wallpaperMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/727x1070/gravity/center");
-//                    hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
-                    List<String> wallpaperBigskinUrl = new ArrayList<>();
-                    wallpaperBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1920x882/gravity/center");
-//                    hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
+                    title = skinArr[0];
+                    skins.add(title);
 
                     for (String tempSkin : skinArr) {
                         tempSkin = tempSkin.trim();
-                        System.out.println("tempSkin:" + tempSkin);
+//                        System.out.println("tempSkin:" + tempSkin);
 
                         for (int j = 0; j < skinArray.size(); j++) {
                             JSONObject skinObj = skinArray.getJSONObject(j);
 //                        System.out.println(skinObj);
-                            String heroName = skinObj.getString("yxmclb_9965");
-                            String skinName2 = skinObj.getString("pfmclb_7523");
-
-
+                            String heroName = skinObj.getString("yxmclb_9965").trim();
+                            String skinName2 = skinObj.getString("pfmclb_7523").trim();
+//                            找到了（如果英雄名和皮肤名都一样）
                             if (cname.equals(heroName) && tempSkin.equals(skinName2)) {
 //                            System.out.println("111111111");
-                                System.out.println("skinObj:" + skinObj);
+//                                System.out.println("skinObj:" + skinObj);
+                                skins.add(tempSkin);
 
+                                baseSkinImage = skinObj.getString("fmlb_4536");
+                                phoneSmallskinUrl.add(baseSkinImage + "?imageMogr2/crop/67x67/gravity/center");
+                                phoneMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/600x410/gravity/center");
+                                phoneBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1200x530/gravity/center");
+                                wallpaperMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/727x1070/gravity/center");
+                                wallpaperBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1920x882/gravity/center");
                             } else {
 //                            System.out.println("2222222222");
 //                        continue;
                             }
                         }
-                    }
-                    hero.setSkins(skins);
+                    }// end for
                 }
+                hero.setTitle(title);
+                hero.setSkins(skins);
+                hero.setPhoneSmallskinUrl(phoneSmallskinUrl);
+                hero.setPhoneMobileskinUrl(phoneMobileskinUrl);
+                hero.setPhoneBigskinUrl(phoneBigskinUrl);
+                hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
+                hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
                 heros.add(hero);
-                System.out.println(hero);
+//                System.out.println("获取皮肤后："+hero);
 //                System.exit(1);
             }
-            System.exit(1);
-
+//            System.exit(1);
         }
         return heros;
     }
