@@ -30,32 +30,37 @@ public class App {
         // 1.从英雄列表页爬取英雄基本数据（id,ename,cname,heroUrl）
         // 在线数据不实时，好像加了js，暂时不会爬取；先使用爬取下载的本地网页
         String url = "https://pvp.qq.com/web201605/herolist.shtml";
+        String urlJSON = "https://pvp.qq.com/zlkdatasys/heroskinlist.json";
         String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏.html";
 //        String localUrl = "./英雄资料列表页-英雄介绍-王者荣耀官方网站-腾讯游戏2.html";
 
         System.out.println("正在爬取数据，请稍后……");
-        ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
+//        ArrayList<Hero> heros = SpiderUtil.getHeros(localUrl, SpiderUtil.GBK);
+        ArrayList<Hero> heros = SpiderUtil.getHerosFromJSON(urlJSON, SpiderUtil.UTF8);
         int size = heros.size();
-        // for (Hero hero : heros) {
-        // System.out.println(hero.toString());
-        // }
+        System.out.println("获取英雄数量：" + size);
+//        for (Hero hero : heros) {
+//            System.out.println(hero.toString());
+//        }
 
         // 2.从每个英雄主页heroUrl中获取英雄的皮肤信息（title，skinName，skins）
         int count = 0;
         for (Hero hero : heros) {
             SpiderUtil.getHeroSkins(hero);
+            // 生成图片url
             hero.generateField();
-            // System.out.println(hero.toString());
+            System.out.println(hero.toString());
             // System.out.println(hero.toStringSimple());
             count++;
             if (count == 2) {
-                // break;
+                break;// 测试用
             }
         }
         // System.exit(1);
         int sum = 0;
         for (Hero hero : heros) {
             sum = sum + hero.getSkins().size();
+            break; // 测试用
         }
         String infoString;
         infoString = "到目前为止，王者荣耀一共有" + heros.size() + "个英雄，" + sum + "个皮肤（含伴生皮肤）。";
@@ -78,7 +83,7 @@ public class App {
 
         // 输出格式化后的字符串 https://blog.csdn.net/bestxianfeng163/article/details/100073318
         String pretty = JSON.toJSONString(map, SerializerFeature.PrettyFormat, SerializerFeature.WriteDateUseDateFormat,
-            SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
+                SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
 
         String pathname = "./wzry-heros.json";
         File file = new File(pathname);
@@ -94,7 +99,7 @@ public class App {
 
         System.out.println("正在下载照片，请稍候......");
         String signType = "王者荣耀";
-        List<String> dirs = FileUtil.mkdir(sign,signType);
+        List<String> dirs = FileUtil.mkdir(sign, signType);
         for (String dir : dirs) {
             FileUtil.downloadImages(heros, dir);
         }

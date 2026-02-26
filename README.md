@@ -80,6 +80,8 @@ wallpaperMobileskinUrl，https://game.gtimg.cn/images/yxzj/img201606/skin/hero-i
 
 https://pvp.qq.com/web201605/herodetail/fuluolun.shtml
 
+后面发现这个是动态加载的，直接获取不了！
+
 ```html
 <img src="https://game-1255653016.file.myqcloud.com/manage/custom_wzry_E1/bec9e5ca9cec82677f55a0c5c7af99a6.png?imageMogr2/crop/120x120/gravity/center" alt="" data-imgname="https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/1920x882/gravity/center" data-title="百花剑豪" data-icon="0">
 ```
@@ -99,6 +101,41 @@ phoneSmallskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/cu
 wallpaperBigskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/1920x882/gravity/center，1920-882
 
 wallpaperMobileskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/727x1070/gravity/center，727-1070
+
+#### 3.从json获取数据
+
+https://pvp.qq.com/zlkdatasys/heroskinlist.json
+
+详见：[wzry-heros-zlkdatasys-heroskinlist.json](./wzry-heros-zlkdatasys-heroskinlist.json)
+
+其中**yxlb20_2489**是英雄信息。
+
+```json
+{
+    "pflb20_3469": [],
+    "yxlb20_2489": [
+        {
+            "fllb_2105": "对抗路",
+            "yxtxlb_8443": "https://game-1255653016.file.myqcloud.com/manage/custom_wzry_E1/bec9e5ca9cec82677f55a0c5c7af99a6.png",
+            "fmb1lb_5300": "https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_B1/546989deab305f9631c98c85f67fb74d.jpg",
+            "yxid_a7": "631",
+            "yxpymc_4614": "fuluolun",
+            "yxmclb_9965": "弗洛伦",
+            "zzy_2397": "1",
+            "fzy_8576": "",
+            "sxsjlb_1516": "20260205",
+            "yjhjsl_5003": "",
+            "yxbq_3755": "3",
+            "fmlb_4536": "https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg",
+            "pfmclb_5571": "百花剑豪&0",
+            "mossid_6573": "",
+            "spvidl_6663": "",
+            "ztlb_6806": "",
+            "fmc1lb_6498": "https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_C1/53e2d5987b176a1bd040af2604ae0d3d.jpg"
+        }
+    ]
+}
+```
 
 
 

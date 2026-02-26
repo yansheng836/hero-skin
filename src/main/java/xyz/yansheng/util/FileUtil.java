@@ -187,13 +187,14 @@ public class FileUtil {
                     Integer skinid = Integer.parseInt(skinidString.substring(skinidString.length() - 2, skinidString.length())) + 1;
                     pathname = dir + "/" + (Integer.parseInt(id) + 1) + cname + "-" + skinid + "-" + skin + ".jpg";
                 } else {
-                    pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+//                    pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+                    pathname = dir + "/" + cname + "-" + (i + 1) + "-" + skin + ".jpg";
                 }
 //                System.out.println("imgUrl:" + imgUrl);
 //                System.out.println("pathname:" + pathname);
                 downloadImage(imgUrl, pathname);
             }
-//            break; // 测试时用，只下载第一个英雄的照片
+            break; // 测试时用，只下载第一个英雄的照片
         }
     }
 

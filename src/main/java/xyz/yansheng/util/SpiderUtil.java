@@ -93,20 +93,76 @@ public class SpiderUtil {
 //                ename = ename.substring(0, 3);
 //                System.out.println(ename);
 //                hero.setEname(Integer.parseInt(ename));
-                Element aElement2 = liElement.selectFirst("img");
-                String heroUrl2 = aElement2.attr("src");
-//                System.out.println(heroUrl2.lastIndexOf('/'));
-                String ename = heroUrl2.substring(heroUrl2.lastIndexOf('/'));
+//                Element aElement2 = liElement.selectFirst("img");
+//                String heroUrl2 = aElement2.attr("src");
+////                System.out.println(heroUrl2.lastIndexOf('/'));
+//                String ename = heroUrl2.substring(heroUrl2.lastIndexOf('/'));
+////                System.out.println(ename);
+//                ename = ename.substring(1, 4);
 //                System.out.println(ename);
-                ename = ename.substring(1, 4);
-//                System.out.println(ename);
+//                hero.setEname(Integer.parseInt(ename));
+//                2026年2月25日16:09:57 因界面没有该值了，不再统计ename，设置默认值0
+                hero.setEname(0);
+
+                // 英雄cname
+                String cname = aElement.text();
+                hero.setCname(cname);
+//                System.out.println(hero);
+            }
+            heros.add(hero);
+        }
+        return heros;
+    }
+
+    /**
+     * 获取英雄列表-从json的请求获取
+     *
+     * @param url      英雄列表页网址
+     * @param encoding 编码
+     * @return 英雄list信息
+     */
+    public static ArrayList<Hero> getHerosFromJSON(String url, String encoding) {
+
+        Document doc = null;
+        String jsonString = null;
+        try {
+            doc = Jsoup.parse(new URL(url).openStream(), encoding, url);
+//            System.out.println(doc);
+            jsonString = doc.text();
+            System.out.println(jsonString);
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+//        转成对象
+        JSONObject rootObj = JSONObject.parseObject(jsonString);
+        JSONArray skinArray = rootObj.getJSONArray("yxlb20_2489");
+        ArrayList<Hero> heros = new ArrayList<>();
+        if (skinArray != null && !skinArray.isEmpty()) {
+            // 4. 遍历数组，提取字段并封装
+            for (int i = 0; i < skinArray.size(); i++) {
+                JSONObject skinObj = skinArray.getJSONObject(i);
+                // 提取指定字段
+                String heroName = skinObj.getString("yxmclb_9965");
+                String skinImageUrl = skinObj.getString("fmlb_4536");
+                // 创建对象并添加到列表
+
+                Hero hero = new Hero();
+                hero.setId(i);
+
+                hero.setHeroUrl(heroUrl);
+
+                // 英雄ename
+                String ename = heroUrl.substring(heroUrl.lastIndexOf('=') + 1);
                 hero.setEname(Integer.parseInt(ename));
 
                 // 英雄cname
                 String cname = aElement.text();
                 hero.setCname(cname);
+
+                heros.add(hero);
             }
-            heros.add(hero);
         }
         return heros;
     }
@@ -186,10 +242,22 @@ public class SpiderUtil {
         Document doc = null;
         try {
             doc = Jsoup.parse(new URL(url).openStream(), GBK, url);
+//            System.out.println(doc);
+            System.out.println(doc.outerHtml());
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
             e1.printStackTrace();
+        }
+
+        // 获取ename，但是实际上图片url没有再使用这个进行生成了！
+        // 使用正则表达式匹配 ename 的值
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("ename\\s*=\\s*'([^']+)'");
+        java.util.regex.Matcher matcher = pattern.matcher(doc.outerHtml());
+        if (matcher.find()) {
+            String enameValue = matcher.group(1);
+//            System.out.println("enameValue:"+enameValue); // 输出: 635
+            hero.setEname(Integer.parseInt(enameValue));
         }
 
         // 皮肤列表
@@ -207,6 +275,9 @@ public class SpiderUtil {
 
         hero.setSkinName(skinName);
         hero.setSkins(skins1);
+
+        System.out.println("处理后：");
+        System.out.println(hero);
 
         return hero;
     }
@@ -291,11 +362,11 @@ public class SpiderUtil {
         JSONObject object = null;
         try {
             Connection con = Jsoup.connect(url).userAgent(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
-                .header("Accept", "text/html,application/xhtml+xml")
-                .header("Content-Type", "application/json;charset=UTF-8").ignoreContentType(true)
-                // 设置连接超时时间
-                .timeout(30000);
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
+                    .header("Accept", "text/html,application/xhtml+xml")
+                    .header("Content-Type", "application/json;charset=UTF-8").ignoreContentType(true)
+                    // 设置连接超时时间
+                    .timeout(30000);
             Connection.Response response = con.execute();
             int sucessStatus = 200;
             if (response.statusCode() == sucessStatus) {
@@ -339,7 +410,7 @@ public class SpiderUtil {
 //                2024年5月11日18:32:41 获取皮肤图片id
 //                https://game.gtimg.cn/images/lol/act/img/center/0b95894e-0df2-470e-b282-6c5f5cf41955.jpg
                 String skinId2Temp = skins.getJSONObject(i).getString("centerImg");
-                skinId2 = skinId2 + skinId2Temp.replace("https://game.gtimg.cn/images/lol/act/img/center/","") + "|";
+                skinId2 = skinId2 + skinId2Temp.replace("https://game.gtimg.cn/images/lol/act/img/center/", "") + "|";
 
                 //                System.out.println("skinName:" + skinName + ",chromasBelongId:" + chromasBelongId);
             }

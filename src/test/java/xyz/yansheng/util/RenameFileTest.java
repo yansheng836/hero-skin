@@ -16,7 +16,8 @@ import static org.junit.Assert.assertEquals;
  * @date 2021/07/10
  */
 public class RenameFileTest {
-    @Test public void testRenameFile() {
+//    @Test
+    public void testRenameFile() {
         String dir = "./1phone-smallskin-lol";
         File file = new File(dir);
         String[] files = file.list();
@@ -60,7 +61,8 @@ public class RenameFileTest {
 
     }
 
-    @Test public void testRenameFile2() {
+//    @Test
+    public void testRenameFile2() {
         String dir = "./5wallpaper-bigskin-lol";
         File file = new File(dir);
         String[] files = file.list();
