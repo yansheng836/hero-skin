@@ -182,13 +182,23 @@ public class FileUtil {
                 imgUrl = urls.get(i);
                 // phone-smallskin-images/96西施-0-归虚梦演.jpg
                 // 对lol的图片重新处理命名规则（从1开始，不是王者的0开始） ：1黑暗之女-1-哥特萝莉 安妮.jpg
+                // 兼容文件扩展名
+                String suffix = ".jpg";
+                if (imgUrl.contains(".jpg")) {
+                    suffix = ".jpg";
+                } else if (imgUrl.contains(".jepg")) {
+                    suffix = ".jpg";
+                } else if (imgUrl.contains(".png")) {
+                    suffix = ".png";
+                }
+
                 if (imgUrl.contains("lol")) {
                     String skinidString = skinidArray[i];
                     Integer skinid = Integer.parseInt(skinidString.substring(skinidString.length() - 2, skinidString.length())) + 1;
-                    pathname = dir + "/" + (Integer.parseInt(id) + 1) + cname + "-" + skinid + "-" + skin + ".jpg";
+                    pathname = dir + "/" + (Integer.parseInt(id) + 1) + cname + "-" + skinid + "-" + skin + suffix;
                 } else {
 //                    pathname = dir + "/" + id + cname + "-" + (i + 1) + "-" + skin + ".jpg";
-                    pathname = dir + "/" + cname + "-" + (i + 1) + "-" + skin + ".jpg";
+                    pathname = dir + "/" + cname + "-" + (i + 1) + "-" + skin + suffix;
                 }
 //                System.out.println("imgUrl:" + imgUrl);
 //                System.out.println("pathname:" + pathname);
