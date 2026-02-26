@@ -24,6 +24,8 @@ import com.alibaba.fastjson.JSONObject;
 
 import xyz.yansheng.bean.Hero;
 
+import javax.security.auth.callback.TextInputCallback;
+
 /**
  * 爬虫工具类
  *
@@ -129,7 +131,7 @@ public class SpiderUtil {
             doc = Jsoup.parse(new URL(url).openStream(), encoding, url);
 //            System.out.println(doc);
             jsonString = doc.text();
-            System.out.println(jsonString);
+//            System.out.println(jsonString);
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
@@ -137,32 +139,119 @@ public class SpiderUtil {
         }
 //        转成对象
         JSONObject rootObj = JSONObject.parseObject(jsonString);
-        JSONArray skinArray = rootObj.getJSONArray("yxlb20_2489");
+        JSONArray skinArray = rootObj.getJSONArray("pflb20_3469");
+        JSONArray heroArray = rootObj.getJSONArray("yxlb20_2489");
         ArrayList<Hero> heros = new ArrayList<>();
-        if (skinArray != null && !skinArray.isEmpty()) {
+        if (heroArray != null && !heroArray.isEmpty()) {
             // 4. 遍历数组，提取字段并封装
-            for (int i = 0; i < skinArray.size(); i++) {
-                JSONObject skinObj = skinArray.getJSONObject(i);
-                // 提取指定字段
-                String heroName = skinObj.getString("yxmclb_9965");
-                String skinImageUrl = skinObj.getString("fmlb_4536");
+            System.out.println("heroArray.size():" + heroArray.size());
+            for (int i = 0; i < heroArray.size(); i++) {
                 // 创建对象并添加到列表
-
                 Hero hero = new Hero();
+
+                JSONObject heroObj = heroArray.getJSONObject(i);
+                // 提取指定字段
                 hero.setId(i);
-
-                hero.setHeroUrl(heroUrl);
-
-                // 英雄ename
-                String ename = heroUrl.substring(heroUrl.lastIndexOf('=') + 1);
-                hero.setEname(Integer.parseInt(ename));
-
                 // 英雄cname
-                String cname = aElement.text();
+                String cname = heroObj.getString("yxmclb_9965");
                 hero.setCname(cname);
+                System.out.println("cname:" + cname);
 
+                String baseSkinImage = heroObj.getString("fmlb_4536");
+//                System.out.println("baseSkinImage:"+baseSkinImage);
+                String skinName = heroObj.getString("pfmclb_5571");
+                skinName = skinName.replaceAll("&\\d+", "");
+                System.out.println("skinName:" + skinName);
+                hero.setSkinName(skinName);
+//                System.exit(1);
+
+//                // 英雄ename
+                String ename = heroObj.getString("yxpymc_4614");
+//                hero.setEname(Integer.parseInt(ename));
+//                https://pvp.qq.com/web201605/herodetail/fuluolun.shtml
+                hero.setHeroUrl("https://pvp.qq.com/web201605/herodetail/" + ename + ".shtml");
+//                只有一个皮肤的情况
+                if (!skinName.contains("|")) {
+                    hero.setTitle(skinName);
+
+                    List<String> skins = new ArrayList<>();
+                    skins.add(skinName);
+                    hero.setSkins(skins);
+
+                    List<String> phoneSmallskinUrl = new ArrayList<>();
+                    phoneSmallskinUrl.add(baseSkinImage + "?imageMogr2/crop/67x67/gravity/center");
+                    hero.setPhoneSmallskinUrl(phoneSmallskinUrl);
+                    List<String> phoneMobileskinUrl = new ArrayList<>();
+                    phoneMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/600x410/gravity/center");
+                    hero.setPhoneMobileskinUrl(phoneMobileskinUrl);
+                    List<String> phoneBigskinUrl = new ArrayList<>();
+                    phoneBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1200x530/gravity/center");
+                    hero.setPhoneBigskinUrl(phoneBigskinUrl);
+
+                    List<String> wallpaperMobileskinUrl = new ArrayList<>();
+                    wallpaperMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/727x1070/gravity/center");
+                    hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
+                    List<String> wallpaperBigskinUrl = new ArrayList<>();
+                    wallpaperBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1920x882/gravity/center");
+                    hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
+//                    System.out.println(hero);
+                } else {
+                    // 处理皮肤，注意：如果是原皮，这里是没有的
+                    System.out.println("cname:" + cname);
+                    System.out.println("skinName:" + skinName);
+                    String[] skinArr = skinName.split("\\|");
+
+
+                    List<String> skins = new ArrayList<>();
+                    skins.add(skinArr[0]);
+//                    hero.setSkins(skins);
+
+                    List<String> phoneSmallskinUrl = new ArrayList<>();
+                    phoneSmallskinUrl.add(baseSkinImage + "?imageMogr2/crop/67x67/gravity/center");
+//                    hero.setPhoneSmallskinUrl(phoneSmallskinUrl);
+                    List<String> phoneMobileskinUrl = new ArrayList<>();
+                    phoneMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/600x410/gravity/center");
+//                    hero.setPhoneMobileskinUrl(phoneMobileskinUrl);
+                    List<String> phoneBigskinUrl = new ArrayList<>();
+                    phoneBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1200x530/gravity/center");
+//                    hero.setPhoneBigskinUrl(phoneBigskinUrl);
+
+                    List<String> wallpaperMobileskinUrl = new ArrayList<>();
+                    wallpaperMobileskinUrl.add(baseSkinImage + "?imageMogr2/crop/727x1070/gravity/center");
+//                    hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
+                    List<String> wallpaperBigskinUrl = new ArrayList<>();
+                    wallpaperBigskinUrl.add(baseSkinImage + "?imageMogr2/crop/1920x882/gravity/center");
+//                    hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
+
+                    for (String tempSkin : skinArr) {
+                        tempSkin = tempSkin.trim();
+                        System.out.println("tempSkin:" + tempSkin);
+
+                        for (int j = 0; j < skinArray.size(); j++) {
+                            JSONObject skinObj = skinArray.getJSONObject(j);
+//                        System.out.println(skinObj);
+                            String heroName = skinObj.getString("yxmclb_9965");
+                            String skinName2 = skinObj.getString("pfmclb_7523");
+
+
+                            if (cname.equals(heroName) && tempSkin.equals(skinName2)) {
+//                            System.out.println("111111111");
+                                System.out.println("skinObj:" + skinObj);
+
+                            } else {
+//                            System.out.println("2222222222");
+//                        continue;
+                            }
+                        }
+                    }
+                    hero.setSkins(skins);
+                }
                 heros.add(hero);
+                System.out.println(hero);
+//                System.exit(1);
             }
+            System.exit(1);
+
         }
         return heros;
     }
