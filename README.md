@@ -137,7 +137,9 @@ https://pvp.qq.com/zlkdatasys/heroskinlist.json
 }
 ```
 
+#### 4.添加HTML进行展示
 
+详见：[index.html](index.html)
 
 ### bug
 

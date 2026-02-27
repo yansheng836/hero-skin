@@ -58,3 +58,5 @@ release
 !assets
 !assets/
 !assets/*.png
+
+index-*.html
