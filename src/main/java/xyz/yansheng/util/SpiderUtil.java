@@ -156,6 +156,8 @@ public class SpiderUtil {
                 String cname = heroObj.getString("yxmclb_9965");
                 hero.setCname(cname);
 //                System.out.println("cname:" + cname);
+                String ename = heroObj.getString("yxid_a7");
+                hero.setEname(Integer.parseInt(ename));
 
                 String baseSkinImage = heroObj.getString("fmlb_4536");
 //                System.out.println("baseSkinImage:"+baseSkinImage);
@@ -163,13 +165,21 @@ public class SpiderUtil {
                 skinName = skinName.replaceAll("&\\d+", "");
 //                System.out.println("skinName:" + skinName);
                 hero.setSkinName(skinName);
+
+                String createTimeStr = heroObj.getString("sxsjlb_1516");
+                hero.setCreateTimeStr(createTimeStr);
+                String slogan = heroObj.getString("yjhjsl_5003");
+                hero.setSlogan(slogan);
+                String heroType = heroObj.getString("fllb_2105");
+                hero.setHeroType(heroType);
+
 //                System.exit(1);
 
 //                // 英雄ename
-                String ename = heroObj.getString("yxpymc_4614");
+                String enameEnglish = heroObj.getString("yxpymc_4614");
 //                hero.setEname(Integer.parseInt(ename));
 //                https://pvp.qq.com/web201605/herodetail/fuluolun.shtml
-                hero.setHeroUrl("https://pvp.qq.com/web201605/herodetail/" + ename + ".shtml");
+                hero.setHeroUrl("https://pvp.qq.com/web201605/herodetail/" + enameEnglish + ".shtml");
 
 //                处理皮肤
                 String title = "";
@@ -245,10 +255,10 @@ public class SpiderUtil {
                 hero.setWallpaperMobileskinUrl(wallpaperMobileskinUrl);
                 hero.setWallpaperBigskinUrl(wallpaperBigskinUrl);
                 heros.add(hero);
-//                System.out.println("获取皮肤后："+hero);
-//                System.exit(1);
+//                System.out.println("获取皮肤后：" + hero);
+//                System.exit(1); // 测试用
             }
-//            System.exit(1);
+//            System.exit(1); // 测试用
         }
         return heros;
     }

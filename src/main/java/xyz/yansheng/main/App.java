@@ -2,10 +2,7 @@ package xyz.yansheng.main;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.io.FileUtils;
 
@@ -56,7 +53,7 @@ public class App {
 //                break;// 测试用
 //            }
 //        }
-        // System.exit(1);
+//         System.exit(1); // 测试用
 
         int sum = 0;
         for (Hero hero : heros) {
@@ -69,11 +66,24 @@ public class App {
         System.out.println(infoString);
         LogUtil.writeLog(CLASS_NAME, null, LogUtil.INFO, infoString);
 
+        // 按照某个字段进行排序，保证每次输出的json数组顺序一致，方便看出新增的数据
+        // 按 createTimeStr 升序排序
+//        heros.sort((h1, h2) -> h1.getCreateTimeStr().compareTo(h2.getCreateTimeStr()));
+        // 1. 主排序規則：按 createTimeStr (String) 升序
+        // 2. 次要排序規則：按 ename (Integer) 升序
+        heros.sort(Comparator.comparing(Hero::getCreateTimeStr).thenComparing(Hero::getEname));
+        // 如果有逆序
+//        heros.sort(Comparator.comparing(Hero::getCreateTimeStr).thenComparing(Hero::getEname,Comparator.reverseOrder()));
+//        排序后重命名id
+        for (int i = 0; i < heros.size(); i++) {
+            heros.get(i).setId(i+1);
+//            System.out.println(heros.get(i));
+        }
+
         // 3.将数据写到json中
         // JSON,JSONArray也可以
         // String jsonString = JSON.toJSONString(heros);
         // 保留空值
-
         Map<String, Object> map = new HashMap<String, Object>(5);
         map.put("description", "该文件用于保存王者荣耀的英雄皮肤的相关信息");
         map.put("phone-smallskin-images", "头像67*67");
@@ -95,6 +105,8 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+//        System.exit(1); // 测试用
 
         // 4.下载图片:sign 标志：0全部，1只下载手机小屏，2手机中，3手机大，4电脑中，5电脑大
         int sign = 0;

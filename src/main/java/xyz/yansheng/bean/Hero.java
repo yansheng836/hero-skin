@@ -61,8 +61,16 @@ public class Hero implements Serializable {
      * 即默认皮肤名称，title = skin.get(0)
      */
     private String title;
+    /*
+    英雄出现时间
+     */
+    private String createTimeStr;
+    /*
+    英雄口号
+     */
+    private String slogan;
     private Integer newType;
-    private Integer heroType;
+    private String heroType;
     /**
      * 皮肤名字符串，如：幻纱之灵|归虚梦演
      */
