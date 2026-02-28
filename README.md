@@ -141,6 +141,14 @@ https://pvp.qq.com/zlkdatasys/heroskinlist.json
 
 详见：[index.html](index.html)
 
+在线访问：<https://yansheng836.github.io/hero-skin/>
+
+预览图：
+
+![image-20260228153049223](README.assets/image-20260228153049223.png)
+
+![image-20260228153105533](README.assets/image-20260228153105533.png)
+
 ### bug
 
 小图有一张有问题：
@@ -361,6 +369,14 @@ https://game.gtimg.cn/images/lol/act/img/skin/big_0b95894e-0df2-470e-b282-6c5f5c
 手机端大图
 
 https://game.gtimg.cn/images/lol/act/img/skinloading/0b95894e-0df2-470e-b282-6c5f5cf41955.jpg
+
+## 免责声明
+
+该项目仅用于学习使用，如作他用所承受的法律责任一概与作者无关（下载使用即代表你同意上述观点）。
+
+所有图片版权归腾讯游戏所有。
+
+
 
 
 

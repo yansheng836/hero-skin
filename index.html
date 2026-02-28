@@ -373,7 +373,7 @@
             fetch('./wzry-heros.json')
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     data = data["hero-list"]
                     data.reverse();
                     displayHeroes(data);
@@ -458,7 +458,7 @@
                                     </div>
                                     <div class="skin-info">
                                         <span class="skin-name">${skin}</span>
-                                        <button class="copy-btn" data-url="${hero.phoneMobileskinUrl[index]}">复制URL</button>
+                                        <button class="copy-btn" data-url="${hero.wallpaperBigskinUrl[index]}">复制URL</button>
                                     </div>
                                 </div>
                             `).join('')}
@@ -476,7 +476,7 @@
                     button.addEventListener('click', function () {
                         const url = this.getAttribute('data-url');
                         // const url = this.getAttribute('data-src2');
-                        console.log("url:" + url)
+                        // console.log("url:" + url)
                         copyToClipboard(url);
 
                         // 添加复制成功样式
