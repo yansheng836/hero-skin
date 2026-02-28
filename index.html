@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王者荣耀英雄皮肤相册 - 横向排列</title>
+    <title>《王者荣耀》英雄皮肤相册 - 横向排列</title>
     <style>
         * {
             margin: 0;
@@ -173,6 +173,37 @@
             flex: 1;
         }
 
+        /* 懒加载相关样式 */
+        .skin-img.lazy {
+            background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .skin-img.loaded {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0.5;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
         .copy-btn {
             background: linear-gradient(to right, #ff9800, #ff5722);
             color: white;
@@ -267,6 +298,21 @@
                 align-self: flex-end;
                 margin-left: 0;
             }
+
+            .toast {
+                position: fixed;
+                top: 20px;
+                right: 80px;
+                background: rgba(46, 125, 50, 0.9);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 5px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s, transform 0.3s;
+            }
         }
 
         @media (max-width: 480px) {
@@ -282,44 +328,13 @@
                 font-size: 1.8rem;
             }
         }
-
-        /* 懒加载相关样式 */
-        .skin-img.lazy {
-            background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% {
-                background-position: 200% 0;
-            }
-
-            100% {
-                background-position: -200% 0;
-            }
-        }
-
-        .skin-img.loaded {
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0.5;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>王者荣耀英雄皮肤相册</h1>
+            <h1>《王者荣耀》英雄皮肤相册</h1>
             <p class="subtitle">收集所有英雄与精美皮肤壁纸 - 横向排列</p>
             <div class="hero-count">加载中...</div>
         </header>
@@ -333,7 +348,7 @@
         <div id="toast" class="toast">URL已复制到剪贴板！</div>
 
         <footer>
-            <p>© 2026 王者荣耀皮肤展示 | 数据仅供参考，实际以游戏内为准</p>
+            <p>© 2026 《王者荣耀》皮肤展示 | 数据仅供参考，实际以游戏内为准</p>
             <p>注：所有图片版权归腾讯游戏所有</p>
         </footer>
     </div>
@@ -423,6 +438,19 @@
             }, 3000);
         }
 
+        // 检测是否为手机端
+        function isMobileDevice() {
+            // 方法1：通过屏幕宽度判断（推荐）
+            const isMobileByWidth = window.innerWidth <= 768;
+
+            // 方法2：通过用户代理判断（双重检测）
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isMobileByUserAgent = /android|webos|iphone|ipad|ipod|blackberry|windows phone/.test(userAgent);
+
+            // 返回两种检测的结果（优先使用屏幕宽度检测）
+            return isMobileByWidth || isMobileByUserAgent;
+        }
+
         // 显示英雄数据
         function displayHeroes(heroes) {
             const container = document.getElementById('heroes-container');
@@ -458,7 +486,7 @@
                                     </div>
                                     <div class="skin-info">
                                         <span class="skin-name">${skin}</span>
-                                        <button class="copy-btn" data-url="${hero.wallpaperBigskinUrl[index]}">复制URL</button>
+                                        <button class="copy-btn" data-url="${hero.wallpaperBigskinUrl[index]}" data-url-mobile="${hero.wallpaperMobileskinUrl[index]}">复制URL</button>
                                     </div>
                                 </div>
                             `).join('')}
@@ -474,10 +502,15 @@
                 const copyButtons = document.querySelectorAll('.copy-btn');
                 copyButtons.forEach(button => {
                     button.addEventListener('click', function () {
-                        const url = this.getAttribute('data-url');
-                        // const url = this.getAttribute('data-src2');
-                        // console.log("url:" + url)
-                        copyToClipboard(url);
+                        // 判断是否手机端
+                        if (isMobileDevice()) {
+                            const url_mobile = this.getAttribute('data-url-mobile');
+                            copyToClipboard(url_mobile);
+                        } else {
+                            const url = this.getAttribute('data-url');
+                            // console.log("url:" + url)
+                            copyToClipboard(url);
+                        }
 
                         // 添加复制成功样式
                         const originalText = this.textContent;
