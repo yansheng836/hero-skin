@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,19 +12,19 @@
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #0c1a2d 0%, #1a1a2e 100%);
             color: #f0f0f0;
             padding: 20px;
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         header {
             text-align: center;
             padding: 30px 0;
@@ -33,20 +34,20 @@
             border-bottom: 3px solid #ff6b35;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
-        
+
         h1 {
             font-size: 2.8rem;
             color: #ffcc00;
             text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
             margin-bottom: 10px;
         }
-        
+
         .subtitle {
             font-size: 1.2rem;
             color: #aaa;
             margin-bottom: 20px;
         }
-        
+
         .hero-count {
             font-size: 1.1rem;
             color: #4da6ff;
@@ -55,13 +56,13 @@
             border-radius: 20px;
             display: inline-block;
         }
-        
+
         .heroes-container {
             display: flex;
             flex-direction: column;
             gap: 25px;
         }
-        
+
         .hero-card {
             background: rgba(30, 40, 60, 0.7);
             border-radius: 15px;
@@ -69,30 +70,30 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .hero-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
         }
-        
+
         .hero-header {
             background: linear-gradient(to right, #1e3c72, #2a5298);
             padding: 20px;
             text-align: center;
             border-bottom: 2px solid #ff6b35;
         }
-        
+
         .hero-name {
             font-size: 1.8rem;
             color: #fff;
             font-weight: bold;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
-        
+
         .skins-container {
             padding: 20px;
         }
-        
+
         .skin-count {
             font-size: 0.9rem;
             color: #aaa;
@@ -100,7 +101,7 @@
             padding-bottom: 10px;
             border-bottom: 1px solid #333;
         }
-        
+
         .skins-grid {
             display: flex;
             flex-wrap: nowrap;
@@ -108,21 +109,21 @@
             gap: 20px;
             padding-bottom: 10px;
         }
-        
+
         .skins-grid::-webkit-scrollbar {
             height: 8px;
         }
-        
+
         .skins-grid::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
         }
-        
+
         .skins-grid::-webkit-scrollbar-thumb {
             background: #ff6b35;
             border-radius: 4px;
         }
-        
+
         .skin-item {
             flex: 0 0 auto;
             width: 280px;
@@ -131,37 +132,37 @@
             overflow: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .skin-item:hover {
             background: rgba(50, 70, 100, 0.7);
             transform: translateY(-3px);
         }
-        
+
         .skin-img-container {
             width: 100%;
             height: 200px;
             overflow: hidden;
             position: relative;
         }
-        
+
         .skin-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        
+
         .skin-item:hover .skin-img {
             transform: scale(1.05);
         }
-        
+
         .skin-info {
             padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .skin-name {
             font-size: 1.1rem;
             font-weight: 500;
@@ -171,7 +172,7 @@
             text-overflow: ellipsis;
             flex: 1;
         }
-        
+
         .copy-btn {
             background: linear-gradient(to right, #ff9800, #ff5722);
             color: white;
@@ -185,29 +186,29 @@
             white-space: nowrap;
             margin-left: 10px;
         }
-        
+
         .copy-btn:hover {
             background: linear-gradient(to right, #ffb74d, #ff7043);
             transform: translateY(-1px);
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
-        
+
         .copy-btn:active {
             transform: translateY(0);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
-        
+
         .copy-btn.copied {
             background: linear-gradient(to right, #4CAF50, #2E7D32);
         }
-        
+
         .loading {
             text-align: center;
             padding: 50px;
             font-size: 1.5rem;
             color: #4da6ff;
         }
-        
+
         .error {
             text-align: center;
             padding: 50px;
@@ -217,7 +218,7 @@
             border-radius: 10px;
             margin: 20px 0;
         }
-        
+
         .toast {
             position: fixed;
             top: 20px;
@@ -232,12 +233,12 @@
             transform: translateY(-20px);
             transition: opacity 0.3s, transform 0.3s;
         }
-        
+
         .toast.show {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         footer {
             text-align: center;
             padding: 30px 0;
@@ -246,43 +247,75 @@
             font-size: 0.9rem;
             border-top: 1px solid #333;
         }
-        
+
         @media (max-width: 768px) {
             .skin-item {
                 width: 240px;
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             .skin-info {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 8px;
             }
-            
+
             .copy-btn {
                 align-self: flex-end;
                 margin-left: 0;
             }
         }
-        
+
         @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
-            
+
             .skin-item {
                 width: 220px;
             }
-            
+
             h1 {
                 font-size: 1.8rem;
             }
         }
+
+        /* 懒加载相关样式 */
+        .skin-img.lazy {
+            background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .skin-img.loaded {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0.5;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -290,15 +323,15 @@
             <p class="subtitle">收集所有英雄与精美皮肤壁纸 - 横向排列</p>
             <div class="hero-count">加载中...</div>
         </header>
-        
+
         <main>
             <div id="heroes-container" class="heroes-container">
                 <div class="loading">正在加载英雄数据...</div>
             </div>
         </main>
-        
+
         <div id="toast" class="toast">URL已复制到剪贴板！</div>
-        
+
         <footer>
             <p>© 2026 王者荣耀皮肤展示 | 数据仅供参考，实际以游戏内为准</p>
             <p>注：所有图片版权归腾讯游戏所有</p>
@@ -331,74 +364,26 @@
                     "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 ]
-            },
-            {
-                name: "孙悟空",
-                skins: ["西部大镖客", "地狱火", "至尊宝", "大圣娶亲", "零号·赤焰", "孙行者", "齐天大圣"],
-                URLs: [
-                    "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ]
-            },
-            {
-                name: "铠",
-                skins: ["龙域领主", "曙光守护者", "青龙志", "绛天战甲", "银白咏叹调", "荣耀典藏"],
-                URLs: [
-                    "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ]
-            },
-            {
-                name: "瑶",
-                skins: ["森", "遇见神鹿", "时之祈愿", "山海·碧波行", "真我赫兹"],
-                URLs: [
-                    "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ]
-            },
-            {
-                name: "诸葛亮",
-                skins: ["星航指挥官", "黄金分割率", "武陵仙君", "时雨天司", "鹤羽星尊", "掌控之力"],
-                URLs: [
-                    "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ]
             }
         ];
 
         // 模拟从JSON文件读取数据
         function loadHeroData() {
             // 实际场景中，这里应该使用fetch API读取hero.json文件
-             fetch('./wzry-heros.json')
-                 .then(response => response.json())
-                 .then(data => {
+            fetch('./wzry-heros.json')
+                .then(response => response.json())
+                .then(data => {
                     console.log(data);
                     data = data["hero-list"]
                     data.reverse();
                     displayHeroes(data);
-                 })
-                 .catch(error => {
-                     console.error('加载数据失败:', error);
-                     document.getElementById('heroes-container').innerHTML = 
-                         '<div class="error">加载英雄数据失败，请检查 wzry-heros.json 文件是否存在</div>';
-                 });
-            
+                })
+                .catch(error => {
+                    console.error('加载数据失败:', error);
+                    document.getElementById('heroes-container').innerHTML =
+                        '<div class="error">加载英雄数据失败，请检查 wzry-heros.json 文件是否存在</div>';
+                });
+
             // 这里我们直接使用模拟数据
             //displayHeroes(heroData);
         }
@@ -431,7 +416,7 @@
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.classList.add('show');
-            
+
             // 3秒后隐藏提示
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -442,18 +427,18 @@
         function displayHeroes(heroes) {
             const container = document.getElementById('heroes-container');
             const heroCountElement = document.querySelector('.hero-count');
-            
+
             // 更新英雄数量
             heroCountElement.textContent = `共 ${heroes.length} 位英雄，${heroes.reduce((total, hero) => total + hero.skins.length, 0)} 款皮肤`;
-            
+
             // 清空容器
             container.innerHTML = '';
-            
+
             // 为每个英雄创建卡片
             heroes.forEach(hero => {
                 const heroCard = document.createElement('div');
                 heroCard.className = 'hero-card';
-                
+
                 // 构建英雄卡片内容
                 heroCard.innerHTML = `
                     <div class="hero-header">
@@ -465,9 +450,10 @@
                             ${hero.skins.map((skin, index) => `
                                 <div class="skin-item">
                                     <div class="skin-img-container">
-                                        <img src="${hero.phoneMobileskinUrl[index] || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
-                                             alt="${hero.cname} - ${skin}" 
-                                             class="skin-img"
+                                        <img data-src="${hero.phoneMobileskinUrl[index] || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}"
+                                             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                                             alt="${hero.cname} - ${skin}"
+                                             class="skin-img lazy"
                                              onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                                     </div>
                                     <div class="skin-info">
@@ -479,25 +465,25 @@
                         </div>
                     </div>
                 `;
-                
+
                 container.appendChild(heroCard);
             });
-            
+
             // 为所有复制按钮添加事件监听
             setTimeout(() => {
                 const copyButtons = document.querySelectorAll('.copy-btn');
                 copyButtons.forEach(button => {
-                    button.addEventListener('click', function() {
+                    button.addEventListener('click', function () {
                         const url = this.getAttribute('data-url');
                         // const url = this.getAttribute('data-src2');
-                        console.log("url:"+url)
+                        console.log("url:" + url)
                         copyToClipboard(url);
-                        
+
                         // 添加复制成功样式
                         const originalText = this.textContent;
                         this.textContent = '已复制';
                         this.classList.add('copied');
-                        
+
                         // 2秒后恢复原状
                         setTimeout(() => {
                             this.textContent = originalText;
@@ -505,11 +491,65 @@
                         }, 2000);
                     });
                 });
+                // 初始化懒加载
+                initLazyLoading();
             }, 100);
+        }
+
+        // 图片懒加载实现
+        function initLazyLoading() {
+            // 使用Intersection Observer API（现代浏览器支持）
+            if ('IntersectionObserver' in window) {
+                const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const lazyImage = entry.target;
+
+                            // 加载图片
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove('lazy');
+
+                            // 图片加载完成后的处理
+                            lazyImage.onload = () => {
+                                lazyImage.classList.add('loaded');
+                            };
+
+                            // 图片加载失败的处理
+                            lazyImage.onerror = () => {
+                                lazyImage.src = 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                                lazyImage.classList.remove('lazy');
+                            };
+
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px', // 提前50px开始加载
+                    threshold: 0.1 // 当10%的图片可见时开始加载
+                });
+
+                // 观察所有懒加载图片
+                document.querySelectorAll('.skin-img.lazy').forEach(lazyImage => {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // 兼容旧浏览器的降级方案
+                console.log('IntersectionObserver not supported, using fallback');
+                loadAllImages();
+            }
+        }
+
+        // 降级方案：一次性加载所有图片
+        function loadAllImages() {
+            document.querySelectorAll('.skin-img.lazy').forEach(img => {
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+            });
         }
 
         // 页面加载完成后执行
         document.addEventListener('DOMContentLoaded', loadHeroData);
     </script>
 </body>
+
 </html>
