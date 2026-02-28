@@ -390,6 +390,7 @@
                  .then(data => {
                     console.log(data);
                     data = data["hero-list"]
+                    data.reverse();
                     displayHeroes(data);
                  })
                  .catch(error => {
@@ -459,7 +460,7 @@
                         <h2 class="hero-name">${hero.cname}</h2>
                     </div>
                     <div class="skins-container">
-                        <div class="skin-count">${hero.cname} - ${hero.skins.length} 款皮肤，英雄介绍：<a href="${hero.heroUrl}" style="color:#11f9ca" >${hero.heroUrl}</a></div>
+                        <div class="skin-count">${hero.cname} - ${hero.skins.length} 款皮肤，英雄介绍页：<a href="${hero.heroUrl}" style="color:#11f9ca" >${hero.heroUrl}</a>，分路：${hero.heroType}，slogan：${hero.slogan || '暂无。'}</div>
                         <div class="skins-grid">
                             ${hero.skins.map((skin, index) => `
                                 <div class="skin-item">
@@ -488,6 +489,8 @@
                 copyButtons.forEach(button => {
                     button.addEventListener('click', function() {
                         const url = this.getAttribute('data-url');
+                        // const url = this.getAttribute('data-src2');
+                        console.log("url:"+url)
                         copyToClipboard(url);
                         
                         // 添加复制成功样式
