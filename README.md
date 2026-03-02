@@ -50,13 +50,13 @@ Java爬取王者荣耀和英雄联盟的英雄皮肤。
 
 ### 存在问题
 
-#### 1.只能爬取本地网页
+#### ✅1.只能爬取本地网页--不再使用这种方式！
 
 爬取的网页数据不是最新的，如直接爬取最新的英雄为93，506，云中君；但是将该网页下载后再爬取，最新,96，523，西施。
 
 处理方法：可以将网页先下载下来，爬取本地文件。
 
-#### 2.2026年2月25日16:30:34网页变化
+#### ✅2.2026年2月25日16:30:34网页变化
 
 英雄没有了ename信息，各种类型壁纸url需要用新方式获取，而且好像凑不齐5种类型的壁纸了，后面发现可以自行调整尺寸。
 
@@ -102,13 +102,13 @@ wallpaperBigskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/
 
 wallpaperMobileskinUrl，https://game-1255653016.file.myqcloud.com/manage/compress/custom_wzry_A1/fe0a932e1012ef5173ee0ceeb9f5a7b2.jpg?imageMogr2/crop/727x1070/gravity/center，727-1070
 
-#### 3.从json获取数据
+#### ✅3.从json获取数据
 
 https://pvp.qq.com/zlkdatasys/heroskinlist.json
 
 详见：[wzry-heros-zlkdatasys-heroskinlist.json](./wzry-heros-zlkdatasys-heroskinlist.json)
 
-其中**yxlb20_2489**是英雄信息。
+其中**yxlb20_2489**是英雄信息，pflb20_3469是皮肤信息。
 
 ```json
 {
@@ -137,7 +137,7 @@ https://pvp.qq.com/zlkdatasys/heroskinlist.json
 }
 ```
 
-#### 4.添加HTML进行展示
+#### ✅4.添加HTML进行展示
 
 详见：[index.html](index.html)
 
@@ -149,15 +149,11 @@ https://pvp.qq.com/zlkdatasys/heroskinlist.json
 
 ![image-20260228153105533](README.assets/image-20260228153105533.png)
 
-### bug
+#### ✅5.部分皮肤异常
 
-小图有一张有问题：
+比如：嫦娥的皮肤：器灵·落星盏，在英雄介绍里面点前后有一个空格，在皮肤里面用的是没有的，导致没有匹配上。
 
-```
-图片链接(https://game.gtimg.cn/images/yxzj/img201606/heroimg/142/142-bigskin-5.jpg)无效！响应状态码为：404
-```
-
-直接访问也是404。
+需要进行兼容处理：去掉空格，保持风格一致。
 
 ### 辅助功能
 

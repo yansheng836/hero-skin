@@ -163,6 +163,7 @@ public class SpiderUtil {
 //                System.out.println("baseSkinImage:"+baseSkinImage);
                 String skinName = heroObj.getString("pfmclb_5571");
                 skinName = skinName.replaceAll("&\\d+", "");
+                skinName = skinName.replaceAll(" ", "");
 //                System.out.println("skinName:" + skinName);
                 hero.setSkinName(skinName);
 
