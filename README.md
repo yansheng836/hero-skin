@@ -4,18 +4,16 @@
 
 # Hero-Skin
 
-Java爬取王者荣耀和英雄联盟的英雄皮肤。
+Java爬取王者荣耀和英雄联盟的 **英雄皮肤** 图片。
 
 注意该项目仅仅是为了爬取，不进行存储，存储放到另外的项目：
 
 王者荣耀：
 
-- <https://gitee.com/yansheng0083/hero-skin-image>
 - <https://github.com/yansheng836/hero-skin-image>
 
 英雄联盟：
 
-- <https://gitee.com/yansheng0083/hero-skin-lol>
 - <https://github.com/yansheng836/hero-skin-lol>
 
 ## 王者荣耀
@@ -47,6 +45,7 @@ Java爬取王者荣耀和英雄联盟的英雄皮肤。
 | 2021年5月12日18:26:00 |   104    |   463    |
 | 2021年6月12日22:25:16 |   105    |   465    |
 | 2023年4月30日01:09:57 |   114    |   617    |
+| 2026年2月27日21:23:30 |   134    |   894    |
 
 ### 存在问题
 

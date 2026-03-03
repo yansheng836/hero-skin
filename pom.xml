@@ -7,7 +7,7 @@
     <artifactId>hero-skin</artifactId>
     <!-- 2021年6月26日 约定：王者荣耀打包后缀为 -wzry ，英雄联盟为 -lol -->
 <!--        <version>1.0.5-lol</version>-->
-    <version>1.0.4-wzry</version>
+    <version>1.0.5-wzry</version>
     <packaging>jar</packaging>
 
     <description>爬取王者荣耀、英雄联盟的皮肤图片。</description>

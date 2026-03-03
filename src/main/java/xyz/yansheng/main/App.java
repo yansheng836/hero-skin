@@ -76,7 +76,7 @@ public class App {
 //        heros.sort(Comparator.comparing(Hero::getCreateTimeStr).thenComparing(Hero::getEname,Comparator.reverseOrder()));
 //        排序后重命名id
         for (int i = 0; i < heros.size(); i++) {
-            heros.get(i).setId(i+1);
+            heros.get(i).setId(i + 1);
 //            System.out.println(heros.get(i));
         }
 
@@ -85,7 +85,7 @@ public class App {
         // String jsonString = JSON.toJSONString(heros);
         // 保留空值
         Map<String, Object> map = new HashMap<String, Object>(5);
-        map.put("description", "该文件用于保存王者荣耀的英雄皮肤的相关信息");
+        map.put("description", "该文件用于保存王者荣耀的英雄皮肤的相关信息，" + infoString);
         map.put("phone-smallskin-images", "头像67*67");
         map.put("phone-mobileskin-images", "小屏手机图片600*410");
         map.put("phone-bigskin-images", "大屏手机图片1200*530");
