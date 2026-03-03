@@ -58,5 +58,8 @@ release
 !assets
 !assets/
 !assets/*.png
+!README.assets
+!README.assets/
+!README.assets/*
 
 index-*.html
