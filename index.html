@@ -483,11 +483,11 @@
                     <div class="skins-container">
                         <div class="skin-count">${hero.cname} - ${hero.skins.length} 款皮肤，英雄介绍页：<a href="${hero.heroUrl}" style="color:#11f9ca" >${hero.heroUrl}</a>，分路：${hero.heroType}，slogan：${hero.slogan || '暂无。'}</div>
                         <div class="skins-grid">
-                            ${hero.skins.map((skin, index) => `
+                            ${hero.skins.slice().reverse().map((skin, index) => `
                                 <div class="skin-item">
-                                    <a href="${hero.wallpaperBigskinUrl[index]}" data-lightbox="album" data-title="${hero.cname}-${skin}">
+                                    <a href="${hero.wallpaperBigskinUrl[hero.skins.length-1-index]}" data-lightbox="album" data-title="${hero.cname}-${skin}">
                                     <div class="skin-img-container">
-                                        <img data-src="${hero.phoneMobileskinUrl[index] || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}"
+                                        <img data-src="${hero.phoneMobileskinUrl[hero.skins.length-1-index] || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}"
                                              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
                                              alt="${hero.cname} - ${skin}"
                                              class="skin-img lazy"
@@ -496,7 +496,7 @@
                                     </a>
                                     <div class="skin-info">
                                         <span class="skin-name">${skin}</span>
-                                        <button class="copy-btn" data-url="${hero.wallpaperBigskinUrl[index]}" data-url-mobile="${hero.wallpaperMobileskinUrl[index]}">复制URL</button>
+                                        <button class="copy-btn" data-url="${hero.wallpaperBigskinUrl[hero.skins.length-1-index]}" data-url-mobile="${hero.wallpaperMobileskinUrl[hero.skins.length-1-index]}">复制URL</button>
                                     </div>
                                 </div>
                             `).join('')}
