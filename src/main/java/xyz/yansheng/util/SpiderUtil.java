@@ -125,15 +125,15 @@ public class SpiderUtil {
      */
     public static ArrayList<Hero> getHerosFromJSON(String url, String encoding) {
 
-        Document doc = null;
         String jsonString = null;
         try {
-            doc = Jsoup.parse(new URL(url).openStream(), encoding, url);
-//            System.out.println(doc);
-            jsonString = doc.text();
-//            System.out.println(jsonString);
-        } catch (MalformedURLException e1) {
-            e1.printStackTrace();
+            System.out.println("url:" + url);
+            Connection.Response response = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
+                    .ignoreContentType(true)
+                    .timeout(30000)
+                    .execute();
+            jsonString = response.body();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
