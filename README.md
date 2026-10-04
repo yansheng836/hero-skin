@@ -4,6 +4,21 @@
 
 # Hero-Skin
 
+<p>
+  <a href="https://github.com/yansheng836/hero-skin/releases">
+    <img src="https://img.shields.io/badge/Maven-1.0.6--wzry-C71A36?logo=apachemaven" alt="Maven Version">
+  </a>
+  <a href="https://www.java.com">
+    <img src="https://img.shields.io/badge/Java-1.8-ED8B00?logo=openjdk&logoColor=white" alt="Java Version">
+  </a>
+  <a href="https://github.com/yansheng836/hero-skin/blob/main/LICENSE.txt">
+    <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
+  </a>
+  <a href="https://github.com/yansheng836/hero-skin/stargazers">
+    <img src="https://img.shields.io/github/stars/yansheng836/hero-skin?style=flat&color=yellow" alt="GitHub Stars">
+  </a>
+</p>
+
 Java爬取王者荣耀和英雄联盟的 **英雄皮肤** 图片。
 
 注意该项目仅仅是为了爬取，不进行存储，存储放到另外的项目：
